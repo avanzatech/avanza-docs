@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 import { Callout, StepCard, Checklist } from "../components/content/Blocks";
 import ProductCardDemo from "../components/demos/ProductCardDemo";
 import DashboardDemo from "../components/demos/DashboardDemo";
+import PedidosDemo from "../components/demos/PedidosDemo";
+import DocumentosDemo from "../components/demos/DocumentosDemo";
 
 // Content is grounded in the live App.jsx implementation, verified against
 // the source before writing — not the original planning spec. Slugs not
@@ -118,6 +120,7 @@ export const osArticles: Record<string, ArticleBody> = {
           Some drafts appear on their own — for example, when a drink's stock crosses the threshold you set.
           Others you create manually from a supplier's product list. Either way, they land in the same review queue.
         </Callout>
+        <PedidosDemo />
         <StepCard number={1} title="Open a draft">
           Tap into any draft in the Pedidos tab. You'll see the supplier, the items, and quantities — all editable
           before you send.
@@ -157,6 +160,7 @@ export const osArticles: Record<string, ArticleBody> = {
           configuraste. Otros los creas manualmente desde la lista de productos de un proveedor. En ambos casos,
           llegan a la misma cola de revisión.
         </Callout>
+        <PedidosDemo />
         <StepCard number={1} title="Abre un borrador">
           Toca cualquier borrador en la pestaña Pedidos. Verás el proveedor, los artículos y las cantidades — todo
           editable antes de enviar.
@@ -328,6 +332,7 @@ export const osArticles: Record<string, ArticleBody> = {
           The factura is for accounting and IVA — it's what you export for tax purposes. Avanza tracks both, but
           they answer different questions.
         </Callout>
+        <DocumentosDemo />
         <StepCard number={1} title="Clear the badge">
           A number on the Documentos tab means something needs a decision — usually a new upload waiting to be
           matched to a supplier and order.
@@ -357,6 +362,7 @@ export const osArticles: Record<string, ArticleBody> = {
           productos. La factura es para contabilidad e IVA — es lo que exportas para hacienda. Avanza sigue ambos,
           pero responden a preguntas distintas.
         </Callout>
+        <DocumentosDemo />
         <StepCard number={1} title="Resuelve el aviso">
           Un número en la pestaña Documentos significa que algo necesita una decisión — normalmente una subida
           nueva esperando emparejarse con un proveedor y un pedido.
