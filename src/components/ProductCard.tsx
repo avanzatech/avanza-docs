@@ -10,9 +10,10 @@ type Props = {
   cta: string;
   onClick: () => void;
   delay: number;
+  image?: string;
 };
 
-export default function ProductCard({ eyebrowDot, glowColor, name, subtitle, desc, cta, onClick, delay }: Props) {
+export default function ProductCard({ eyebrowDot, glowColor, name, subtitle, desc, cta, onClick, delay, image }: Props) {
   const ref = useRef<HTMLButtonElement>(null);
   const mx = useMotionValue(0.5);
   const my = useMotionValue(0.5);
@@ -46,16 +47,33 @@ export default function ProductCard({ eyebrowDot, glowColor, name, subtitle, des
       onMouseLeave={onMouseLeave}
       onClick={onClick}
       style={{ rotateX, rotateY, transformPerspective: 1000 }}
-      className="group relative overflow-hidden rounded-[24px] border p-9 text-left backdrop-blur-2xl transition-[border-color,box-shadow,transform] duration-300"
+      className="group relative flex min-h-[440px] flex-col justify-end overflow-hidden rounded-[24px] border p-9 text-left backdrop-blur-2xl transition-[border-color,box-shadow,transform] duration-300"
     >
-      {/* resting-state color wash — this is what makes the card read as
-          intentional even before anyone hovers it, not just on interaction */}
-      <div
-        className="absolute inset-0 -z-10"
-        style={{
-          background: `linear-gradient(155deg, ${glowColor}, transparent 55%), linear-gradient(155deg, rgba(255,255,255,0.05), rgba(14,38,22,0.4))`,
-        }}
-      />
+      {/* image background — real product screenshot, not a flat color wash,
+          when one is provided. Parallax zoom on hover matches the reference
+          card pattern; a bottom-anchored scrim keeps the text legible over
+          busy image detail without hiding the art entirely. */}
+      {image ? (
+        <>
+          <div
+            className="absolute inset-0 -z-20 bg-cover bg-center transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+            style={{ backgroundImage: `url(${image})` }}
+          />
+          <div
+            className="absolute inset-0 -z-10"
+            style={{
+              background: `linear-gradient(180deg, rgba(10,26,15,0.15) 0%, rgba(10,26,15,0.55) 55%, rgba(10,26,15,0.92) 100%), linear-gradient(155deg, ${glowColor}, transparent 60%)`,
+            }}
+          />
+        </>
+      ) : (
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            background: `linear-gradient(155deg, ${glowColor}, transparent 55%), linear-gradient(155deg, rgba(255,255,255,0.05), rgba(14,38,22,0.4))`,
+          }}
+        />
+      )}
       {/* resting border + shadow tinted to the product color, intensifies on hover */}
       <div
         className="pointer-events-none absolute inset-0 rounded-[24px] transition-shadow duration-300 group-hover:shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]"

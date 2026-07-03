@@ -5,6 +5,8 @@ import { usePreferences } from "../lib/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import ProductCard from "../components/ProductCard";
 import AmbientBackground from "../components/AmbientBackground";
+import osCardImg from "../assets/cards/avanza-os-card.webp";
+import impulseCardImg from "../assets/cards/avanza-impulse-card.webp";
 import LogoGleam from "../components/LogoGleam";
 import LogoIntro from "../components/LogoIntro";
 
@@ -19,6 +21,7 @@ const products = [
     },
     dot: "bg-gold",
     glow: "rgba(201,168,76,0.16)",
+    image: osCardImg,
   },
   {
     id: "impulse" as const,
@@ -30,6 +33,7 @@ const products = [
     },
     dot: "bg-blue",
     glow: "rgba(91,141,239,0.16)",
+    image: impulseCardImg,
   },
 ];
 
@@ -108,6 +112,7 @@ export default function Landing() {
                 cta={t("Open Documentation", "Abrir Documentación")}
                 onClick={() => go(p.id)}
                 delay={0.25 + i * 0.12}
+                image={p.image}
               />
             ))}
         </div>
