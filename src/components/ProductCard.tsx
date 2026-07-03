@@ -47,7 +47,7 @@ export default function ProductCard({ eyebrowDot, glowColor, name, subtitle, des
       onMouseLeave={onMouseLeave}
       onClick={onClick}
       style={{ rotateX, rotateY, transformPerspective: 1000 }}
-      className="group relative flex min-h-[440px] flex-col justify-end overflow-hidden rounded-[24px] border p-9 text-left backdrop-blur-2xl transition-[border-color,box-shadow,transform] duration-300"
+      className={`group relative flex ${image ? "aspect-[4/3]" : "min-h-[440px]"} flex-col justify-end overflow-hidden rounded-[24px] border p-9 text-left transition-[border-color,box-shadow,transform] duration-300 ${image ? "" : "backdrop-blur-2xl"}`}
     >
       {/* image background — real product screenshot, not a flat color wash,
           when one is provided. Parallax zoom on hover matches the reference
@@ -56,7 +56,7 @@ export default function ProductCard({ eyebrowDot, glowColor, name, subtitle, des
       {image ? (
         <>
           <div
-            className="absolute inset-0 -z-20 bg-cover bg-center transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+            className="absolute inset-0 -z-20 bg-cover bg-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
             style={{ backgroundImage: `url(${image})` }}
           />
           <div
