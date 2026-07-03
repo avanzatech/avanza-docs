@@ -3,7 +3,7 @@ import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 
 type Props = {
   eyebrowDot: string;
-  glowColor: string; // rgba string
+  glowColor: string;
   name: string;
   subtitle: string;
   desc: string;
@@ -16,8 +16,13 @@ export default function ProductCard({ eyebrowDot, glowColor, name, subtitle, des
   const ref = useRef<HTMLButtonElement>(null);
   const mx = useMotionValue(0.5);
   const my = useMotionValue(0.5);
-  const rotateX = useSpring(useTransform(my, [0, 1], [6, -6]), { stiffness: 200, damping: 20 });
-  const rotateY = useSpring(useTransform(mx, [0, 1], [-6, 6]), { stiffness: 200, damping: 20 });
+  const spring = { stiffness: 200, damping: 20 };
+  const rotateX = useSpring(useTransform(my, [0, 1], [8, -8]), spring);
+  const rotateY = useSpring(useTransform(mx, [0, 1], [-8, 8]), spring);
+  // Content floats on its own, shallower axis than the card shell — this is
+  // what actually reads as "3D glass" rather than a flat card that tilts.
+  const contentX = useSpring(useTransform(mx, [0, 1], [-6, 6]), spring);
+  const contentY = useSpring(useTransform(my, [0, 1], [-6, 6]), spring);
   const glowX = useTransform(mx, [0, 1], ["0%", "100%"]);
   const glowY = useTransform(my, [0, 1], ["0%", "100%"]);
 
@@ -35,28 +40,37 @@ export default function ProductCard({ eyebrowDot, glowColor, name, subtitle, des
       initial={{ opacity: 0, y: 28 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -6 }}
+      whileHover={{ y: -8 }}
       whileTap={{ scale: 0.985 }}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
-      style={{ rotateX, rotateY, transformPerspective: 900 }}
-      className="group relative overflow-hidden rounded-[22px] border border-brd bg-card p-9 text-left backdrop-blur-xl transition-[border-color,box-shadow] duration-300 hover:border-white/10"
+      style={{ rotateX, rotateY, transformPerspective: 1000 }}
+      className="group relative overflow-hidden rounded-[24px] border border-white/[0.08] p-9 text-left backdrop-blur-2xl transition-[border-color,box-shadow] duration-300 hover:border-white/[0.16] hover:shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]"
+      // Deliberately more transparent than the standard .glass-card utility —
+      // this card needs to read as glass sitting above the ambient background,
+      // not as an opaque panel.
     >
-      {/* cursor-following glow */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{
-          background: `radial-gradient(360px circle at ${glowX} ${glowY}, ${glowColor}, transparent 70%)`,
-        }}
-      />
-      {/* animated border shimmer on hover */}
       <div
-        className="pointer-events-none absolute inset-0 rounded-[22px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{ boxShadow: `inset 0 0 0 1px ${glowColor}` }}
+        className="absolute inset-0 -z-10"
+        style={{ background: "linear-gradient(155deg, rgba(255,255,255,0.05), rgba(14,38,22,0.35))" }}
       />
 
-      <div className="relative">
+      <motion.div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{ background: `radial-gradient(380px circle at ${glowX} ${glowY}, ${glowColor}, transparent 70%)` }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 rounded-[24px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{ boxShadow: `inset 0 0 0 1px ${glowColor}, inset 0 1px 0 rgba(255,255,255,0.06)` }}
+      />
+      {/* top edge highlight — the detail that sells "glass" over "card" */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)" }}
+      />
+
+      <motion.div style={{ x: contentX, y: contentY }} className="relative">
         <span className={`inline-block h-1.5 w-1.5 rounded-full ${eyebrowDot}`} />
         <h2 className="mt-7 font-display text-[26px] font-semibold leading-tight text-text">{name}</h2>
         <p className="mt-1.5 text-[13px] font-medium text-gold-light">{subtitle}</p>
@@ -65,7 +79,7 @@ export default function ProductCard({ eyebrowDot, glowColor, name, subtitle, des
           {cta}
           <span className="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
         </div>
-      </div>
+      </motion.div>
     </motion.button>
   );
 }

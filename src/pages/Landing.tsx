@@ -5,6 +5,7 @@ import { usePreferences } from "../lib/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import ProductCard from "../components/ProductCard";
 import AmbientBackground from "../components/AmbientBackground";
+import LogoGleam from "../components/LogoGleam";
 
 const products = [
   {
@@ -56,14 +57,13 @@ export default function Landing() {
       <AmbientBackground />
 
       <header className="relative z-10 flex items-center justify-between px-8 py-7 md:px-16">
-        <motion.span
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
-          className="font-display text-[15px] font-semibold tracking-tight text-gold-up"
         >
-          Avanza
-        </motion.span>
+          <LogoGleam size={26} />
+        </motion.div>
         <LanguageSwitcher />
       </header>
 

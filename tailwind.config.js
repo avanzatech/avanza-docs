@@ -23,6 +23,12 @@ export default {
         body: ["'DM Sans'", "sans-serif"],
         mono: ["'DM Mono'", "monospace"],
       },
+      keyframes: {
+        gleam: {
+          "0%, 15%": { backgroundPosition: "150% 0" },
+          "35%, 100%": { backgroundPosition: "-50% 0" },
+        },
+      },
     },
   },
   plugins: [],
