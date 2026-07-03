@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Callout, StepCard } from "../components/content/Blocks";
+import KitchenPortalDemo from "../components/demos/KitchenPortalDemo";
 
 type ArticleBody = { en: ReactNode; es: ReactNode };
 
@@ -11,6 +12,7 @@ export const kitchenArticles: Record<string, ArticleBody> = {
           Kitchen Portal's home screen shows exactly one thing that needs attention — not a dashboard full of
           numbers. It picks the single most urgent item and puts it front and center.
         </p>
+        <KitchenPortalDemo />
         <Callout type="info" title="Priority order">
           It checks in this order: dishes completely out of stock first, then deliveries waiting for APPCC
           registration, then dishes running low, and only shows "all good" once none of those apply.
@@ -34,6 +36,7 @@ export const kitchenArticles: Record<string, ArticleBody> = {
           La pantalla de inicio del Portal de Cocina muestra exactamente una cosa que necesita atención — no un
           panel lleno de cifras. Elige el elemento más urgente y lo pone en primer plano.
         </p>
+        <KitchenPortalDemo />
         <Callout type="info" title="Orden de prioridad">
           Comprueba en este orden: primero los platos completamente sin stock, después las entregas esperando
           registro APPCC, luego los platos con stock bajo, y solo muestra "todo en orden" cuando ninguno aplica.
