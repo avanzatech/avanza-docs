@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { usePreferences } from "../lib/LanguageContext";
@@ -6,6 +6,7 @@ import LanguageSwitcher from "../components/LanguageSwitcher";
 import ProductCard from "../components/ProductCard";
 import AmbientBackground from "../components/AmbientBackground";
 import LogoGleam from "../components/LogoGleam";
+import LogoIntro from "../components/LogoIntro";
 
 const products = [
   {
@@ -37,6 +38,7 @@ export default function Landing() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const forceHome = params.get("home") === "1";
+  const [introDone, setIntroDone] = useState(false);
 
   useEffect(() => {
     if (forceHome || !product) return;
@@ -52,25 +54,31 @@ export default function Landing() {
     navigate(id === "os" ? `/docs/${lang}/os` : `/docs/${lang}/impulse/getting-started`);
   };
 
+  // Content animates in only once the intro reveal has receded.
+  const show = introDone;
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-bg">
+      <LogoIntro onDone={() => setIntroDone(true)} />
       <AmbientBackground />
 
       <header className="relative z-10 flex items-center justify-between px-8 py-7 md:px-16">
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate={{ opacity: show ? 1 : 0 }}
           transition={{ duration: 0.6 }}
         >
           <LogoGleam size={26} />
         </motion.div>
-        <LanguageSwitcher />
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: show ? 1 : 0 }} transition={{ duration: 0.6 }}>
+          <LanguageSwitcher />
+        </motion.div>
       </header>
 
       <main className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-6 pb-28 pt-20 text-center md:pt-28">
         <motion.p
           initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={show ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mb-7 font-mono text-[11px] uppercase tracking-[0.25em] text-text-dim"
         >
@@ -78,7 +86,7 @@ export default function Landing() {
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={show ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-[22ch] font-display text-[44px] font-semibold leading-[1.08] tracking-tight text-text md:text-[56px]"
         >
@@ -88,19 +96,20 @@ export default function Landing() {
         </motion.h1>
 
         <div className="mt-20 grid w-full gap-5 [perspective:1200px] md:grid-cols-2">
-          {products.map((p, i) => (
-            <ProductCard
-              key={p.id}
-              eyebrowDot={p.dot}
-              glowColor={p.glow}
-              name={p.name}
-              subtitle={p.subtitle[lang]}
-              desc={p.desc[lang]}
-              cta={t("Open Documentation", "Abrir Documentación")}
-              onClick={() => go(p.id)}
-              delay={0.2 + i * 0.1}
-            />
-          ))}
+          {show &&
+            products.map((p, i) => (
+              <ProductCard
+                key={p.id}
+                eyebrowDot={p.dot}
+                glowColor={p.glow}
+                name={p.name}
+                subtitle={p.subtitle[lang]}
+                desc={p.desc[lang]}
+                cta={t("Open Documentation", "Abrir Documentación")}
+                onClick={() => go(p.id)}
+                delay={0.25 + i * 0.12}
+              />
+            ))}
         </div>
       </main>
     </div>
