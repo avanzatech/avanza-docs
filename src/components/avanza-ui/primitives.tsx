@@ -1,4 +1,4 @@
-import type { ReactNode, CSSProperties } from "react";
+import { useState, useEffect, type ReactNode, type CSSProperties } from "react";
 
 // Ported directly from App.jsx's Card/Btn/Input/Toggle — same structure and
 // interaction logic, restyled onto our CSS-var token set (which already
@@ -124,6 +124,23 @@ export function Input({
       />
     </div>
   );
+}
+
+export function AnimNum({ value, prefix = "", duration = 1200 }: { value: number; prefix?: string; duration?: number }) {
+  const [d, setD] = useState(0);
+  useEffect(() => {
+    let raf: number;
+    const start = performance.now();
+    const from = 0;
+    const step = (n: number) => {
+      const p = Math.min((n - start) / duration, 1);
+      setD(from + (value - from) * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [value, duration]);
+  return <span>{prefix}{d.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>;
 }
 
 export function Toggle({ on, onClick, label }: { on: boolean; onClick: () => void; label?: string }) {

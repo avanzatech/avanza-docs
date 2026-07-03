@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Callout, StepCard, Checklist } from "../components/content/Blocks";
 import ProductCardDemo from "../components/demos/ProductCardDemo";
+import DashboardDemo from "../components/demos/DashboardDemo";
 
 // Content is grounded in the live App.jsx implementation, verified against
 // the source before writing — not the original planning spec. Slugs not
@@ -8,6 +9,44 @@ import ProductCardDemo from "../components/demos/ProductCardDemo";
 type ArticleBody = { en: ReactNode; es: ReactNode };
 
 export const osArticles: Record<string, ArticleBody> = {
+  sales: {
+    en: (
+      <>
+        <p>
+          Sales is what opens first — it's your dashboard, not a separate screen. One number matters most:
+          yesterday's revenue, front and center, compared against the day before.
+        </p>
+        <DashboardDemo />
+        <Callout type="info" title="Where the numbers come from">
+          Nothing here is manually entered. Revenue comes from your POS feed, costs come from processed invoices —
+          the margin bar is real accounting, not an estimate.
+        </Callout>
+        <Callout type="tip" title="Business value">
+          Seeing margin — not just revenue — next to your sales number is what actually drives decisions. A busy
+          day with a thin margin tells a different story than the revenue number alone would.
+        </Callout>
+      </>
+    ),
+    es: (
+      <>
+        <p>
+          Ventas es lo primero que se abre — es tu panel principal, no una pantalla aparte. Un número importa más
+          que ningún otro: la facturación de ayer, en primer plano, comparada con el día anterior.
+        </p>
+        <DashboardDemo />
+        <Callout type="info" title="De dónde salen los números">
+          Nada aquí se introduce manualmente. La facturación viene de tu TPV, los costes vienen de las facturas
+          procesadas — la barra de margen es contabilidad real, no una estimación.
+        </Callout>
+        <Callout type="tip" title="Valor de negocio">
+          Ver el margen — no solo la facturación — junto a tu número de ventas es lo que realmente guía las
+          decisiones. Un día ajetreado con margen ajustado cuenta una historia distinta a la que cuenta solo la
+          cifra de ventas.
+        </Callout>
+      </>
+    ),
+  },
+
   "getting-started": {
     en: (
       <>
