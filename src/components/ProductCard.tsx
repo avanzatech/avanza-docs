@@ -46,23 +46,25 @@ export default function ProductCard({ eyebrowDot, glowColor, name, subtitle, des
       onMouseLeave={onMouseLeave}
       onClick={onClick}
       style={{ rotateX, rotateY, transformPerspective: 1000 }}
-      className="group relative overflow-hidden rounded-[24px] border border-white/[0.08] p-9 text-left backdrop-blur-2xl transition-[border-color,box-shadow] duration-300 hover:border-white/[0.16] hover:shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]"
-      // Deliberately more transparent than the standard .glass-card utility —
-      // this card needs to read as glass sitting above the ambient background,
-      // not as an opaque panel.
+      className="group relative overflow-hidden rounded-[24px] border p-9 text-left backdrop-blur-2xl transition-[border-color,box-shadow,transform] duration-300"
     >
+      {/* resting-state color wash — this is what makes the card read as
+          intentional even before anyone hovers it, not just on interaction */}
       <div
         className="absolute inset-0 -z-10"
-        style={{ background: "linear-gradient(155deg, rgba(255,255,255,0.05), rgba(14,38,22,0.35))" }}
+        style={{
+          background: `linear-gradient(155deg, ${glowColor}, transparent 55%), linear-gradient(155deg, rgba(255,255,255,0.05), rgba(14,38,22,0.4))`,
+        }}
+      />
+      {/* resting border + shadow tinted to the product color, intensifies on hover */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-[24px] transition-shadow duration-300 group-hover:shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]"
+        style={{ boxShadow: `inset 0 0 0 1px ${glowColor.replace(/[\d.]+\)$/, "0.4)")}` }}
       />
 
       <motion.div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{ background: `radial-gradient(380px circle at ${glowX} ${glowY}, ${glowColor}, transparent 70%)` }}
-      />
-      <div
-        className="pointer-events-none absolute inset-0 rounded-[24px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{ boxShadow: `inset 0 0 0 1px ${glowColor}, inset 0 1px 0 rgba(255,255,255,0.06)` }}
+        style={{ background: `radial-gradient(380px circle at ${glowX} ${glowY}, ${glowColor.replace(/[\d.]+\)$/, "0.5)")}, transparent 70%)` }}
       />
       {/* top edge highlight — the detail that sells "glass" over "card" */}
       <div

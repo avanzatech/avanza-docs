@@ -21,12 +21,12 @@ export default function AmbientBackground() {
       />
       {/* Real marketing-site keyframes: butterfly-float for motion,
           gold-pulse for the glow breathing behind it — not approximated. */}
-      <div className="absolute left-1/2 top-[38%] h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/[0.1] blur-[140px] animate-gold-pulse" />
+      <div className="absolute left-1/2 top-[32%] h-[550px] w-[550px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/[0.14] blur-[130px] animate-gold-pulse" />
       <img
         src={logo}
         alt=""
-        className="absolute left-1/2 top-[38%] w-[900px] max-w-none -translate-x-1/2 -translate-y-1/2 animate-butterfly-float opacity-[0.06]"
-        style={{ filter: "grayscale(1) brightness(1.6)" }}
+        className="absolute left-1/2 top-[32%] w-[820px] max-w-none -translate-x-1/2 -translate-y-1/2 animate-butterfly-float opacity-[0.14]"
+        style={{ filter: "grayscale(1) brightness(2.2)" }}
       />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,26,15,0.55)_100%)]" />
     </div>
