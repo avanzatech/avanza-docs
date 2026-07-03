@@ -4,6 +4,7 @@ import DocsLayout from "../layouts/DocsLayout";
 import { osRestaurantNav, impulseNav, kitchenPortalNav } from "../lib/navConfig";
 import ArticleFooter from "../components/content/ArticleFooter";
 import { Callout } from "../components/content/Blocks";
+import { osArticles } from "../content/osArticles";
 
 type Section = "os" | "impulse" | "kitchen";
 type Props = { product: "os" | "impulse"; section?: Section };
@@ -30,6 +31,8 @@ export default function DocsArticle({ product, section }: Props) {
       ? `/docs/${lang}/os/restaurant`
       : `/docs/${lang}/impulse`;
 
+  const realContent = sec === "os" && slug ? osArticles[slug] : undefined;
+
   return (
     <DocsLayout product={cfg.product} section={sec === "kitchen" ? "kitchen" : undefined}>
       <article>
@@ -38,7 +41,7 @@ export default function DocsArticle({ product, section }: Props) {
           <span>·</span>
           <span>{t("Updated Jul 2026", "Actualizado jul. 2026")}</span>
         </div>
-        <h1 className="font-display text-3xl font-semibold text-text">{title}</h1>
+        <h1 className="mb-6 font-display text-3xl font-semibold text-text">{title}</h1>
 
         {sec === "kitchen" && (
           <Callout type="info" title={t("A separate mini-app", "Una mini-app aparte")}>
@@ -49,12 +52,18 @@ export default function DocsArticle({ product, section }: Props) {
           </Callout>
         )}
 
-        <Callout type="note" title={t("Not written yet", "Aún no escrito")}>
-          {t(
-            "This article's content hasn't been authored — this is the documentation engine's placeholder. Real articles load from metadata (title, category, product, blueprint, reading time, related articles, keywords) rather than being hardcoded pages.",
-            "El contenido de este artículo aún no se ha redactado — este es el marcador de posición del motor de documentación. Los artículos reales se cargan desde metadatos (título, categoría, producto, blueprint, tiempo de lectura, artículos relacionados, palabras clave) en lugar de ser páginas fijas."
-          )}
-        </Callout>
+        {realContent ? (
+          <div className="flex flex-col gap-1 text-sm leading-relaxed text-text-muted [&_p]:mb-3">
+            {lang === "en" ? realContent.en : realContent.es}
+          </div>
+        ) : (
+          <Callout type="note" title={t("Not written yet", "Aún no escrito")}>
+            {t(
+              "This article's content hasn't been authored — this is the documentation engine's placeholder. Real articles load from metadata (title, category, product, blueprint, reading time, related articles, keywords) rather than being hardcoded pages.",
+              "El contenido de este artículo aún no se ha redactado — este es el marcador de posición del motor de documentación. Los artículos reales se cargan desde metadatos (título, categoría, producto, blueprint, tiempo de lectura, artículos relacionados, palabras clave) en lugar de ser páginas fijas."
+            )}
+          </Callout>
+        )}
       </article>
 
       <ArticleFooter nav={nav} currentSlug={slug ?? ""} base={base} />
