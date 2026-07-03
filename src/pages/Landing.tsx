@@ -88,14 +88,14 @@ export default function Landing() {
           initial={{ opacity: 0, y: 16 }}
           animate={show ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-[22ch] font-display text-[44px] font-semibold leading-[1.08] tracking-tight text-text md:text-[56px]"
+          className="max-w-[23ch] font-display text-[48px] font-semibold leading-[1.06] tracking-tight text-text md:text-[64px]"
         >
           {t("Which Avanza product", "¿Con qué producto de Avanza")}
           <br />
           <span className="text-text-muted">{t("do you need help with?", "necesitas ayuda?")}</span>
         </motion.h1>
 
-        <div className="mt-20 grid w-full gap-5 [perspective:1200px] md:grid-cols-2">
+        <div className="mt-24 grid w-full gap-5 [perspective:1200px] md:grid-cols-2">
           {show &&
             products.map((p, i) => (
               <ProductCard
