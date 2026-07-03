@@ -92,7 +92,7 @@ export default function DocsLayout({ product, section, children }: Props) {
       </aside>
 
       <div className="flex min-h-screen flex-1 flex-col">
-        <header className="sticky top-0 z-10 flex items-center justify-between border-b border-brd bg-bg/80 px-6 py-3 backdrop-blur-xl">
+        <header className="glass-navbar sticky top-0 z-10 flex items-center justify-between px-6 py-3">
           <div className="font-mono text-xs text-text-dim">
             <Link to="/?home=1" className="hover:text-text">Avanza</Link>
             {" / "}

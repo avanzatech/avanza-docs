@@ -5,18 +5,17 @@
 
 html, body, #root { height: 100%; }
 body {
-  background: linear-gradient(170deg, #0A1A0F, #0D2214);
+  background: linear-gradient(170deg, #040e08, #0a2318);
   @apply text-text font-body antialiased;
 }
 
 ::selection {
-  background: #C9A84C;
-  color: #0A1A0F;
+  background: #c9a84c;
+  color: #040e08;
 }
 
-/* Avanza glass card — matches App.jsx card treatment exactly */
 .glass-card {
-  background: rgba(14,38,22,0.65);
+  background: rgba(10,30,20,0.65);
   border: 1px solid rgba(201,168,76,0.10);
   backdrop-filter: blur(16px);
 }
@@ -24,8 +23,34 @@ body {
   border-color: rgba(201,168,76,0.22);
 }
 
-/* Avanza primary button — gold gradient, matches App.jsx CTA pattern */
 .btn-gold {
-  background: linear-gradient(135deg, #C9A84C, #8B7332);
-  color: #0A1A0F;
+  background: linear-gradient(135deg, #c9a84c, #8B7332);
+  color: #040e08;
+}
+
+/* Ported verbatim from the marketing site's index.css */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(25px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-effect:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.glass-navbar {
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(30px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 1px 1px rgba(255, 255, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }

@@ -82,3 +82,17 @@ layout/bottom-nav, and APPCC's reception cards all still use prose-only content 
 demo components following this same pattern. This is a real scope increase per module (each interactive
 demo took meaningfully more work than the equivalent prose article) — flagging so the pace of remaining
 modules is set with that in mind.
+
+## Update: aligned to real marketing-site design tokens
+Sudhanshu shared the actual marketing site's `index.css`/`App.tsx`/`main.tsx`. Colors and
+animations are now pulled from that source directly rather than approximated:
+- Colors: `--background #040e08`, `--avanza-green #0a2318`, `--avanza-gold #c9a84c` — exact match
+- `.glass-effect` / `.glass-navbar` ported verbatim
+- Logo animation now uses the real `butterflyFloat` + `goldPulse` keyframes (built specifically
+  for the butterfly mark in the original file) instead of an approximated float
+
+Note: only CSS/root files were shared (App.css, index.css, App.tsx, main.tsx) — not the actual
+Hero or dashboard-card component JSX. Colors/classes/keyframes are now exact; component *layout*
+patterns (how Hero and dashboard cards are actually structured) are still this project's own
+implementation. If the Hero.tsx / card component files get shared, those should replace the
+current Landing/ProductCard layout more precisely.

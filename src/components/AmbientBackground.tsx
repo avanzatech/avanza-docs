@@ -19,13 +19,13 @@ export default function AmbientBackground() {
         transition={{ duration: 32, repeat: Infinity, ease: "easeInOut" }}
         style={{ bottom: "-15%", right: "8%" }}
       />
-      <motion.img
+      {/* Real marketing-site keyframes: butterfly-float for motion,
+          gold-pulse for the glow breathing behind it — not approximated. */}
+      <div className="absolute left-1/2 top-[38%] h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/[0.1] blur-[140px] animate-gold-pulse" />
+      <img
         src={logo}
         alt=""
-        initial={{ opacity: 0, scale: 1.05 }}
-        animate={{ opacity: 0.05, scale: 1, y: [0, -14, 0] }}
-        transition={{ opacity: { duration: 1.4 }, scale: { duration: 1.4 }, y: { duration: 12, repeat: Infinity, ease: "easeInOut" } }}
-        className="absolute left-1/2 top-[38%] w-[900px] max-w-none -translate-x-1/2 -translate-y-1/2"
+        className="absolute left-1/2 top-[38%] w-[900px] max-w-none -translate-x-1/2 -translate-y-1/2 animate-butterfly-float opacity-[0.06]"
         style={{ filter: "grayscale(1) brightness(1.6)" }}
       />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,26,15,0.55)_100%)]" />
