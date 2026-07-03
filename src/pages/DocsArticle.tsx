@@ -5,6 +5,7 @@ import { osRestaurantNav, impulseNav, kitchenPortalNav } from "../lib/navConfig"
 import ArticleFooter from "../components/content/ArticleFooter";
 import { Callout } from "../components/content/Blocks";
 import { osArticles } from "../content/osArticles";
+import { kitchenArticles } from "../content/kitchenArticles";
 
 type Section = "os" | "impulse" | "kitchen";
 type Props = { product: "os" | "impulse"; section?: Section };
@@ -31,7 +32,8 @@ export default function DocsArticle({ product, section }: Props) {
       ? `/docs/${lang}/os/restaurant`
       : `/docs/${lang}/impulse`;
 
-  const realContent = sec === "os" && slug ? osArticles[slug] : undefined;
+  const realContent =
+    sec === "os" && slug ? osArticles[slug] : sec === "kitchen" && slug ? kitchenArticles[slug] : undefined;
 
   return (
     <DocsLayout product={cfg.product} section={sec === "kitchen" ? "kitchen" : undefined}>

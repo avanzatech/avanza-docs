@@ -147,6 +147,76 @@ export const osArticles: Record<string, ArticleBody> = {
     ),
   },
 
+  productos: {
+    en: (
+      <>
+        <p>
+          Productos shows your beverage stock — not food. Food is tracked separately in Kitchen Portal, through
+          real events on the floor (deliveries, staff counts), not a number you maintain here.
+        </p>
+        <Callout type="info" title="Why the split">
+          Beverages move slowly enough and are counted precisely enough that a stock number here is trustworthy.
+          Food doesn't work that way — plates get made from combinations of ingredients, so Kitchen Portal tracks
+          dish availability instead of trying to guess raw ingredient counts.
+        </Callout>
+        <StepCard number={1} title="Set a stock count">
+          Tap a product, enter what you actually counted. This creates a checkpoint — the system estimates from
+          there using sales and deliveries, until you correct it again.
+        </StepCard>
+        <StepCard number={2} title="Link a supplier before setting a reorder threshold">
+          Threshold-based auto-drafting only works once a product has a supplier attached — without one, there's
+          nowhere for the draft order to go.
+        </StepCard>
+        <StepCard number={3} title="Set threshold and order quantity">
+          When stock drops to the threshold, Avanza creates a draft order automatically for the order quantity you
+          set — it still waits in Pedidos for your approval, it doesn't send itself.
+        </StepCard>
+        <Callout type="warning" title="Common mistake">
+          Expecting food items to show up here. If a product you're looking for isn't in this list, check Kitchen
+          Portal's Board instead — food inventory lives there.
+        </Callout>
+        <p className="text-sm text-text-dim">
+          Related: <em>Pedidos</em> — thresholds set here are what triggers automatic drafts there.
+        </p>
+      </>
+    ),
+    es: (
+      <>
+        <p>
+          Productos muestra tu stock de bebidas — no de comida. La comida se controla por separado en el Portal de
+          Cocina, mediante eventos reales en la cocina (entregas, conteos del personal), no una cifra que mantienes
+          aquí.
+        </p>
+        <Callout type="info" title="Por qué la separación">
+          Las bebidas se mueven con la lentitud suficiente y se cuentan con la precisión suficiente para que una
+          cifra de stock aquí sea fiable. La comida no funciona así — los platos se elaboran combinando
+          ingredientes, así que el Portal de Cocina sigue la disponibilidad de platos en lugar de intentar adivinar
+          cantidades de ingredientes crudos.
+        </Callout>
+        <StepCard number={1} title="Registra un conteo de stock">
+          Toca un producto, introduce lo que realmente contaste. Esto crea un punto de control — el sistema estima
+          a partir de ahí usando ventas y entregas, hasta que lo corrijas de nuevo.
+        </StepCard>
+        <StepCard number={2} title="Vincula un proveedor antes de fijar un umbral">
+          Los pedidos automáticos por umbral solo funcionan una vez que un producto tiene un proveedor vinculado —
+          sin uno, no hay dónde enviar el borrador de pedido.
+        </StepCard>
+        <StepCard number={3} title="Fija el umbral y la cantidad a pedir">
+          Cuando el stock baja al umbral, Avanza crea un borrador de pedido automáticamente por la cantidad que
+          configuraste — sigue esperando tu aprobación en Pedidos, no se envía solo.
+        </StepCard>
+        <Callout type="warning" title="Error común">
+          Esperar encontrar productos de comida aquí. Si un producto que buscas no está en esta lista, revisa el
+          Tablero del Portal de Cocina — el inventario de comida vive allí.
+        </Callout>
+        <p className="text-sm text-text-dim">
+          Relacionado: <em>Pedidos</em> — los umbrales configurados aquí son lo que dispara los borradores
+          automáticos allí.
+        </p>
+      </>
+    ),
+  },
+
   documentos: {
     en: (
       <>
