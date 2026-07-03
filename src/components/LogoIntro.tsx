@@ -42,22 +42,25 @@ export default function LogoIntro({ onDone }: { onDone: () => void }) {
         >
           {/* gold pulse glow behind the mark */}
           <motion.div
-            className="absolute h-[520px] w-[520px] rounded-full bg-gold/[0.16] blur-[130px]"
+            className="absolute h-[70vh] w-[70vh] rounded-full bg-gold/[0.14] blur-[160px]"
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
           />
           <motion.div
-            className="relative"
-            initial={{ opacity: 0, scale: 0.86, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ scale: 1.5, opacity: 0 }}
+            className="relative flex h-screen w-screen items-center justify-center"
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ scale: 1.08, opacity: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             <img
               src={logo}
               alt="Avanza"
-              className="w-[440px] max-w-[80vw]"
+              // Real asset is 1800x1013 (~16:9) — fill the viewport at that
+              // ratio via object-contain rather than a fixed pixel width, so
+              // it's a true full-screen moment, not a small boxed logo.
+              className="h-full w-full object-contain px-[6vw] py-[12vh]"
               style={{ filter: "grayscale(1) brightness(2.2)" }}
             />
             {/* gleam sweep across the mark */}
