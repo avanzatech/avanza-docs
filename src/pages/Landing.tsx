@@ -3,10 +3,12 @@ import { motion } from "framer-motion";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { usePreferences } from "../lib/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
+import ProductCard from "../components/ProductCard";
+import AmbientBackground from "../components/AmbientBackground";
 
 const products = [
   {
-    id: "os",
+    id: "os" as const,
     name: "Avanza OS",
     subtitle: { en: "Restaurant Operations Platform", es: "Plataforma de Operaciones para Restaurantes" },
     desc: {
@@ -14,11 +16,10 @@ const products = [
       es: "Inventario, proveedores, compras, cocina, cumplimiento normativo e inteligencia de negocio.",
     },
     dot: "bg-gold",
-    ring: "hover:border-gold/40",
-    glow: "shadow-[0_0_120px_-30px_rgba(201,168,76,0.35)]",
+    glow: "rgba(201,168,76,0.16)",
   },
   {
-    id: "impulse",
+    id: "impulse" as const,
     name: "Avanza Impulse",
     subtitle: { en: "AI Growth Platform", es: "Plataforma de Crecimiento con IA" },
     desc: {
@@ -26,10 +27,9 @@ const products = [
       es: "Marketing, redes sociales, SEO, reputación, campañas y crecimiento de clientes.",
     },
     dot: "bg-blue",
-    ring: "hover:border-blue/40",
-    glow: "shadow-[0_0_120px_-30px_rgba(59,130,246,0.35)]",
+    glow: "rgba(91,141,239,0.16)",
   },
-] as const;
+];
 
 export default function Landing() {
   const { lang, t, product, blueprint, setProduct } = usePreferences();
@@ -37,9 +37,6 @@ export default function Landing() {
   const [params] = useSearchParams();
   const forceHome = params.get("home") === "1";
 
-  // Returning users with a saved product go straight back in — the landing
-  // screen only asks once. Explicit "switch product" always goes through the
-  // ProductSwitcher in the docs header, not back through here.
   useEffect(() => {
     if (forceHome || !product) return;
     if (product === "os") {
@@ -49,58 +46,60 @@ export default function Landing() {
     }
   }, [forceHome, product, blueprint, lang, navigate]);
 
+  const go = (id: "os" | "impulse") => {
+    setProduct(id);
+    navigate(id === "os" ? `/docs/${lang}/os` : `/docs/${lang}/impulse/getting-started`);
+  };
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-bg">
-      <div className="pointer-events-none absolute inset-0 opacity-50">
-        <div className="absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-gold/10 blur-[140px]" />
-        <div className="absolute -bottom-40 right-1/4 h-[500px] w-[500px] rounded-full bg-blue/10 blur-[140px]" />
-      </div>
+      <AmbientBackground />
 
-      <header className="relative z-10 flex items-center justify-between px-8 py-6 md:px-16">
-        <span className="font-display text-lg font-semibold tracking-tight text-gold-up">Avanza Docs</span>
+      <header className="relative z-10 flex items-center justify-between px-8 py-7 md:px-16">
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="font-display text-[15px] font-semibold tracking-tight text-gold-up"
+        >
+          Avanza
+        </motion.span>
         <LanguageSwitcher />
       </header>
 
-      <main className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 pb-24 pt-16 text-center md:pt-24">
+      <main className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-6 pb-28 pt-20 text-center md:pt-28">
         <motion.p
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-6 font-mono text-xs uppercase tracking-widest text-text-muted"
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-7 font-mono text-[11px] uppercase tracking-[0.25em] text-text-dim"
         >
           {t("Select your product", "Selecciona tu producto")}
         </motion.p>
         <motion.h1
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.05 }}
-          className="max-w-2xl font-display text-4xl font-semibold leading-[1.15] text-text md:text-5xl"
+          transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-[22ch] font-display text-[44px] font-semibold leading-[1.08] tracking-tight text-text md:text-[56px]"
         >
-          {t("Which Avanza product do you need help with?", "¿Con qué producto de Avanza necesitas ayuda?")}
+          {t("Which Avanza product", "¿Con qué producto de Avanza")}
+          <br />
+          <span className="text-text-muted">{t("do you need help with?", "necesitas ayuda?")}</span>
         </motion.h1>
 
-        <div className="mt-16 grid w-full gap-6 md:grid-cols-2">
+        <div className="mt-20 grid w-full gap-5 [perspective:1200px] md:grid-cols-2">
           {products.map((p, i) => (
-            <motion.button
+            <ProductCard
               key={p.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
-              whileHover={{ y: -4 }}
-              onClick={() => { setProduct(p.id); navigate(p.id === "os" ? `/docs/${lang}/os` : `/docs/${lang}/impulse/getting-started`); }}
-              className={`glass-card group relative overflow-hidden rounded-2xl p-8 text-left transition-colors ${p.ring} ${p.glow}`}
-            >
-              <div className="flex items-center justify-between">
-                <span className={`h-2 w-2 rounded-full ${p.dot}`} />
-              </div>
-              <h2 className="mt-6 font-display text-2xl font-semibold text-text">{p.name}</h2>
-              <p className="mt-1 text-sm font-medium text-gold-light">{p.subtitle[lang]}</p>
-              <p className="mt-4 text-sm leading-relaxed text-text-muted">{p.desc[lang]}</p>
-              <div className="mt-8 flex items-center gap-2 text-sm font-medium text-text">
-                {t("Open Documentation", "Abrir Documentación")}
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </div>
-            </motion.button>
+              eyebrowDot={p.dot}
+              glowColor={p.glow}
+              name={p.name}
+              subtitle={p.subtitle[lang]}
+              desc={p.desc[lang]}
+              cta={t("Open Documentation", "Abrir Documentación")}
+              onClick={() => go(p.id)}
+              delay={0.2 + i * 0.1}
+            />
           ))}
         </div>
       </main>
