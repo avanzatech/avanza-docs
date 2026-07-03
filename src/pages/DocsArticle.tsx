@@ -1,22 +1,37 @@
 import { useParams } from "react-router-dom";
 import { usePreferences } from "../lib/LanguageContext";
 import DocsLayout from "../layouts/DocsLayout";
-import { osRestaurantNav, impulseNav } from "../lib/navConfig";
+import { osRestaurantNav, impulseNav, kitchenPortalNav } from "../lib/navConfig";
 import ArticleFooter from "../components/content/ArticleFooter";
 import { Callout } from "../components/content/Blocks";
 
-type Props = { product: "os" | "impulse" };
+type Section = "os" | "impulse" | "kitchen";
+type Props = { product: "os" | "impulse"; section?: Section };
 
-export default function DocsArticle({ product }: Props) {
+const sectionConfig = {
+  os: { nav: osRestaurantNav, product: "os" as const },
+  impulse: { nav: impulseNav, product: "impulse" as const },
+  kitchen: { nav: kitchenPortalNav, product: "os" as const },
+};
+
+export default function DocsArticle({ product, section }: Props) {
   const { slug } = useParams();
   const { lang, t } = usePreferences();
-  const nav = product === "os" ? osRestaurantNav : impulseNav;
+  const sec = section ?? product;
+  const cfg = sectionConfig[sec];
+  const nav = cfg.nav;
   const item = nav.find((n) => n.slug === slug);
   const title = item ? (lang === "en" ? item.en : item.es) : slug;
-  const base = product === "os" ? `/docs/${lang}/os/restaurant` : `/docs/${lang}/impulse`;
+
+  const base =
+    sec === "kitchen"
+      ? `/docs/${lang}/os/restaurant/kitchen-portal`
+      : sec === "os"
+      ? `/docs/${lang}/os/restaurant`
+      : `/docs/${lang}/impulse`;
 
   return (
-    <DocsLayout product={product}>
+    <DocsLayout product={cfg.product} section={sec === "kitchen" ? "kitchen" : undefined}>
       <article>
         <div className="mb-6 flex items-center gap-3 font-mono text-xs text-text-dim">
           <span>{t("4 min read", "4 min de lectura")}</span>
@@ -24,6 +39,15 @@ export default function DocsArticle({ product }: Props) {
           <span>{t("Updated Jul 2026", "Actualizado jul. 2026")}</span>
         </div>
         <h1 className="font-display text-3xl font-semibold text-text">{title}</h1>
+
+        {sec === "kitchen" && (
+          <Callout type="info" title={t("A separate mini-app", "Una mini-app aparte")}>
+            {t(
+              "Kitchen Portal opens from a link with a restaurant-specific token — kitchen staff never log in. It's built for a phone screen on a counter during service, not a desk.",
+              "El Portal de Cocina se abre desde un enlace con un token específico del restaurante — el personal de cocina nunca inicia sesión. Está pensado para un móvil en la barra durante el servicio, no para un escritorio."
+            )}
+          </Callout>
+        )}
 
         <Callout type="note" title={t("Not written yet", "Aún no escrito")}>
           {t(

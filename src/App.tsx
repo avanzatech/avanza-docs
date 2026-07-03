@@ -15,7 +15,11 @@ export default function App() {
         <Route path="/docs/:lang/os" element={<OsIndex />} />
         <Route path="/docs/:lang/os/pick" element={<BlueprintPicker />} />
         <Route path="/docs/:lang/os/restaurant" element={<DocsIndex product="os" />} />
-        <Route path="/docs/:lang/os/restaurant/:slug" element={<DocsArticle product="os" />} />
+        <Route path="/docs/:lang/os/restaurant/:slug" element={<DocsArticle product="os" section="os" />} />
+
+        {/* Kitchen Portal — nested under OS/Restaurant, own nav + banner */}
+        <Route path="/docs/:lang/os/restaurant/kitchen-portal" element={<DocsIndex product="os" section="kitchen" />} />
+        <Route path="/docs/:lang/os/restaurant/kitchen-portal/:slug" element={<DocsArticle product="os" section="kitchen" />} />
 
         {/* Avanza Impulse: language -> docs (no blueprint layer) */}
         <Route path="/docs/:lang/impulse" element={<DocsIndex product="impulse" />} />
