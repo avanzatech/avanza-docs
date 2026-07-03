@@ -68,3 +68,17 @@ Per the "Final Architecture Pass" spec, before writing content pages:
 - **Rich content blocks**: `src/components/content/Blocks.tsx` — `Callout` (info/success/warning/tip/note), `StepCard`, `Checklist` (clickable), `Expandable`. `ArticleFooter.tsx` adds prev/next, copy link, print, and a thumbs up/down feedback control to every article.
 
 Still not done: actual MDX loading (schema exists, loader doesn't — DocsArticle still renders a placeholder body using the Callout block as a demo), keyboard shortcut for search (⌘K is shown as a hint but not wired), related-articles rendering (relatedSlugs exists in the schema but nothing reads it yet), and the deeper "reuse actual App.jsx components" ask from the master prompt — this pass matched tokens/behavior, not componentry, since App.jsx has no exported component library to import from (single-file, all inline).
+
+## Update: interactive component reuse (pilot module — Productos)
+Per the "application is the documentation" direction: added `src/components/avanza-ui/primitives.tsx`,
+Card/Btn/Input/Toggle ported directly from App.jsx's own component source (same style logic,
+same interaction patterns — not redrawn from memory) — and `src/components/demos/ProductCardDemo.tsx`,
+a working reproduction of the real InventoryCard threshold-config flow (status pill states, border-urgency
+coloring, save/confirm animation) running on local demo state so it's safe to click through in docs.
+Embedded in the Productos article as the pilot for "one module at a time."
+
+Not yet extended to other modules — Pedidos, Documentos, Dashboard-style cards, Kitchen Portal's mobile
+layout/bottom-nav, and APPCC's reception cards all still use prose-only content and would need their own
+demo components following this same pattern. This is a real scope increase per module (each interactive
+demo took meaningfully more work than the equivalent prose article) — flagging so the pace of remaining
+modules is set with that in mind.

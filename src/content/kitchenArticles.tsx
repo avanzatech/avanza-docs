@@ -97,4 +97,55 @@ export const kitchenArticles: Record<string, ArticleBody> = {
       </>
     ),
   },
+
+  "kitchen-appcc": {
+    en: (
+      <>
+        <p>
+          APPCC logs the food-safety checks required for every delivery — reception temperature, condition, and
+          batch traceability for each item. This is compliance record-keeping, not optional.
+        </p>
+        <StepCard number={1} title="Open the batch for the delivery you just received">
+          Pending batches are what Home points you to when APPCC registration is needed.
+        </StepCard>
+        <StepCard number={2} title="Scan instead of typing lot numbers">
+          Point the camera at the product's barcode — it reads the lot number and expiry date directly (GS1
+          format) instead of you copying digits by hand.
+        </StepCard>
+        <StepCard number={3} title="Record temperature and condition">
+          Enter the reception temperature and mark whether the delivery's condition and appearance passed — these
+          are the two go/no-go checks required at reception.
+        </StepCard>
+        <Callout type="warning" title="Common mistake">
+          Skipping the scan and typing "NO_LOTE" out of habit. Only use that when a product genuinely has no lot
+          number on it — scanning correctly is what makes traceability actually work if there's ever a recall.
+        </Callout>
+      </>
+    ),
+    es: (
+      <>
+        <p>
+          APPCC registra los controles de seguridad alimentaria obligatorios en cada entrega — temperatura de
+          recepción, estado y trazabilidad de lote de cada artículo. Es un registro de cumplimiento normativo, no
+          opcional.
+        </p>
+        <StepCard number={1} title="Abre el lote de la entrega que acabas de recibir">
+          Los lotes pendientes son a lo que te dirige Inicio cuando hace falta registrar el APPCC.
+        </StepCard>
+        <StepCard number={2} title="Escanea en lugar de escribir los números de lote">
+          Apunta la cámara al código de barras del producto — lee el número de lote y la fecha de caducidad
+          directamente (formato GS1) en lugar de copiar los dígitos a mano.
+        </StepCard>
+        <StepCard number={3} title="Registra temperatura y estado">
+          Introduce la temperatura de recepción y marca si el estado y el aspecto de la entrega son correctos —
+          son los dos controles obligatorios en la recepción.
+        </StepCard>
+        <Callout type="warning" title="Error común">
+          Saltarse el escaneo y escribir "NO_LOTE" por costumbre. Úsalo solo cuando un producto realmente no tenga
+          número de lote — escanear correctamente es lo que hace que la trazabilidad funcione de verdad si alguna
+          vez hay una retirada de producto.
+        </Callout>
+      </>
+    ),
+  },
 };

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Callout, StepCard, Checklist } from "../components/content/Blocks";
+import ProductCardDemo from "../components/demos/ProductCardDemo";
 
 // Content is grounded in the live App.jsx implementation, verified against
 // the source before writing — not the original planning spec. Slugs not
@@ -147,6 +148,63 @@ export const osArticles: Record<string, ArticleBody> = {
     ),
   },
 
+  "avanza-chat": {
+    en: (
+      <>
+        <p>
+          Avanza is a conversation, not a form. Ask it questions the way you'd ask a manager — it has real context
+          on your sales, spend, and orders, and answers from that.
+        </p>
+        <Callout type="tip" title="Good places to start">
+          "How are sales going?", "How much have I spent?", "What should I reorder soon?" — these are the exact
+          suggested prompts shown when you open the tab, because they're the questions owners actually ask.
+        </Callout>
+        <StepCard number={1} title="Just type the question">
+          No commands, no syntax — plain language, in Spanish or English.
+        </StepCard>
+        <StepCard number={2} title="Confirm or reject when it proposes an action">
+          If Avanza suggests doing something concrete (not just answering), you'll get a clear confirm/reject
+          choice — it never takes action on your data without that explicit step.
+        </StepCard>
+        <StepCard number={3} title="Keep going in the same thread">
+          It's one continuous conversation, not a fresh session each time — earlier context in the thread carries
+          forward.
+        </StepCard>
+        <Callout type="note" title="Common mistake">
+          Treating it like a search bar for menu navigation ("where's the export button"). It's built for
+          questions about your business, not app navigation — for that, the tabs at the bottom are faster.
+        </Callout>
+      </>
+    ),
+    es: (
+      <>
+        <p>
+          Avanza es una conversación, no un formulario. Pregúntale como le preguntarías a un encargado — tiene
+          contexto real sobre tus ventas, gastos y pedidos, y responde a partir de eso.
+        </p>
+        <Callout type="tip" title="Buenos puntos de partida">
+          "¿Cómo van las ventas?", "¿Cuánto he gastado?", "¿Qué pedir pronto?" — son exactamente las sugerencias
+          que aparecen al abrir la pestaña, porque son las preguntas que los dueños hacen de verdad.
+        </Callout>
+        <StepCard number={1} title="Simplemente escribe la pregunta">
+          Sin comandos ni sintaxis especial — lenguaje normal, en español o inglés.
+        </StepCard>
+        <StepCard number={2} title="Confirma o rechaza cuando proponga una acción">
+          Si Avanza sugiere hacer algo concreto (no solo responder), te dará una opción clara de confirmar o
+          rechazar — nunca actúa sobre tus datos sin ese paso explícito.
+        </StepCard>
+        <StepCard number={3} title="Continúa en el mismo hilo">
+          Es una conversación continua, no una sesión nueva cada vez — el contexto anterior del hilo se mantiene.
+        </StepCard>
+        <Callout type="note" title="Error común">
+          Tratarlo como un buscador para navegar por el menú ("dónde está el botón de exportar"). Está pensado
+          para preguntas sobre tu negocio, no para navegar la app — para eso, las pestañas de abajo son más
+          rápidas.
+        </Callout>
+      </>
+    ),
+  },
+
   productos: {
     en: (
       <>
@@ -159,6 +217,7 @@ export const osArticles: Record<string, ArticleBody> = {
           Food doesn't work that way — plates get made from combinations of ingredients, so Kitchen Portal tracks
           dish availability instead of trying to guess raw ingredient counts.
         </Callout>
+        <ProductCardDemo />
         <StepCard number={1} title="Set a stock count">
           Tap a product, enter what you actually counted. This creates a checkpoint — the system estimates from
           there using sales and deliveries, until you correct it again.
@@ -193,6 +252,7 @@ export const osArticles: Record<string, ArticleBody> = {
           ingredientes, así que el Portal de Cocina sigue la disponibilidad de platos en lugar de intentar adivinar
           cantidades de ingredientes crudos.
         </Callout>
+        <ProductCardDemo />
         <StepCard number={1} title="Registra un conteo de stock">
           Toca un producto, introduce lo que realmente contaste. Esto crea un punto de control — el sistema estima
           a partir de ahí usando ventas y entregas, hasta que lo corrijas de nuevo.
