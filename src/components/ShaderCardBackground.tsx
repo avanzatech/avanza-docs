@@ -71,8 +71,8 @@ const fsSource = `
     // Purple on the left, resolving into Avanza's forest green on the right —
     // ties the two-product hero (Impulse blue/purple, OS green/gold) together
     // in one background instead of picking a single neutral color.
-    vec4 bgColor1 = vec4(0.14, 0.08, 0.22, 1.0);
-    vec4 bgColor2 = vec4(0.04, 0.14, 0.08, 1.0);
+    vec4 bgColor1 = vec4(0.22, 0.10, 0.34, 1.0);
+    vec4 bgColor2 = vec4(0.05, 0.22, 0.11, 1.0);
 
     for (int l = 0; l < linesPerGroup; l++) {
       float normalizedLineIndex = float(l) / float(linesPerGroup);

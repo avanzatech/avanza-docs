@@ -64,10 +64,14 @@ export default function Landing() {
     <div className="relative flex min-h-screen flex-col overflow-hidden bg-bg">
       <LogoIntro onDone={() => setIntroDone(true)} />
       <div className="absolute inset-0 -z-10">
+        {/* CSS fallback — visible immediately and stays visible if WebGL
+            fails to initialize for any reason, so the background is never
+            just flat black. The shader canvas paints over this once it's up. */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, #16321f 0%, #0A1A0F 45%, #0A1A0F 55%, #241733 100%)" }} />
         <ShaderCardBackground />
-        {/* vignette on top of the shader — keeps text and cards legible
-            against a full-bleed animated background instead of fighting it */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(10,26,15,0.35)_0%,rgba(10,26,15,0.75)_100%)]" />
+        {/* light vignette only — just enough to keep text legible at the
+            very center, not enough to wash the shader out entirely */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(10,26,15,0.05)_0%,rgba(10,26,15,0.4)_100%)]" />
       </div>
 
       <header className="relative z-10 flex items-center justify-end px-8 py-6 md:px-16">
