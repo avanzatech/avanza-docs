@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { usePreferences } from "../lib/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import ProductCard from "../components/ProductCard";
@@ -39,21 +39,10 @@ const products = [
 ];
 
 export default function Landing() {
-  const { lang, t, product, blueprint, setProduct } = usePreferences();
+  const { lang, t, setProduct } = usePreferences();
   const navigate = useNavigate();
-  const [params] = useSearchParams();
-  const forceHome = params.get("home") === "1";
   const [introDone, setIntroDone] = useState(false);
   const [showComingSoon, setShowComingSoon] = useState(false);
-
-  useEffect(() => {
-    if (forceHome || !product) return;
-    if (product === "os") {
-      navigate(blueprint ? `/docs/${lang}/os/${blueprint}` : `/docs/${lang}/os`, { replace: true });
-    } else {
-      navigate(`/docs/${lang}/impulse/getting-started`, { replace: true });
-    }
-  }, [forceHome, product, blueprint, lang, navigate]);
 
   const go = (id: "os" | "impulse") => {
     const p = products.find((x) => x.id === id);
