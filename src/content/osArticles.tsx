@@ -324,75 +324,99 @@ export const osArticles: Record<string, ArticleBody> = {
     en: (
       <>
         <p>
-          Avanza is a conversation, not a form. Ask it questions the way you'd ask a trusted manager who happens to
-          have every invoice, sale, and order memorized — because that's exactly the context it's answering from. No
-          menus to learn, no report to configure: you ask, it answers from your real numbers.
+          Most software makes you go and find the answer. Avanza is the opposite: you ask, in plain words, and it
+          reasons across everything your restaurant has ever recorded — every invoice, delivery, sale, supplier and
+          product — to answer. It is not a chatbot bolted onto a dashboard. It is the intelligence layer that sits on
+          top of your entire operation, and it can both <strong>tell you things</strong> and <strong>do things</strong>.
         </p>
         <AvanzaChatDemo />
-        <Callout type="tip" title="Good places to start">
-          "How are sales going?", "How much have I spent this month?", "What should I reorder soon?" — these are the
-          exact suggested prompts shown when you open the tab, because they're the questions owners actually ask. But
-          the real power shows when you get specific: "Which supplier raised prices the most this quarter?" or "Was
-          last Friday busier than the Friday before?"
+        <p>
+          Think of what it can do in three levels — try the prompts above to see each one in action.
+        </p>
+        <StepCard number={1} title="It understands — reasoning across your whole business">
+          Not lookups, reasoning. "Why is my food cost up?" doesn't return a number — it traces the increase to a
+          specific supplier and product, quantifies the annual impact, and tells you whether it's worth acting on.
+          Ask it to compare weekends, rank suppliers by price movement, or find your most profitable dish, and it
+          works it out from your real data, not averages or guesses.
+        </StepCard>
+        <StepCard number={2} title="It acts — building and connecting your data for you">
+          This is where most people underestimate it. Avanza can <strong>create a new supplier</strong> and wire it
+          up so future deliveries and invoices map to it automatically. It can <strong>add a new product</strong>,
+          pulling the unit price straight from the supplier's last albarán so your cost history starts accurate. It
+          can set reorder thresholds, draft orders, and connect the pieces of your operation — the tedious data entry
+          that used to eat your evenings, done in a sentence.
+        </StepCard>
+        <StepCard number={3} title="It decides — a sounding board for real business calls">
+          "Should I drop the tasting menu?" is a business decision, and Avanza answers it like an analyst: it weighs
+          the menu's share of covers against its share of margin, factors in the wine it pulls, quantifies the cost
+          of cutting it, and gives you a recommendation with the reasoning shown. You stay the decision-maker — but
+          now you're deciding with the full picture in front of you.
+        </StepCard>
+        <Callout type="tip" title="Nothing happens without your say-so">
+          When Avanza proposes an action — a new supplier, a product, an order — you get a clear Confirm / Reject
+          choice, every time. It does the work of preparing the change; you keep the final word. Powerful and safe
+          are not a trade-off here.
         </Callout>
-        <StepCard number={1} title="Just type the question">
-          No commands, no syntax — plain language, in Spanish or English.
-        </StepCard>
-        <StepCard number={2} title="Confirm or reject when it proposes an action">
-          If Avanza suggests doing something concrete (not just answering), you'll get a clear confirm/reject
-          choice — it never takes action on your data without that explicit step.
-        </StepCard>
-        <StepCard number={3} title="Keep going in the same thread">
-          It's one continuous conversation, not a fresh session each time — earlier context in the thread carries
-          forward.
-        </StepCard>
-        <Callout type="info" title="Why it gets more valuable over time">
-          Every invoice you process, every order you approve, every day of sales adds to what Avanza can reason
-          about. Six months in, "why is my food cost higher than last spring?" isn't a vague question — it has a real
-          answer, drawn from your own history. The assistant is the front door to a growing memory of how your
-          restaurant actually runs.
+        <Callout type="info" title="It gets sharper the more you run on it">
+          Every invoice processed, every order approved, every day of sales deepens the map Avanza reasons from.
+          Six months in, "why is my margin thinner than last spring?" has a precise, sourced answer — because the
+          history is yours and it remembers all of it. The longer you run your restaurant on Avanza, the more it
+          becomes the single place you go to understand and steer the business.
         </Callout>
-        <Callout type="note" title="Common mistake">
-          Treating it like a search bar for menu navigation ("where's the export button"). It's built for
-          questions about your business, not app navigation — for that, the tabs at the bottom are faster.
+        <Callout type="note" title="What to keep in mind">
+          Avanza reasons and proposes; it never invents facts or acts silently. Every number it gives traces back to
+          a real event you can check, and every change it makes waits for your confirmation. Ask it anything about
+          your business — the more specific, the better it answers.
         </Callout>
       </>
     ),
     es: (
       <>
         <p>
-          Avanza es una conversación, no un formulario. Pregúntale como le preguntarías a un encargado de confianza
-          que se supiera de memoria cada factura, venta y pedido — porque ese es justo el contexto desde el que
-          responde. Sin menús que aprender, sin informes que configurar: preguntas y responde desde tus números
-          reales.
+          La mayoría del software te obliga a ir a buscar la respuesta. Avanza es lo contrario: preguntas, en
+          lenguaje normal, y razona sobre todo lo que tu restaurante ha registrado jamás — cada factura, entrega,
+          venta, proveedor y producto — para responder. No es un chatbot pegado a un panel. Es la capa de
+          inteligencia que se sitúa sobre toda tu operación, y puede tanto <strong>decirte cosas</strong> como{" "}
+          <strong>hacer cosas</strong>.
         </p>
         <AvanzaChatDemo />
-        <Callout type="tip" title="Buenos puntos de partida">
-          "¿Cómo van las ventas?", "¿Cuánto he gastado este mes?", "¿Qué pedir pronto?" — son exactamente las
-          sugerencias que aparecen al abrir la pestaña, porque son las preguntas que los dueños hacen de verdad. Pero
-          la fuerza real aparece cuando concretas: "¿Qué proveedor subió más los precios este trimestre?" o "¿El
-          viernes pasado fue más fuerte que el anterior?"
+        <p>
+          Piensa en lo que puede hacer en tres niveles — prueba las sugerencias de arriba para ver cada uno en acción.
+        </p>
+        <StepCard number={1} title="Entiende — razona sobre todo tu negocio">
+          No son búsquedas, es razonamiento. "¿Por qué ha subido mi coste de comida?" no devuelve un número — rastrea
+          la subida hasta un proveedor y un producto concretos, cuantifica el impacto anual y te dice si merece la
+          pena actuar. Pídele comparar findes, ordenar proveedores por variación de precio o encontrar tu plato más
+          rentable, y lo calcula desde tus datos reales, no desde medias ni suposiciones.
+        </StepCard>
+        <StepCard number={2} title="Actúa — construye y conecta tus datos por ti">
+          Aquí es donde la mayoría lo subestima. Avanza puede <strong>crear un proveedor nuevo</strong> y dejarlo
+          conectado para que las futuras entregas y facturas se le asignen solas. Puede <strong>añadir un producto
+          nuevo</strong>, sacando el precio unitario del último albarán del proveedor para que tu historial de coste
+          empiece exacto. Puede fijar umbrales de reposición, preparar pedidos y conectar las piezas de tu operación
+          — la entrada de datos tediosa que antes se comía tus tardes, hecha en una frase.
+        </StepCard>
+        <StepCard number={3} title="Decide — un asesor para decisiones reales de negocio">
+          "¿Debería quitar el menú degustación?" es una decisión de negocio, y Avanza la responde como un analista:
+          pesa la cuota de cubiertos del menú frente a su cuota de margen, tiene en cuenta el vino que arrastra,
+          cuantifica el coste de quitarlo y te da una recomendación con el razonamiento a la vista. Tú sigues
+          decidiendo — pero ahora decides con la imagen completa delante.
+        </StepCard>
+        <Callout type="tip" title="Nada pasa sin tu visto bueno">
+          Cuando Avanza propone una acción — un proveedor nuevo, un producto, un pedido — recibes una opción clara de
+          Confirmar / Rechazar, siempre. Hace el trabajo de preparar el cambio; tú mantienes la última palabra.
+          Potente y seguro no están reñidos aquí.
         </Callout>
-        <StepCard number={1} title="Simplemente escribe la pregunta">
-          Sin comandos ni sintaxis especial — lenguaje normal, en español o inglés.
-        </StepCard>
-        <StepCard number={2} title="Confirma o rechaza cuando proponga una acción">
-          Si Avanza sugiere hacer algo concreto (no solo responder), te dará una opción clara de confirmar o
-          rechazar — nunca actúa sobre tus datos sin ese paso explícito.
-        </StepCard>
-        <StepCard number={3} title="Continúa en el mismo hilo">
-          Es una conversación continua, no una sesión nueva cada vez — el contexto anterior del hilo se mantiene.
-        </StepCard>
-        <Callout type="info" title="Por qué vale más con el tiempo">
-          Cada factura que procesas, cada pedido que apruebas, cada día de ventas suma a lo que Avanza puede razonar.
-          A los seis meses, "¿por qué mi coste de comida es más alto que la primavera pasada?" no es una pregunta
-          vaga — tiene una respuesta real, sacada de tu propio historial. El asistente es la puerta de entrada a una
-          memoria creciente de cómo funciona de verdad tu restaurante.
+        <Callout type="info" title="Se afina cuanto más lo usas">
+          Cada factura procesada, cada pedido aprobado, cada día de ventas profundiza el mapa desde el que razona
+          Avanza. A los seis meses, "¿por qué mi margen es más fino que la primavera pasada?" tiene una respuesta
+          precisa y con fuente — porque el historial es tuyo y lo recuerda entero. Cuanto más gestionas tu
+          restaurante con Avanza, más se convierte en el único sitio al que vas para entender y dirigir el negocio.
         </Callout>
-        <Callout type="note" title="Error común">
-          Tratarlo como un buscador para navegar por el menú ("dónde está el botón de exportar"). Está pensado
-          para preguntas sobre tu negocio, no para navegar la app — para eso, las pestañas de abajo son más
-          rápidas.
+        <Callout type="note" title="Qué tener en cuenta">
+          Avanza razona y propone; nunca inventa datos ni actúa en silencio. Cada número que da se remonta a un
+          evento real que puedes comprobar, y cada cambio que hace espera tu confirmación. Pregúntale lo que sea
+          sobre tu negocio — cuanto más concreto, mejor responde.
         </Callout>
       </>
     ),
