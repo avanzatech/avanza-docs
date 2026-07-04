@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { usePreferences } from "../lib/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import ProductCard from "../components/ProductCard";
-import AmbientBackground from "../components/AmbientBackground";
+import ShaderCardBackground from "../components/ShaderCardBackground";
 import osCardImg from "../assets/cards/avanza-os-card.webp";
 import impulseCardImg from "../assets/cards/avanza-impulse-card.webp";
 import LogoIntro from "../components/LogoIntro";
@@ -71,7 +71,21 @@ export default function Landing() {
   return (
     <div className="relative flex min-h-screen flex-col overflow-hidden bg-bg">
       <LogoIntro onDone={() => setIntroDone(true)} />
-      <AmbientBackground />
+      <div className="absolute inset-0 z-0">
+        {/* CSS fallback — visible immediately and stays visible if WebGL
+            fails to initialize for any reason, so the background is never
+            just flat black. The shader canvas paints over this once it's up. */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, #16321f 0%, #0A1A0F 45%, #0A1A0F 55%, #241733 100%)" }} />
+        <ShaderCardBackground />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 900px 700px at center, rgba(8,16,10,0.72) 0%, rgba(8,16,10,0.35) 55%, transparent 80%)",
+          }}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(10,26,15,0.05)_0%,rgba(10,26,15,0.4)_100%)]" />
+      </div>
 
       <header className="relative z-10 flex items-center justify-end px-8 py-6 md:px-16">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: show ? 1 : 0 }} transition={{ duration: 0.6 }}>
@@ -84,7 +98,8 @@ export default function Landing() {
           initial={{ opacity: 0, y: 6 }}
           animate={show ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-5 font-mono text-[11px] uppercase tracking-[0.25em] text-text-dim"
+          className="mb-5 font-mono text-[11px] uppercase tracking-[0.25em] text-text-muted"
+          style={{ textShadow: "0 1px 8px rgba(0,0,0,0.7)" }}
         >
           {t("Select your product", "Selecciona tu producto")}
         </motion.p>
@@ -93,6 +108,7 @@ export default function Landing() {
           animate={show ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-[23ch] font-display text-[36px] font-semibold leading-[1.08] tracking-tight text-text md:text-[48px]"
+          style={{ textShadow: "0 2px 20px rgba(0,0,0,0.6)" }}
         >
           {t("Which Avanza product", "¿Con qué producto de Avanza")}
           <br />

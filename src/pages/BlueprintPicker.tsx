@@ -5,16 +5,21 @@ import { usePreferences } from "../lib/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import AmbientBackground from "../components/AmbientBackground";
 import ComingSoonOverlay from "../components/ComingSoonOverlay";
+import restaurantImg from "../assets/blueprints/restaurant.webp";
+import groceryImg from "../assets/blueprints/grocery.webp";
+import bakeryImg from "../assets/blueprints/bakery.webp";
+import hardwareImg from "../assets/blueprints/hardware.webp";
 
 const blueprints = [
-  { id: "restaurant", icon: "🍽", en: "Restaurant", es: "Restaurante", active: true, glow: "rgba(201,168,76,0.16)" },
-  { id: "grocery", icon: "🛒", en: "Grocery", es: "Tienda de Alimentación", active: false, glow: "rgba(91,141,239,0.14)" },
-  { id: "bakery", icon: "🥖", en: "Bakery", es: "Panadería", active: false, glow: "rgba(232,163,61,0.14)" },
-  { id: "hardware", icon: "🔧", en: "Hardware", es: "Ferretería", active: false, glow: "rgba(168,85,247,0.14)" },
+  { id: "restaurant", icon: "🍽", en: "Restaurant", es: "Restaurante", active: true, glow: "rgba(201,168,76,0.18)", image: restaurantImg },
+  { id: "grocery", icon: "🛒", en: "Grocery", es: "Tienda de Alimentación", active: false, glow: "rgba(91,141,239,0.16)", image: groceryImg },
+  { id: "bakery", icon: "🥖", en: "Bakery", es: "Panadería", active: false, glow: "rgba(232,163,61,0.16)", image: bakeryImg },
+  { id: "hardware", icon: "🔧", en: "Hardware", es: "Ferretería", active: false, glow: "rgba(168,85,247,0.16)", image: hardwareImg },
 ];
 
-// Same tilt/glow interaction as the main landing page's ProductCard, scaled
-// down for a 4-up grid — one shared visual language across both screens.
+// Same tilt/glow/image-background language as the main landing page's
+// ProductCard — one shared visual system across both screens, now with
+// thematic wallpaper art per business type instead of a flat icon tile.
 function BlueprintCard({
   b,
   lang,
@@ -52,26 +57,40 @@ function BlueprintCard({
       onMouseLeave={onMouseLeave}
       onClick={onSelect}
       style={{ rotateX, rotateY, transformPerspective: 900 }}
-      className="group relative flex min-h-[190px] flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl border border-brd bg-card px-4 py-8 backdrop-blur-xl transition-[border-color,box-shadow] duration-300 hover:border-white/10"
+      className="group relative flex aspect-[4/3] min-h-[260px] flex-col justify-end overflow-hidden rounded-2xl border border-brd text-left transition-[border-color,box-shadow] duration-300 hover:border-white/10"
     >
       <div
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{ background: `radial-gradient(220px circle at ${glowX} ${glowY}, ${b.glow}, transparent 70%)` }}
+        className="absolute inset-0 -z-20 bg-cover bg-center transition-transform duration-500 ease-out group-hover:scale-[1.05]"
+        style={{ backgroundImage: `url(${b.image})` }}
       />
       <div
-        className="pointer-events-none absolute inset-0 rounded-2xl transition-shadow duration-300 group-hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6)]"
-        style={{ boxShadow: `inset 0 0 0 1px ${b.glow.replace(/[\d.]+\)$/, "0.35)")}` }}
+        className="absolute inset-0 -z-10"
+        style={{
+          background: `linear-gradient(180deg, rgba(8,16,10,0.15) 0%, rgba(8,16,10,0.55) 55%, rgba(8,16,10,0.92) 100%), linear-gradient(155deg, ${b.glow}, transparent 60%)`,
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{ background: `radial-gradient(240px circle at ${glowX} ${glowY}, ${b.glow}, transparent 70%)` }}
       />
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px"
         style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)" }}
       />
 
-      <div className="relative flex flex-col items-center gap-3">
-        <span className="text-3xl">{b.icon}</span>
-        <span className="text-sm font-medium text-text">{lang === "en" ? b.en : b.es}</span>
+      <div className="relative flex flex-col items-start gap-2 p-5">
+        <span className="text-2xl" style={{ filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.6))" }}>{b.icon}</span>
+        <span
+          className="text-[15px] font-semibold text-text"
+          style={{ textShadow: "0 2px 10px rgba(0,0,0,0.9)" }}
+        >
+          {lang === "en" ? b.en : b.es}
+        </span>
         {!b.active && (
-          <span className="font-mono text-[9px] uppercase tracking-wide text-text-dim">
+          <span
+            className="font-mono text-[9px] uppercase tracking-wide text-text-dim"
+            style={{ textShadow: "0 1px 6px rgba(0,0,0,0.9)" }}
+          >
             {t("Coming soon", "Próximamente")}
           </span>
         )}
@@ -105,13 +124,13 @@ export default function BlueprintPicker() {
         <LanguageSwitcher />
       </header>
 
-      <main className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 pb-24 pt-12 text-center">
+      <main className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-6 pb-24 pt-12 text-center">
         <p className="mb-6 font-mono text-xs uppercase tracking-widest text-text-muted">{t("Avanza OS", "Avanza OS")}</p>
         <h1 className="max-w-xl font-display text-3xl font-semibold leading-tight text-text md:text-4xl">
           {t("Select your business blueprint", "Selecciona tu tipo de negocio")}
         </h1>
 
-        <div className="mt-12 grid w-full grid-cols-2 gap-4 [perspective:1000px] md:grid-cols-4">
+        <div className="mt-12 grid w-full grid-cols-2 gap-5 [perspective:1000px] md:grid-cols-4">
           {blueprints.map((b, i) => (
             <motion.div
               key={b.id}
