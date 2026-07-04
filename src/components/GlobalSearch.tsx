@@ -2,9 +2,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePreferences } from "../lib/LanguageContext";
 import { expandSearchTerms } from "../lib/contentSchema";
-import { osRestaurantNav, impulseNav, kitchenPortalNav, type NavItem } from "../lib/navConfig";
+import { osRestaurantNav, impulseNav, type NavItem } from "../lib/navConfig";
 
-type Product = "os" | "impulse" | "kitchen";
+type Product = "os" | "impulse";
 type Result = NavItem & { product: Product };
 
 export default function GlobalSearch() {
@@ -35,15 +35,18 @@ export default function GlobalSearch() {
 
   const results: Result[] = useMemo(() => {
     if (!query.trim()) return [];
-    const terms = expandSearchTerms(query).length ? expandSearchTerms(query) : [query.toLowerCase()];
+    const q = query.toLowerCase().trim();
+    const terms = expandSearchTerms(query).length ? expandSearchTerms(query) : [q];
     const pool: Result[] = [
       ...osRestaurantNav.map((n) => ({ ...n, product: "os" as const })),
-      ...kitchenPortalNav.map((n) => ({ ...n, product: "kitchen" as const })),
       ...impulseNav.map((n) => ({ ...n, product: "impulse" as const })),
     ];
+    // Match against title AND the page's concept keywords, so searching e.g.
+    // "IVA", "lot number" or "booking form" finds the right page — not just
+    // exact title words.
     return pool.filter((item) => {
-      const haystack = `${item.en} ${item.es} ${item.slug}`.toLowerCase();
-      return terms.some((t) => haystack.includes(t)) || haystack.includes(query.toLowerCase());
+      const haystack = `${item.en} ${item.es} ${item.slug} ${(item.keywords || []).join(" ")}`.toLowerCase();
+      return terms.some((term) => haystack.includes(term)) || haystack.includes(q);
     });
   }, [query]);
 
@@ -52,12 +55,9 @@ export default function GlobalSearch() {
   const go = (r: Result) => {
     setOpen(false);
     setQuery("");
-    const base =
-      r.product === "kitchen"
-        ? `/docs/${lang}/os/restaurant/kitchen-portal`
-        : r.product === "os"
-        ? `/docs/${lang}/os/restaurant`
-        : `/docs/${lang}/impulse`;
+    // Unified routing: kitchen pages live inside the restaurant nav now, so all
+    // OS pages (kitchen included) share one base path.
+    const base = r.product === "os" ? `/docs/${lang}/os/restaurant` : `/docs/${lang}/impulse`;
     navigate(`${base}/${r.slug}`);
   };
 
@@ -68,7 +68,7 @@ export default function GlobalSearch() {
     if (e.key === "Enter") { e.preventDefault(); go(results[highlight]); }
   };
 
-  const productLabel = { os: "OS", kitchen: "Kitchen", impulse: "Impulse" };
+  const tag = (r: Result) => (r.kitchen ? (lang === "en" ? "Kitchen" : "Cocina") : r.product === "impulse" ? "Impulse" : "OS");
 
   return (
     <div className="relative w-full max-w-sm">
@@ -78,26 +78,32 @@ export default function GlobalSearch() {
         onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
         onFocus={() => setOpen(true)}
         onKeyDown={onKeyDown}
-        placeholder={t("Search everything…  ⌘K", "Buscar todo…  ⌘K")}
+        placeholder={t("Search docs…  ⌘K", "Buscar…  ⌘K")}
         className="w-full rounded-lg border border-brd bg-bg2 px-3 py-2 text-sm text-text placeholder:text-text-dim focus:border-gold/40 focus:outline-none"
       />
-      {open && results.length > 0 && (
+      {open && query.trim() && (
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
           <div className="absolute left-0 top-full z-20 mt-1 max-h-72 w-full overflow-y-auto rounded-lg border border-brd bg-card shadow-xl">
-            {results.map((r, i) => (
-              <button
-                key={`${r.product}-${r.slug}`}
-                onClick={() => go(r)}
-                onMouseEnter={() => setHighlight(i)}
-                className={`flex w-full items-center justify-between px-3 py-2 text-left text-sm ${
-                  i === highlight ? "bg-bg2 text-text" : "text-text-muted"
-                }`}
-              >
-                <span>{lang === "en" ? r.en : r.es}</span>
-                <span className="font-mono text-[10px] uppercase text-text-dim">{productLabel[r.product]}</span>
-              </button>
-            ))}
+            {results.length > 0 ? (
+              results.map((r, i) => (
+                <button
+                  key={`${r.product}-${r.slug}`}
+                  onClick={() => go(r)}
+                  onMouseEnter={() => setHighlight(i)}
+                  className={`flex w-full items-center justify-between px-3 py-2 text-left text-sm ${
+                    i === highlight ? "bg-bg2 text-text" : "text-text-muted"
+                  }`}
+                >
+                  <span>{lang === "en" ? r.en : r.es}</span>
+                  <span className={`font-mono text-[10px] uppercase ${r.kitchen ? "text-green" : "text-text-dim"}`}>{tag(r)}</span>
+                </button>
+              ))
+            ) : (
+              <div className="px-3 py-4 text-center text-sm text-text-dim">
+                {t("No results — try a topic like \"IVA\" or \"lot\"", "Sin resultados — prueba un tema como \"IVA\" o \"lote\"")}
+              </div>
+            )}
           </div>
         </>
       )}

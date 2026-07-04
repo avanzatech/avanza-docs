@@ -26,7 +26,10 @@ export default function DocsLayout({ product, children }: Props) {
   const accentClass = product === "os" ? "border-gold" : "border-blue";
 
   const filtered = query
-    ? nav.filter((n) => (lang === "en" ? n.en : n.es).toLowerCase().includes(query.toLowerCase()))
+    ? nav.filter((n) => {
+        const hay = `${n.en} ${n.es} ${n.slug} ${(n.keywords || []).join(" ")}`.toLowerCase();
+        return hay.includes(query.toLowerCase());
+      })
     : nav;
 
   const navList = (onNavigate?: () => void) => (

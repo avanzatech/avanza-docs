@@ -1,4 +1,4 @@
-export type NavItem = { slug: string; en: string; es: string; group?: string; kitchen?: boolean };
+export type NavItem = { slug: string; en: string; es: string; group?: string; kitchen?: boolean; keywords?: string[] };
 
 // Mirrors the actual client-facing structure in App.jsx, not the original
 // planning spec — confirmed by reading the bottom-nav array, OverflowMenu,
@@ -8,21 +8,24 @@ export type NavItem = { slug: string; en: string; es: string; group?: string; ki
 // Kitchen Portal is part of the same restaurant experience — a grouped
 // sub-section within this one nav, not a separate mode (kitchen: true marks
 // pages that render the login-free portal styling and content).
+//
+// keywords: bilingual concept terms a user might search for, so the search bar
+// surfaces the right page by topic (e.g. "IVA", "lot number") not just title.
 export const osRestaurantNav: NavItem[] = [
-  { slug: "getting-started", en: "Getting Started", es: "Primeros Pasos" },
-  { slug: "sales", en: "Sales", es: "Ventas" },
-  { slug: "avanza-chat", en: "Avanza (AI Assistant)", es: "Avanza (Asistente IA)" },
-  { slug: "documentos", en: "Documents (Albaranes & Facturas)", es: "Documentos (Albaranes y Facturas)" },
-  { slug: "productos", en: "Products", es: "Productos" },
-  { slug: "pedidos", en: "Orders & Suppliers", es: "Pedidos y Proveedores" },
-  { slug: "kitchen-home", en: "Overview", es: "Resumen", group: "Kitchen Portal", kitchen: true },
-  { slug: "kitchen-board", en: "Board", es: "Tablero", group: "Kitchen Portal", kitchen: true },
-  { slug: "kitchen-appcc", en: "APPCC", es: "APPCC", group: "Kitchen Portal", kitchen: true },
-  { slug: "kitchen-pedidos", en: "Orders", es: "Pedidos", group: "Kitchen Portal", kitchen: true },
-  { slug: "kitchen-notas", en: "Notes", es: "Notas", group: "Kitchen Portal", kitchen: true },
-  { slug: "support", en: "Support", es: "Soporte", group: "Help" },
-  { slug: "release-notes", en: "Release Notes", es: "Notas de Versión", group: "Help" },
-  { slug: "faq", en: "FAQ", es: "Preguntas Frecuentes", group: "Help" },
+  { slug: "getting-started", en: "Getting Started", es: "Primeros Pasos", keywords: ["start", "empezar", "overview", "resumen", "dashboard", "panel", "tabs", "pestañas", "first", "primeros"] },
+  { slug: "sales", en: "Sales", es: "Ventas", keywords: ["revenue", "facturación", "margin", "margen", "profit", "beneficio", "takings", "recaudación", "daily", "diario", "ticket"] },
+  { slug: "avanza-chat", en: "Avanza (AI Assistant)", es: "Avanza (Asistente IA)", keywords: ["ai", "ia", "assistant", "asistente", "chat", "ask", "preguntar", "supplier mapping", "create product", "crear producto", "decisions", "decisiones", "analysis", "análisis"] },
+  { slug: "documentos", en: "Documents (Albaranes & Facturas)", es: "Documentos (Albaranes y Facturas)", keywords: ["invoice", "factura", "albaran", "albarán", "delivery note", "export", "exportar", "iva", "vat", "tax", "impuestos", "gestoria", "gestoría", "xlsx", "excel", "date range", "rango de fechas", "download", "descargar"] },
+  { slug: "productos", en: "Products", es: "Productos", keywords: ["inventory", "inventario", "stock", "beverages", "bebidas", "drinks", "threshold", "umbral", "reorder", "reponer", "checkpoint"] },
+  { slug: "pedidos", en: "Orders & Suppliers", es: "Pedidos y Proveedores", keywords: ["order", "pedido", "supplier", "proveedor", "draft", "borrador", "approve", "aprobar", "whatsapp", "email", "reorder"] },
+  { slug: "kitchen-home", en: "Overview", es: "Resumen", group: "Kitchen Portal", kitchen: true, keywords: ["kitchen", "cocina", "portal", "home", "inicio", "status", "estado", "token", "tablet", "staff", "personal"] },
+  { slug: "kitchen-board", en: "Board", es: "Tablero", group: "Kitchen Portal", kitchen: true, keywords: ["kitchen", "cocina", "dishes", "platos", "stock", "board", "tablero", "food", "comida", "tracking"] },
+  { slug: "kitchen-appcc", en: "APPCC", es: "APPCC", group: "Kitchen Portal", kitchen: true, keywords: ["appcc", "haccp", "lot", "lote", "batch", "expiry", "caducidad", "traceability", "trazabilidad", "temperature", "temperatura", "reception", "recepción", "scan", "escanear", "barcode", "gs1", "food safety", "seguridad alimentaria", "no_lote"] },
+  { slug: "kitchen-pedidos", en: "Orders", es: "Pedidos", group: "Kitchen Portal", kitchen: true, keywords: ["kitchen", "cocina", "order", "pedido", "request", "solicitar", "supplier", "proveedor", "staff", "draft"] },
+  { slug: "kitchen-notas", en: "Notes", es: "Notas", group: "Kitchen Portal", kitchen: true, keywords: ["kitchen", "cocina", "notes", "notas", "chat", "photo", "foto", "message", "mensaje", "agenda", "calendar", "calendario", "booking", "reserva", "webhook", "events", "eventos"] },
+  { slug: "support", en: "Support", es: "Soporte", group: "Help", keywords: ["support", "soporte", "help", "ayuda", "contact", "contacto", "ticket", "problem", "problema"] },
+  { slug: "release-notes", en: "Release Notes", es: "Notas de Versión", group: "Help", keywords: ["release", "version", "versión", "updates", "actualizaciones", "changelog", "new", "nuevo"] },
+  { slug: "faq", en: "FAQ", es: "Preguntas Frecuentes", group: "Help", keywords: ["faq", "questions", "preguntas", "frequent", "frecuentes", "help", "ayuda"] },
 ];
 
 // Bilingual labels for the sidebar group headers.
