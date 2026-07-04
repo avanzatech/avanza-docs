@@ -27,9 +27,9 @@ const fsSource = `
   const float majorLineFrequency = 5.0;
   const float minorLineFrequency = 1.0;
   const float scale = 5.0;
-  const vec4 lineColor = vec4(0.75, 0.66, 0.3, 1.0);
-  const float minLineWidth = 0.01;
-  const float maxLineWidth = 0.2;
+  const vec4 lineColor = vec4(0.55, 0.47, 0.25, 1.0);
+  const float minLineWidth = 0.008;
+  const float maxLineWidth = 0.14;
   const float lineSpeed = 1.0 * overallSpeed;
   const float lineAmplitude = 1.0;
   const float lineFrequency = 0.2;
@@ -40,7 +40,7 @@ const fsSource = `
   const float offsetSpeed = 1.33 * overallSpeed;
   const float minOffsetSpread = 0.6;
   const float maxOffsetSpread = 2.0;
-  const int linesPerGroup = 16;
+  const int linesPerGroup = 10;
 
   #define drawCircle(pos, radius, coord) smoothstep(radius + gridSmoothWidth, radius, length(coord - (pos)))
   #define drawSmoothLine(pos, halfWidth, t) smoothstep(halfWidth, 0.0, abs(pos - (t)))

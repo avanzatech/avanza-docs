@@ -71,6 +71,16 @@ export default function Landing() {
         <ShaderCardBackground />
         {/* light vignette only — just enough to keep text legible at the
             very center, not enough to wash the shader out entirely */}
+        {/* content-safe vignette — darkens the center column where text and
+            cards live more than the outer edges, so the shader stays vivid
+            where there's nothing to read instead of fighting the copy */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 900px 700px at center, rgba(8,16,10,0.72) 0%, rgba(8,16,10,0.35) 55%, transparent 80%)",
+          }}
+        />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(10,26,15,0.05)_0%,rgba(10,26,15,0.4)_100%)]" />
       </div>
 
