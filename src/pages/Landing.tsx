@@ -5,7 +5,6 @@ import { usePreferences } from "../lib/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import ProductCard from "../components/ProductCard";
 import ShaderCardBackground from "../components/ShaderCardBackground";
-import AmbientBackground from "../components/AmbientBackground";
 import osCardImg from "../assets/cards/avanza-os-card.webp";
 import impulseCardImg from "../assets/cards/avanza-impulse-card.webp";
 import LogoIntro from "../components/LogoIntro";
@@ -64,7 +63,12 @@ export default function Landing() {
   return (
     <div className="relative flex min-h-screen flex-col overflow-hidden bg-bg">
       <LogoIntro onDone={() => setIntroDone(true)} />
-      <AmbientBackground />
+      <div className="absolute inset-0 -z-10">
+        <ShaderCardBackground />
+        {/* vignette on top of the shader — keeps text and cards legible
+            against a full-bleed animated background instead of fighting it */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(10,26,15,0.35)_0%,rgba(10,26,15,0.75)_100%)]" />
+      </div>
 
       <header className="relative z-10 flex items-center justify-end px-8 py-6 md:px-16">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: show ? 1 : 0 }} transition={{ duration: 0.6 }}>
@@ -92,27 +96,22 @@ export default function Landing() {
           <span className="text-text-muted">{t("do you need help with?", "necesitas ayuda?")}</span>
         </motion.h1>
 
-        <div className="relative mt-10 w-full max-w-3xl">
-          <div className="absolute -inset-8 -z-10 overflow-hidden rounded-[32px] opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_100%)]">
-            <ShaderCardBackground />
-          </div>
-          <div className="grid w-full gap-5 [perspective:1200px] md:grid-cols-2">
-            {show &&
-              products.map((p, i) => (
-                <ProductCard
-                  key={p.id}
-                  eyebrowDot={p.dot}
-                  glowColor={p.glow}
-                  name={p.name}
-                  subtitle={p.subtitle[lang]}
-                  desc={p.desc[lang]}
-                  cta={t("Open Documentation", "Abrir Documentación")}
-                  onClick={() => go(p.id)}
-                  delay={0.25 + i * 0.12}
-                  image={p.image}
-                />
-              ))}
-          </div>
+        <div className="mt-10 grid w-full max-w-3xl gap-5 [perspective:1200px] md:grid-cols-2">
+          {show &&
+            products.map((p, i) => (
+              <ProductCard
+                key={p.id}
+                eyebrowDot={p.dot}
+                glowColor={p.glow}
+                name={p.name}
+                subtitle={p.subtitle[lang]}
+                desc={p.desc[lang]}
+                cta={t("Open Documentation", "Abrir Documentación")}
+                onClick={() => go(p.id)}
+                delay={0.25 + i * 0.12}
+                image={p.image}
+              />
+            ))}
         </div>
       </main>
     </div>

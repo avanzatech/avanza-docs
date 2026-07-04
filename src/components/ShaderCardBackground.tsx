@@ -92,7 +92,7 @@ const fsSource = `
       lines += line * lineColor * rand;
     }
 
-    fragColor = mix(bgColor1, bgColor2, uv.x);
+    fragColor = mix(bgColor2, bgColor1, uv.x);
     fragColor *= verticalFade;
     fragColor.a = 1.0;
     fragColor += lines;
