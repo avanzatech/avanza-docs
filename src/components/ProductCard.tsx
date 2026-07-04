@@ -62,7 +62,7 @@ export default function ProductCard({ eyebrowDot, glowColor, name, subtitle, des
           <div
             className="absolute inset-0 -z-10"
             style={{
-              background: `linear-gradient(180deg, rgba(10,26,15,0.15) 0%, rgba(10,26,15,0.55) 55%, rgba(10,26,15,0.92) 100%), linear-gradient(155deg, ${glowColor}, transparent 60%)`,
+              background: `linear-gradient(180deg, rgba(8,16,10,0.1) 0%, rgba(8,16,10,0.35) 38%, rgba(8,16,10,0.85) 62%, rgba(8,16,10,0.95) 100%), linear-gradient(155deg, ${glowColor}, transparent 60%)`,
             }}
           />
         </>
@@ -91,11 +91,29 @@ export default function ProductCard({ eyebrowDot, glowColor, name, subtitle, des
       />
 
       <motion.div style={{ x: contentX, y: contentY }} className="relative">
-        <span className={`inline-block h-1.5 w-1.5 rounded-full ${eyebrowDot}`} />
-        <h2 className="mt-7 font-display text-[26px] font-semibold leading-tight text-text">{name}</h2>
-        <p className="mt-1.5 text-[13px] font-medium text-gold-light">{subtitle}</p>
-        <p className="mt-5 max-w-[34ch] text-[14px] leading-relaxed text-text-muted">{desc}</p>
-        <div className="mt-10 flex items-center gap-2 text-[13px] font-medium text-text">
+        <span className={`inline-block h-1.5 w-1.5 rounded-full ${eyebrowDot}`} style={{ boxShadow: "0 1px 6px rgba(0,0,0,0.8)" }} />
+        <h2
+          className="mt-7 font-display text-[26px] font-semibold leading-tight text-text"
+          style={{ textShadow: "0 2px 12px rgba(0,0,0,0.85), 0 1px 2px rgba(0,0,0,0.9)" }}
+        >
+          {name}
+        </h2>
+        <p
+          className="mt-1.5 text-[13px] font-semibold text-gold-up"
+          style={{ textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 1px 2px rgba(0,0,0,0.95)" }}
+        >
+          {subtitle}
+        </p>
+        <p
+          className="mt-5 max-w-[34ch] text-[14px] leading-relaxed text-text"
+          style={{ textShadow: "0 1px 8px rgba(0,0,0,0.85), 0 1px 2px rgba(0,0,0,0.9)" }}
+        >
+          {desc}
+        </p>
+        <div
+          className="mt-10 flex items-center gap-2 text-[13px] font-semibold text-text"
+          style={{ textShadow: "0 1px 8px rgba(0,0,0,0.85)" }}
+        >
           {cta}
           <span className="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
         </div>

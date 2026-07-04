@@ -95,7 +95,8 @@ export default function Landing() {
           initial={{ opacity: 0, y: 6 }}
           animate={show ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-5 font-mono text-[11px] uppercase tracking-[0.25em] text-text-dim"
+          className="mb-5 font-mono text-[11px] uppercase tracking-[0.25em] text-text-muted"
+          style={{ textShadow: "0 1px 8px rgba(0,0,0,0.7)" }}
         >
           {t("Select your product", "Selecciona tu producto")}
         </motion.p>
@@ -104,6 +105,7 @@ export default function Landing() {
           animate={show ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-[23ch] font-display text-[36px] font-semibold leading-[1.08] tracking-tight text-text md:text-[48px]"
+          style={{ textShadow: "0 2px 20px rgba(0,0,0,0.6)" }}
         >
           {t("Which Avanza product", "¿Con qué producto de Avanza")}
           <br />
