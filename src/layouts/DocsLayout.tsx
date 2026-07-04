@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useLanguage } from "../lib/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
-import ProductSwitcher from "../components/ProductSwitcher";
-import BlueprintSwitcher from "../components/BlueprintSwitcher";
 import GlobalSearch from "../components/GlobalSearch";
 import { osRestaurantNav, impulseNav, kitchenPortalNav, type NavItem } from "../lib/navConfig";
 
@@ -108,10 +106,6 @@ export default function DocsLayout({ product, section, children }: Props) {
           </div>
           <div className="hidden md:block md:w-72">
             <GlobalSearch />
-          </div>
-          <div className="flex items-center gap-3">
-            <ProductSwitcher />
-            {product === "os" && <BlueprintSwitcher />}
           </div>
           <LanguageSwitcher />
         </header>

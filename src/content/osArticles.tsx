@@ -53,57 +53,138 @@ export const osArticles: Record<string, ArticleBody> = {
     en: (
       <>
         <p>
-          Avanza runs your daily purchasing and compliance work from five places: Sales, Avanza (your AI assistant),
-          Documents, Products, and Orders — the same five tabs along the bottom of the app, always available.
+          Avanza is the operating system for your restaurant's back office. Everything you do to keep the kitchen
+          supplied, the books clean, and the health inspector satisfied lives in one app — five tabs along the
+          bottom, plus a separate Kitchen Portal for your staff. This page is the map: what each part is for, and
+          why it earns its place in your day.
         </p>
-        <Callout type="tip" title="Start here every day">
-          The Avanza tab is the fastest way in. It surfaces what actually needs your attention today — pending
-          documents, low stock, suppliers waiting on a reply — instead of making you check five screens yourself.
+        <Callout type="tip" title="The one habit that makes Avanza pay off">
+          Open the <strong>Avanza</strong> tab first, every morning. It reads across every other screen and tells
+          you the three or four things that actually need you today — a delivery note not yet uploaded, a drink about
+          to run dry, a supplier still waiting on your reply. Two minutes here replaces fifteen minutes of checking
+          everything yourself.
         </Callout>
-        <StepCard number={1} title="Check your Documents badge">
-          If the Documentos tab shows a number, you have albaranes or facturas waiting to be processed. This is
-          usually the first thing worth clearing each morning.
+
+        <p>
+          Here is the whole dashboard, in the order you'll come to rely on it:
+        </p>
+
+        <StepCard number={1} title="Sales — your day in one number">
+          The first thing you see: yesterday's revenue, compared to the day before, with the week and month beside
+          it. But the number that matters most isn't sales — it's <strong>margin</strong>, shown right below it.
+          Revenue tells you how busy you were; margin tells you whether being busy actually paid. Over weeks, this is
+          the screen that tells you which changes to your menu and suppliers are quietly making or costing you money.
         </StepCard>
-        <StepCard number={2} title="Review anything in Orders">
-          The Pedidos tab shows draft orders — some created automatically from stock thresholds, some you'll create
-          yourself. Nothing sends without your review first.
+
+        <StepCard number={2} title="Avanza — the assistant that already knows your numbers">
+          Instead of digging through screens, ask. "Why is my meat supplier more expensive this month?" "What's
+          about to run out?" "How did last weekend compare to the one before?" Avanza answers from your real
+          invoices, orders, and stock — not generic advice. The long-term value: the more you use it, the more it
+          becomes the single place you go to understand your own business.
         </StepCard>
-        <StepCard number={3} title="Ask Avanza when something looks off">
-          Rather than hunting through screens, ask directly: "why is this supplier's price up this month?" or
-          "what's low on stock right now?" The assistant has context on your actual inventory and orders.
+
+        <StepCard number={3} title="Documentos — every albarán and factura, sorted for you">
+          Photograph a delivery note or invoice and Avanza reads it, files it, and pulls out the numbers. Two kinds
+          of document, two jobs: <strong>albaranes</strong> (delivery notes) are the truth about what physically
+          arrived; <strong>facturas</strong> (invoices) are the truth for your accountant and your IVA return. Keeping
+          them straight here means your VAT export at quarter-end is already done — no shoebox of receipts.
         </StepCard>
-        <Callout type="note" title="Common mistake">
-          Treating Avanza like a live inventory counter. It isn't one — it's built for purchasing decisions and
-          compliance, using real events (deliveries, staff counts, POS data), not guessed stock numbers.
+
+        <StepCard number={4} title="Productos — your beverages, tracked and reordered automatically">
+          This tab manages your drinks stock. Set a threshold once — "never let this beer drop below two crates" —
+          and when a delivery pushes it there, Avanza drafts the reorder for you. Food isn't here; food lives in the
+          Kitchen Portal, driven by what your staff actually cook and receive. The payoff: drinks reorder themselves,
+          quietly, without you ever running out mid-service.
+        </StepCard>
+
+        <StepCard number={5} title="Pedidos — orders you approve, never orders that surprise you">
+          Every order starts as a draft — whether Avanza created it from a low-stock threshold or you started it
+          yourself. Nothing reaches a supplier until you tap approve. You choose how it sends: email for hands-off
+          suppliers, WhatsApp when you want to add a note. This is the safety rail — automation does the tedious
+          part, you keep the final say.
+        </StepCard>
+
+        <Callout type="info" title="And your kitchen has its own door">
+          The <strong>Kitchen Portal</strong> is a separate, login-free mini-app your staff open on a tablet — its own
+          link, no password, no access to your financials. It's where the day's dishes, food stock, APPCC checks, and
+          team notes live. It connects to this dashboard automatically, so what happens on the line shows up in your
+          numbers. There's a full section on it below.
+        </Callout>
+
+        <Callout type="note" title="What Avanza is — and isn't">
+          Avanza is a purchasing and compliance brain, not a live stock counter. It never invents inventory numbers.
+          Everything it knows comes from real events — a delivery you photographed, a count your staff tapped in, a
+          sale from your POS. That's deliberate: decisions you can trust have to be built on things that actually
+          happened, not guesses.
         </Callout>
       </>
     ),
     es: (
       <>
         <p>
-          Avanza gestiona tus compras diarias y el cumplimiento normativo desde cinco secciones: Ventas, Avanza (tu
-          asistente IA), Documentos, Productos y Pedidos — las mismas cinco pestañas inferiores, siempre disponibles.
+          Avanza es el sistema operativo de la trastienda de tu restaurante. Todo lo que haces para mantener la
+          cocina abastecida, las cuentas en orden y al inspector de sanidad satisfecho vive en una sola app — cinco
+          pestañas en la parte inferior, más un Portal de Cocina aparte para tu equipo. Esta página es el mapa: para
+          qué sirve cada parte, y por qué se gana su sitio en tu día.
         </p>
-        <Callout type="tip" title="Empieza aquí cada día">
-          La pestaña Avanza es la entrada más rápida. Te muestra lo que realmente necesita atención hoy — documentos
-          pendientes, stock bajo, proveedores esperando respuesta — sin tener que revisar cinco pantallas tú mismo.
+        <Callout type="tip" title="El hábito que hace que Avanza valga la pena">
+          Abre la pestaña <strong>Avanza</strong> lo primero, cada mañana. Lee todas las demás pantallas y te dice las
+          tres o cuatro cosas que de verdad te necesitan hoy — un albarán sin subir, una bebida a punto de agotarse,
+          un proveedor esperando tu respuesta. Dos minutos aquí sustituyen quince revisándolo todo tú mismo.
         </Callout>
-        <StepCard number={1} title="Revisa el aviso de Documentos">
-          Si la pestaña Documentos muestra un número, tienes albaranes o facturas pendientes de procesar. Suele ser
-          lo primero que conviene resolver cada mañana.
+
+        <p>
+          Este es el panel completo, en el orden en que acabarás confiando en él:
+        </p>
+
+        <StepCard number={1} title="Ventas — tu día en un solo número">
+          Lo primero que ves: la facturación de ayer, comparada con el día anterior, con la semana y el mes al lado.
+          Pero el número que más importa no es la facturación — es el <strong>margen</strong>, justo debajo. La
+          facturación te dice cuánto trabajaste; el margen te dice si trabajar tanto realmente valió la pena. Con las
+          semanas, esta es la pantalla que te dice qué cambios en tu carta y tus proveedores te hacen ganar o perder
+          dinero sin que lo notes.
         </StepCard>
-        <StepCard number={2} title="Revisa lo que haya en Pedidos">
-          La pestaña Pedidos muestra borradores de pedido — algunos creados automáticamente por umbrales de stock,
-          otros que crearás tú mismo. Nada se envía sin que lo revises antes.
+
+        <StepCard number={2} title="Avanza — el asistente que ya conoce tus números">
+          En vez de rebuscar por las pantallas, pregunta. "¿Por qué mi proveedor de carne está más caro este mes?"
+          "¿Qué está a punto de agotarse?" "¿Cómo fue el finde pasado comparado con el anterior?" Avanza responde
+          desde tus facturas, pedidos y stock reales — no consejos genéricos. El valor a largo plazo: cuanto más lo
+          usas, más se convierte en el único sitio al que vas para entender tu propio negocio.
         </StepCard>
-        <StepCard number={3} title="Pregunta a Avanza cuando algo no cuadre">
-          En lugar de buscar en varias pantallas, pregunta directamente: "¿por qué ha subido el precio de este
-          proveedor este mes?" o "¿qué producto tiene el stock más bajo ahora mismo?"
+
+        <StepCard number={3} title="Documentos — cada albarán y factura, ordenados por ti">
+          Fotografía un albarán o una factura y Avanza la lee, la archiva y extrae los números. Dos tipos de
+          documento, dos funciones: los <strong>albaranes</strong> son la verdad sobre lo que llegó físicamente; las{" "}
+          <strong>facturas</strong> son la verdad para tu gestor y tu declaración de IVA. Mantenerlos separados aquí
+          significa que tu exportación de IVA a fin de trimestre ya está hecha — sin cajas de tickets.
         </StepCard>
-        <Callout type="note" title="Error común">
-          Tratar Avanza como un contador de inventario en vivo. No lo es — está construido para decisiones de compra
-          y cumplimiento normativo, usando eventos reales (entregas, conteos del personal, datos del TPV), no cifras
-          de stock inventadas.
+
+        <StepCard number={4} title="Productos — tus bebidas, controladas y repuestas solas">
+          Esta pestaña gestiona el stock de bebidas. Fija un umbral una vez — "que esta cerveza nunca baje de dos
+          cajas" — y cuando una entrega lo alcance, Avanza te prepara el pedido de reposición. La comida no está aquí;
+          la comida vive en el Portal de Cocina, movida por lo que tu equipo realmente cocina y recibe. El resultado:
+          las bebidas se reponen solas, en silencio, sin que te quedes sin nada a mitad de servicio.
+        </StepCard>
+
+        <StepCard number={5} title="Pedidos — pedidos que apruebas, nunca pedidos que te sorprenden">
+          Cada pedido empieza como borrador — lo haya creado Avanza desde un umbral de stock bajo o lo empieces tú.
+          Nada llega a un proveedor hasta que pulsas aprobar. Tú eliges cómo se envía: email para proveedores
+          automáticos, WhatsApp cuando quieres añadir una nota. Esta es la barrera de seguridad — la automatización
+          hace lo tedioso, tú mantienes la última palabra.
+        </StepCard>
+
+        <Callout type="info" title="Y tu cocina tiene su propia puerta">
+          El <strong>Portal de Cocina</strong> es una mini-app aparte, sin login, que tu equipo abre en una tablet —
+          su propio enlace, sin contraseña, sin acceso a tus finanzas. Es donde viven los platos del día, el stock de
+          comida, los controles APPCC y las notas del equipo. Se conecta a este panel automáticamente, así que lo que
+          pasa en la línea aparece en tus números. Tienes una sección completa sobre él más abajo.
+        </Callout>
+
+        <Callout type="note" title="Qué es Avanza — y qué no">
+          Avanza es un cerebro de compras y cumplimiento normativo, no un contador de stock en vivo. Nunca inventa
+          cifras de inventario. Todo lo que sabe viene de eventos reales — una entrega que fotografiaste, un conteo
+          que tu equipo introdujo, una venta de tu TPV. Es deliberado: las decisiones en las que puedes confiar deben
+          construirse sobre cosas que realmente pasaron, no sobre suposiciones.
         </Callout>
       </>
     ),
