@@ -13,10 +13,10 @@ const products = [
   {
     id: "os" as const,
     name: "Avanza OS",
-    subtitle: { en: "Restaurant Operations Platform", es: "Plataforma de Operaciones para Restaurantes" },
+    subtitle: { en: "Business Operations Platform", es: "Plataforma de Operaciones para Negocios" },
     desc: {
-      en: "Inventory, suppliers, purchasing, kitchen operations, compliance and business intelligence.",
-      es: "Inventario, proveedores, compras, cocina, cumplimiento normativo e inteligencia de negocio.",
+      en: "Purchasing intelligence, supplier coordination, compliance and operational memory for growing businesses.",
+      es: "Inteligencia de compras, coordinación de proveedores, cumplimiento normativo y memoria operativa para negocios en crecimiento.",
     },
     dot: "bg-gold",
     glow: "rgba(201,168,76,0.16)",
