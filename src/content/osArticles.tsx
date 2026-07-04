@@ -4,6 +4,7 @@ import ProductCardDemo from "../components/demos/ProductCardDemo";
 import DashboardDemo from "../components/demos/DashboardDemo";
 import PedidosDemo from "../components/demos/PedidosDemo";
 import DocumentosDemo from "../components/demos/DocumentosDemo";
+import AvanzaChatDemo from "../components/demos/AvanzaChatDemo";
 
 // Content is grounded in the live App.jsx implementation, verified against
 // the source before writing — not the original planning spec. Slugs not
@@ -327,6 +328,7 @@ export const osArticles: Record<string, ArticleBody> = {
           have every invoice, sale, and order memorized — because that's exactly the context it's answering from. No
           menus to learn, no report to configure: you ask, it answers from your real numbers.
         </p>
+        <AvanzaChatDemo />
         <Callout type="tip" title="Good places to start">
           "How are sales going?", "How much have I spent this month?", "What should I reorder soon?" — these are the
           exact suggested prompts shown when you open the tab, because they're the questions owners actually ask. But
@@ -364,6 +366,7 @@ export const osArticles: Record<string, ArticleBody> = {
           responde. Sin menús que aprender, sin informes que configurar: preguntas y responde desde tus números
           reales.
         </p>
+        <AvanzaChatDemo />
         <Callout type="tip" title="Buenos puntos de partida">
           "¿Cómo van las ventas?", "¿Cuánto he gastado este mes?", "¿Qué pedir pronto?" — son exactamente las
           sugerencias que aparecen al abrir la pestaña, porque son las preguntas que los dueños hacen de verdad. Pero
