@@ -49,10 +49,7 @@ export const ParticleTextEffect: React.FC<ParticleTextEffectProps> = ({
   const hasPointerRef = useRef<boolean>(false);
   const interactionRadiusRef = useRef<number>(100);
 
-  const [canvasSize, setCanvasSize] = useState<{ width: number; height: number }>({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
+  const [canvasSize, setCanvasSize] = useState<{ width: number; height: number }>({ width: 300, height: 150 });
 
   const [textBox] = useState<TextBox>({ str: text });
 
@@ -204,11 +201,17 @@ export const ParticleTextEffect: React.FC<ParticleTextEffectProps> = ({
   };
 
   useEffect(() => {
-    const handleResize = () => {
-      setCanvasSize({ width: window.innerWidth, height: window.innerHeight });
+    const canvas = canvasRef.current;
+    const container = canvas?.parentElement;
+    if (!container) return;
+    const update = () => {
+      const rect = container.getBoundingClientRect();
+      setCanvasSize({ width: Math.max(1, Math.floor(rect.width)), height: Math.max(1, Math.floor(rect.height)) });
     };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const ro = new ResizeObserver(update);
+    ro.observe(container);
+    update();
+    return () => ro.disconnect();
   }, []);
 
   useEffect(() => {
