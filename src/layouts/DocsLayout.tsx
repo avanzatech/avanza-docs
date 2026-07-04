@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useLanguage } from "../lib/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import GlobalSearch from "../components/GlobalSearch";
-import watermarkTile from "../assets/watermark-tile.png";
+import watermarkStamp from "../assets/watermark-stamp.png";
 import watermarkTilePrint from "../assets/watermark-tile-print.png";
 import { osRestaurantNav, impulseNav, kitchenPortalNav, type NavItem } from "../lib/navConfig";
 
@@ -170,16 +170,30 @@ export default function DocsLayout({ product, section, children }: Props) {
         <main className="relative flex-1">
           {/* Faint repeating logo watermark — sits behind the content as a
               subtle brand stamp; pointer-events-none so it never interferes. */}
-          <div
-            aria-hidden
-            className="doc-watermark-screen pointer-events-none absolute inset-0 z-0"
-            style={{
-              backgroundImage: `url(${watermarkTile})`,
-              backgroundRepeat: "repeat",
-              backgroundSize: "300px auto",
-              opacity: 0.14,
-            }}
-          />
+          {/* A few large, well-spaced logo stamps down the page rather than a
+              dense repeating grid — reads as an intentional brand mark, not a
+              busy pattern. Alternating sides, generous vertical gaps. */}
+          <div aria-hidden className="doc-watermark-screen pointer-events-none absolute inset-0 z-0 overflow-hidden">
+            {[
+              { top: "4%", side: "left", off: "-3%" },
+              { top: "26%", side: "right", off: "-4%" },
+              { top: "50%", side: "left", off: "2%" },
+              { top: "72%", side: "right", off: "-3%" },
+              { top: "92%", side: "left", off: "-2%" },
+            ].map((m, i) => (
+              <img
+                key={i}
+                src={watermarkStamp}
+                alt=""
+                className="absolute w-[300px] max-w-[60vw]"
+                style={{
+                  top: m.top,
+                  [m.side]: m.off,
+                  opacity: 0.06,
+                }}
+              />
+            ))}
+          </div>
           <div
             aria-hidden
             className="doc-watermark-print pointer-events-none absolute inset-0 z-0"
