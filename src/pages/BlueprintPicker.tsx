@@ -17,6 +17,28 @@ const blueprints = [
   { id: "hardware", icon: "🔧", en: "Hardware", es: "Ferretería", active: false, glow: "rgba(168,85,247,0.16)", image: hardwareImg },
 ];
 
+// Descending cascade: Restaurant (the only live blueprint) is tallest and
+// most prominent; each card beneath it steps down in height and text size,
+// all full-width, stacked one after another rather than a grid.
+const sizeClass: Record<"xl" | "lg" | "md" | "sm", string> = {
+  xl: "aspect-[21/9] min-h-[240px]",
+  lg: "aspect-[21/6] min-h-[160px]",
+  md: "aspect-[21/5] min-h-[130px]",
+  sm: "aspect-[21/4] min-h-[110px]",
+};
+const textSizeClass: Record<"xl" | "lg" | "md" | "sm", string> = {
+  xl: "text-[19px]",
+  lg: "text-[16px]",
+  md: "text-[14px]",
+  sm: "text-[13px]",
+};
+const padClass: Record<"xl" | "lg" | "md" | "sm", string> = {
+  xl: "p-6",
+  lg: "p-5",
+  md: "p-4",
+  sm: "p-4",
+};
+
 // Same tilt/glow/image-background language as the main landing page's
 // ProductCard — one shared visual system across both screens, now with
 // thematic wallpaper art per business type instead of a flat icon tile.
@@ -25,13 +47,13 @@ function BlueprintCard({
   lang,
   t,
   onSelect,
-  featured = false,
+  size = "lg",
 }: {
   b: (typeof blueprints)[number];
   lang: "en" | "es";
   t: (en: string, es: string) => string;
   onSelect: () => void;
-  featured?: boolean;
+  size?: "xl" | "lg" | "md" | "sm";
 }) {
   const ref = useRef<HTMLButtonElement>(null);
   const mx = useMotionValue(0.5);
@@ -59,9 +81,7 @@ function BlueprintCard({
       onMouseLeave={onMouseLeave}
       onClick={onSelect}
       style={{ rotateX, rotateY, transformPerspective: 900 }}
-      className={`group relative flex ${
-        featured ? "aspect-[16/9] min-h-[200px] md:aspect-[21/9]" : "aspect-[4/3] min-h-[130px]"
-      } flex-col justify-end overflow-hidden rounded-2xl border border-brd text-left transition-[border-color,box-shadow] duration-300 hover:border-white/10`}
+      className={`group relative flex w-full ${sizeClass[size]} flex-col justify-end overflow-hidden rounded-2xl border border-brd text-left transition-[border-color,box-shadow] duration-300 hover:border-white/10`}
     >
       <div
         className="absolute inset-0 -z-20 bg-cover bg-center transition-transform duration-500 ease-out group-hover:scale-[1.05]"
@@ -82,9 +102,9 @@ function BlueprintCard({
         style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)" }}
       />
 
-      <div className={`relative flex flex-col items-start gap-2 ${featured ? "p-6" : "p-4"}`}>
+      <div className={`relative flex flex-col items-start gap-2 ${padClass[size]}`}>
         <span
-          className={`${featured ? "text-[19px]" : "text-[13px]"} font-semibold text-text`}
+          className={`${textSizeClass[size]} font-semibold text-text`}
           style={{ textShadow: "0 2px 10px rgba(0,0,0,0.9)" }}
         >
           {lang === "en" ? b.en : b.es}
@@ -134,26 +154,22 @@ export default function BlueprintPicker() {
         </h1>
 
         <div className="mt-12 flex w-full flex-col gap-4 [perspective:1000px]">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <BlueprintCard b={blueprints[0]} lang={lang} t={t} onSelect={() => select(blueprints[0])} featured />
-          </motion.div>
-
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {blueprints.slice(1).map((b, i) => (
-              <motion.div
-                key={b.id}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.08 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <BlueprintCard b={b} lang={lang} t={t} onSelect={() => select(b)} />
-              </motion.div>
-            ))}
-          </div>
+          {(["xl", "lg", "md", "sm"] as const).map((size, i) => (
+            <motion.div
+              key={blueprints[i].id}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <BlueprintCard
+                b={blueprints[i]}
+                lang={lang}
+                t={t}
+                onSelect={() => select(blueprints[i])}
+                size={size}
+              />
+            </motion.div>
+          ))}
         </div>
       </main>
 
