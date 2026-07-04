@@ -35,7 +35,7 @@ export default function ComingSoonOverlay({ open, onClose }: Props) {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             <ParticleTextEffect
-              text="COMING SOON"
+              text={t("COMING SOON", "PRÓXIMAMENTE")}
               colors={["8FB2F5", "5B8DEF", "A855F7", "5B8DEF", "8FB2F5"]}
               particleDensity={3}
               animationForce={60}
