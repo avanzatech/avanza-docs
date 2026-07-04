@@ -151,4 +151,135 @@ export const kitchenArticles: Record<string, ArticleBody> = {
       </>
     ),
   },
+
+  "kitchen-pedidos": {
+    en: (
+      <>
+        <p>
+          Kitchen Orders lets your staff request stock without ever touching your financials or your suppliers'
+          contact details. They pick a supplier, build a list, and submit it — and it lands in your approval queue,
+          not in the supplier's inbox. It's the kitchen's request slip, not a spending button.
+        </p>
+        <KitchenPortalDemo />
+        <StepCard number={1} title="Pick a supplier">
+          Staff see the same suppliers you've set up — Peix Fresc del Port, Distribucions Costa, your produce
+          supplier — each showing how orders reach them (WhatsApp, email, or both). No prices, no account numbers.
+        </StepCard>
+        <StepCard number={2} title="Build the list">
+          Each supplier's usual products appear with their typical quantity already filled in, so a cook just taps
+          to adjust and add. Need something that isn't listed — a one-off, a special? They add a custom item by name
+          and quantity.
+        </StepCard>
+        <StepCard number={3} title="Submit — it becomes a draft for you">
+          Submitting doesn't send anything to the supplier. It creates a draft order that appears in your Pedidos
+          tab on the main dashboard, waiting for your approval. You keep the final say on every euro spent.
+        </StepCard>
+        <Callout type="info" title="Why staff never touch the money">
+          The whole point of the login-free portal is that anyone on the line can flag "we're low on octopus" the
+          moment they notice — without you handing out passwords or exposing costs. The request flows to you; the
+          decision stays with you. Fewer 11pm "we forgot to order" surprises, zero financial exposure.
+        </Callout>
+        <p className="text-sm text-text-dim">
+          Related: <em>Pedidos</em> (main dashboard) — where these kitchen requests arrive for your approval.
+        </p>
+      </>
+    ),
+    es: (
+      <>
+        <p>
+          Pedidos de Cocina permite a tu equipo solicitar stock sin tocar nunca tus finanzas ni los datos de
+          contacto de tus proveedores. Eligen un proveedor, arman una lista y la envían — y llega a tu cola de
+          aprobación, no al buzón del proveedor. Es la nota de pedido de la cocina, no un botón de gasto.
+        </p>
+        <KitchenPortalDemo />
+        <StepCard number={1} title="Elige un proveedor">
+          El equipo ve los mismos proveedores que has configurado — Peix Fresc del Port, Distribucions Costa, tu
+          proveedor de verdura — cada uno mostrando cómo le llegan los pedidos (WhatsApp, email o ambos). Sin
+          precios, sin números de cuenta.
+        </StepCard>
+        <StepCard number={2} title="Arma la lista">
+          Los productos habituales de cada proveedor aparecen con su cantidad típica ya rellenada, así que un
+          cocinero solo toca para ajustar y añadir. ¿Falta algo que no está en la lista — algo puntual, un especial?
+          Lo añade como artículo personalizado por nombre y cantidad.
+        </StepCard>
+        <StepCard number={3} title="Envía — se convierte en un borrador para ti">
+          Enviar no manda nada al proveedor. Crea un borrador de pedido que aparece en tu pestaña Pedidos del panel
+          principal, esperando tu aprobación. Tú mantienes la última palabra sobre cada euro gastado.
+        </StepCard>
+        <Callout type="info" title="Por qué el equipo nunca toca el dinero">
+          El sentido del portal sin login es que cualquiera en la cocina pueda avisar "nos queda poco pulpo" en
+          cuanto lo nota — sin que repartas contraseñas ni expongas costes. La solicitud llega a ti; la decisión se
+          queda contigo. Menos sorpresas de "se nos olvidó pedir" a las 11 de la noche, cero exposición financiera.
+        </Callout>
+        <p className="text-sm text-text-dim">
+          Relacionado: <em>Pedidos</em> (panel principal) — donde llegan estas solicitudes de cocina para tu
+          aprobación.
+        </p>
+      </>
+    ),
+  },
+
+  "kitchen-notas": {
+    en: (
+      <>
+        <p>
+          Notes is the kitchen's shared memory — two tools in one tab. A running team noticeboard for messages and
+          photos, and an agenda calendar for what's coming up. It's where the things that used to live on sticky
+          notes and in one person's head become something the whole team can see.
+        </p>
+        <KitchenPortalDemo />
+        <StepCard number={1} title="The noticeboard — messages and photos">
+          Anyone can post a note, with or without a photo. A cook snaps the crate of bruised tomatoes that arrived
+          so the manager sees it before deciding whether to accept the delivery. A shift leaves a handover: "low on
+          clean aprons, laundry comes Thursday." Photos compress automatically, so it's fast even on kitchen wifi.
+        </StepCard>
+        <StepCard number={2} title="The agenda — what's coming up">
+          The calendar holds events the whole team should know about: a large booking Friday, a deep-clean Monday,
+          a supplier visit, a staff birthday. Add a title, date, time, and type — it's visible to everyone who opens
+          the portal.
+        </StepCard>
+        <Callout type="tip" title="Why this matters more than it looks">
+          A restaurant runs on dozens of small pieces of knowledge that usually live in one person's memory. When
+          that person is off, things slip. Notes turns that fragile, personal knowledge into shared, durable
+          knowledge — the difference between a kitchen that depends on one manager being present and one that keeps
+          running smoothly when they're not.
+        </Callout>
+        <Callout type="note" title="Login-free, like the rest of the portal">
+          Notes lives inside the same token-based Kitchen Portal — no password, no access to your financials. It's
+          for the team's day-to-day coordination, kept cleanly separate from the owner's dashboard.
+        </Callout>
+      </>
+    ),
+    es: (
+      <>
+        <p>
+          Notas es la memoria compartida de la cocina — dos herramientas en una pestaña. Un tablón de anuncios
+          continuo para mensajes y fotos, y una agenda para lo que viene. Es donde las cosas que antes vivían en
+          post-its y en la cabeza de una sola persona pasan a estar a la vista de todo el equipo.
+        </p>
+        <KitchenPortalDemo />
+        <StepCard number={1} title="El tablón — mensajes y fotos">
+          Cualquiera puede publicar una nota, con o sin foto. Un cocinero fotografía la caja de tomates golpeados que
+          llegó para que el encargado lo vea antes de decidir si acepta la entrega. Un turno deja un relevo: "quedan
+          pocos delantales limpios, la lavandería viene el jueves". Las fotos se comprimen solas, así que es rápido
+          incluso con el wifi de la cocina.
+        </StepCard>
+        <StepCard number={2} title="La agenda — lo que viene">
+          El calendario guarda eventos que todo el equipo debería saber: una reserva grande el viernes, una limpieza
+          a fondo el lunes, la visita de un proveedor, el cumpleaños de alguien. Añade título, fecha, hora y tipo —
+          queda visible para todos los que abran el portal.
+        </StepCard>
+        <Callout type="tip" title="Por qué importa más de lo que parece">
+          Un restaurante funciona con decenas de pequeños datos que normalmente viven en la memoria de una sola
+          persona. Cuando esa persona libra, las cosas se escapan. Notas convierte ese conocimiento frágil y personal
+          en conocimiento compartido y duradero — la diferencia entre una cocina que depende de que un encargado esté
+          presente y una que sigue funcionando bien cuando no está.
+        </Callout>
+        <Callout type="note" title="Sin login, como el resto del portal">
+          Notas vive dentro del mismo Portal de Cocina basado en token — sin contraseña, sin acceso a tus finanzas.
+          Es para la coordinación diaria del equipo, mantenida limpiamente separada del panel del dueño.
+        </Callout>
+      </>
+    ),
+  },
 };
