@@ -112,7 +112,7 @@ export default function Landing() {
           initial={{ opacity: 0, y: 16 }}
           animate={show ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-[23ch] font-display text-[28px] font-semibold leading-[1.1] tracking-tight text-text sm:text-[36px] md:text-[48px]"
+          className="max-w-[23ch] font-display text-[36px] font-semibold leading-[1.08] tracking-tight text-text md:text-[48px]"
           style={{ textShadow: "0 2px 20px rgba(0,0,0,0.6)" }}
         >
           {t("Which Avanza product", "¿Con qué producto de Avanza")}

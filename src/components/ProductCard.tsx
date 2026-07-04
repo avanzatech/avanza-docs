@@ -47,7 +47,7 @@ export default function ProductCard({ eyebrowDot, glowColor, name, subtitle, des
       onMouseLeave={onMouseLeave}
       onClick={onClick}
       style={{ rotateX, rotateY, transformPerspective: 1000 }}
-      className={`group relative flex ${image ? "aspect-auto min-h-[360px] md:aspect-[4/3] md:min-h-0" : "min-h-[380px] md:min-h-[440px]"} flex-col justify-end overflow-hidden rounded-[24px] border p-6 text-left transition-[border-color,box-shadow,transform] duration-300 md:p-9 ${image ? "" : "backdrop-blur-2xl"}`}
+      className={`group relative flex ${image ? "aspect-auto min-h-[420px] md:aspect-[4/3] md:min-h-0" : "min-h-[440px]"} flex-col justify-end overflow-hidden rounded-[24px] border p-9 text-left transition-[border-color,box-shadow,transform] duration-300 ${image ? "" : "backdrop-blur-2xl"}`}
     >
       {/* image background — real product screenshot, not a flat color wash,
           when one is provided. Parallax zoom on hover matches the reference
@@ -93,25 +93,25 @@ export default function ProductCard({ eyebrowDot, glowColor, name, subtitle, des
       <motion.div style={{ x: contentX, y: contentY }} className="relative">
         <span className={`inline-block h-1.5 w-1.5 rounded-full ${eyebrowDot}`} style={{ boxShadow: "0 1px 6px rgba(0,0,0,0.8)" }} />
         <h2
-          className="mt-5 font-display text-[21px] font-semibold leading-tight text-text md:mt-7 md:text-[26px]"
+          className="mt-7 font-display text-[26px] font-semibold leading-tight text-text"
           style={{ textShadow: "0 2px 12px rgba(0,0,0,0.85), 0 1px 2px rgba(0,0,0,0.9)" }}
         >
           {name}
         </h2>
         <p
-          className="mt-1 text-[12px] font-semibold text-gold-up md:mt-1.5 md:text-[13px]"
+          className="mt-1.5 text-[13px] font-semibold text-gold-up"
           style={{ textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 1px 2px rgba(0,0,0,0.95)" }}
         >
           {subtitle}
         </p>
         <p
-          className="mt-3 max-w-[34ch] text-[13px] leading-relaxed text-text md:mt-5 md:text-[14px]"
+          className="mt-5 max-w-[34ch] text-[14px] leading-relaxed text-text"
           style={{ textShadow: "0 1px 8px rgba(0,0,0,0.85), 0 1px 2px rgba(0,0,0,0.9)" }}
         >
           {desc}
         </p>
         <div
-          className="mt-5 flex items-center gap-2 text-[13px] font-semibold text-text md:mt-10"
+          className="mt-8 flex items-center gap-2 text-[13px] font-semibold text-text"
           style={{ textShadow: "0 1px 8px rgba(0,0,0,0.85)" }}
         >
           {cta}
