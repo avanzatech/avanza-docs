@@ -3,6 +3,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useLanguage } from "../lib/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import GlobalSearch from "../components/GlobalSearch";
+import watermarkTile from "../assets/watermark-tile.png";
+import watermarkTilePrint from "../assets/watermark-tile-print.png";
 import { osRestaurantNav, impulseNav, kitchenPortalNav, type NavItem } from "../lib/navConfig";
 
 type Props = {
@@ -16,6 +18,7 @@ export default function DocsLayout({ product, section, children }: Props) {
   const navigate = useNavigate();
   const { slug } = useParams();
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [query, setQuery] = useState("");
 
   const nav: NavItem[] = section === "kitchen" ? kitchenPortalNav : product === "os" ? osRestaurantNav : impulseNav;
@@ -31,6 +34,26 @@ export default function DocsLayout({ product, section, children }: Props) {
   const filtered = query
     ? nav.filter((n) => (lang === "en" ? n.en : n.es).toLowerCase().includes(query.toLowerCase()))
     : nav;
+
+  const navList = (onNavigate?: () => void) => (
+    <nav className="flex flex-col gap-0.5 px-2 pb-8">
+      {filtered.map((item) => {
+        const active = slug === item.slug;
+        return (
+          <Link
+            key={item.slug}
+            to={`${base}/${item.slug}`}
+            onClick={onNavigate}
+            className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
+              active ? `bg-bg2 text-text border-l-2 ${accentClass}` : "text-text-muted hover:bg-bg2/60 hover:text-text"
+            } ${collapsed ? "text-center text-xs" : ""}`}
+          >
+            {collapsed ? (lang === "en" ? item.en : item.es).slice(0, 2) : lang === "en" ? item.en : item.es}
+          </Link>
+        );
+      })}
+    </nav>
+  );
 
   return (
     <div className="flex min-h-screen bg-bg">
@@ -71,37 +94,72 @@ export default function DocsLayout({ product, section, children }: Props) {
           </div>
         )}
 
-        <nav className="flex flex-col gap-0.5 px-2 pb-8">
-          {filtered.map((item) => {
-            const active = slug === item.slug;
-            return (
-              <Link
-                key={item.slug}
-                to={`${base}/${item.slug}`}
-                className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
-                  active ? `bg-bg2 text-text border-l-2 ${accentClass}` : "text-text-muted hover:bg-bg2/60 hover:text-text"
-                } ${collapsed ? "text-center text-xs" : ""}`}
-              >
-                {collapsed ? (lang === "en" ? item.en : item.es).slice(0, 2) : lang === "en" ? item.en : item.es}
-              </Link>
-            );
-          })}
-        </nav>
+        {navList()}
       </aside>
 
+      {/* Mobile drawer */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-40 md:hidden" onClick={() => setMobileOpen(false)}>
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+          <aside
+            className="absolute left-0 top-0 h-full w-72 max-w-[82vw] overflow-y-auto border-r border-brd bg-card"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-4 py-5">
+              <button onClick={() => navigate("/?home=1")} className="flex items-center gap-2">
+                <span className="font-display text-base font-semibold text-gold-up">Avanza</span>
+                <span className="text-xs font-medium text-text-muted">{section === "kitchen" ? "Kitchen" : productLabel === "Avanza OS" ? "OS" : "Impulse"}</span>
+              </button>
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="rounded p-1 text-text-dim hover:bg-bg2 hover:text-text"
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+            {section === "kitchen" && (
+              <div className="mx-4 mb-3 rounded-md border border-green/20 bg-green/5 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-wide text-green">
+                {t("No login required", "No requiere inicio de sesión")}
+              </div>
+            )}
+            <div className="px-4 pb-3">
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={t("Search docs…", "Buscar en la documentación…")}
+                className="w-full rounded-lg border border-brd bg-bg2 px-3 py-2 text-sm text-text placeholder:text-text-dim focus:border-gold/40 focus:outline-none"
+              />
+            </div>
+            {navList(() => setMobileOpen(false))}
+          </aside>
+        </div>
+      )}
+
       <div className="flex min-h-screen flex-1 flex-col">
-        <header className="glass-navbar sticky top-0 z-10 flex items-center justify-between px-6 py-3">
-          <div className="font-mono text-xs text-text-dim">
+        <header className="glass-navbar sticky top-0 z-10 flex items-center justify-between gap-3 px-4 py-3 md:px-6">
+          <button
+            onClick={() => setMobileOpen(true)}
+            className="rounded p-1 text-text-muted hover:bg-bg2 hover:text-text md:hidden"
+            aria-label="Open menu"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+          <div className="min-w-0 flex-1 truncate font-mono text-xs text-text-dim">
             <Link to="/?home=1" className="hover:text-text">Avanza</Link>
             {" / "}
             <Link to={section === "kitchen" ? `${base}/kitchen-home` : product === "os" ? `/docs/${lang}/os` : `/docs/${lang}/impulse`} className="hover:text-text">
               {productLabel}
             </Link>
             {slug && (
-              <>
+              <span className="hidden sm:inline">
                 {" / "}
                 <span className="text-text-muted">{slug}</span>
-              </>
+              </span>
             )}
           </div>
           <div className="hidden md:block md:w-72">
@@ -109,7 +167,30 @@ export default function DocsLayout({ product, section, children }: Props) {
           </div>
           <LanguageSwitcher />
         </header>
-        <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-12">{children}</main>
+        <main className="relative flex-1">
+          {/* Faint repeating logo watermark — sits behind the content as a
+              subtle brand stamp; pointer-events-none so it never interferes. */}
+          <div
+            aria-hidden
+            className="doc-watermark-screen pointer-events-none absolute inset-0 z-0"
+            style={{
+              backgroundImage: `url(${watermarkTile})`,
+              backgroundRepeat: "repeat",
+              backgroundSize: "300px auto",
+              opacity: 0.08,
+            }}
+          />
+          <div
+            aria-hidden
+            className="doc-watermark-print pointer-events-none absolute inset-0 z-0"
+            style={{
+              backgroundImage: `url(${watermarkTilePrint})`,
+              backgroundRepeat: "repeat",
+              backgroundSize: "280px auto",
+            }}
+          />
+          <div className="relative z-[1] mx-auto w-full max-w-3xl px-6 py-12">{children}</div>
+        </main>
       </div>
     </div>
   );

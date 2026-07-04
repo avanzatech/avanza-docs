@@ -54,3 +54,52 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
     inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
+
+/* ---- Print / PDF export ---- */
+@media print {
+  /* Force backgrounds to render (Chromium/Safari honor this) */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* Clean paper: white page, dark text */
+  html, body {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+  }
+  /* Hide app chrome — sidebar, header, drawer, footer controls */
+  aside, header, .no-print {
+    display: none !important;
+  }
+  /* Article fills the page */
+  main {
+    max-width: 100% !important;
+  }
+  main > div {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  /* Swap the dark-bg screen watermark for the paper-tuned print watermark */
+  .doc-watermark-screen {
+    display: none !important;
+  }
+  .doc-watermark-print {
+    display: block !important;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    opacity: 0.07 !important;
+  }
+  a {
+    color: #1a1a1a !important;
+    text-decoration: none !important;
+  }
+  @page {
+    margin: 1.6cm;
+  }
+}
+
+/* Print watermark hidden on screen (screen watermark handles the display view) */
+@media screen {
+  .doc-watermark-print { display: none; }
+}
