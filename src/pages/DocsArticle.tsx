@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { usePreferences } from "../lib/LanguageContext";
 import DocsLayout from "../layouts/DocsLayout";
-import { osRestaurantNav, impulseNav, kitchenPortalNav } from "../lib/navConfig";
+import { osRestaurantNav, impulseNav } from "../lib/navConfig";
 import ArticleFooter from "../components/content/ArticleFooter";
 import { Callout } from "../components/content/Blocks";
 import { osArticles } from "../content/osArticles";
@@ -10,33 +10,31 @@ import { kitchenArticles } from "../content/kitchenArticles";
 type Section = "os" | "impulse" | "kitchen";
 type Props = { product: "os" | "impulse"; section?: Section };
 
-const sectionConfig = {
-  os: { nav: osRestaurantNav, product: "os" as const },
-  impulse: { nav: impulseNav, product: "impulse" as const },
-  kitchen: { nav: kitchenPortalNav, product: "os" as const },
-};
-
 export default function DocsArticle({ product, section }: Props) {
   const { slug } = useParams();
   const { lang, t } = usePreferences();
+  // Kitchen pages now live inside the restaurant experience — one nav, no
+  // separate mode. A page is "kitchen" if its nav entry is flagged, so the
+  // sidebar and back-navigation never swap out from under the reader.
   const sec = section ?? product;
-  const cfg = sectionConfig[sec];
-  const nav = cfg.nav;
+  const nav = sec === "impulse" ? impulseNav : osRestaurantNav;
   const item = nav.find((n) => n.slug === slug);
+  const isKitchen = !!item?.kitchen;
   const title = item ? (lang === "en" ? item.en : item.es) : slug;
 
-  const base =
-    sec === "kitchen"
-      ? `/docs/${lang}/os/restaurant/kitchen-portal`
-      : sec === "os"
-      ? `/docs/${lang}/os/restaurant`
-      : `/docs/${lang}/impulse`;
+  const base = sec === "impulse" ? `/docs/${lang}/impulse` : `/docs/${lang}/os/restaurant`;
 
   const realContent =
-    sec === "os" && slug ? osArticles[slug] : sec === "kitchen" && slug ? kitchenArticles[slug] : undefined;
+    sec === "impulse"
+      ? undefined
+      : slug
+      ? isKitchen
+        ? kitchenArticles[slug]
+        : osArticles[slug]
+      : undefined;
 
   return (
-    <DocsLayout product={cfg.product} section={sec === "kitchen" ? "kitchen" : undefined}>
+    <DocsLayout product={sec === "impulse" ? "impulse" : "os"}>
       <article>
         <div className="mb-6 flex items-center gap-3 font-mono text-xs text-text-dim">
           <span>{t("4 min read", "4 min de lectura")}</span>
@@ -45,11 +43,11 @@ export default function DocsArticle({ product, section }: Props) {
         </div>
         <h1 className="mb-6 font-display text-3xl font-semibold text-text">{title}</h1>
 
-        {sec === "kitchen" && (
-          <Callout type="info" title={t("A separate mini-app", "Una mini-app aparte")}>
+        {isKitchen && (
+          <Callout type="info" title={t("Part of Kitchen Portal", "Parte del Portal de Cocina")}>
             {t(
-              "Kitchen Portal opens from a link with a restaurant-specific token — kitchen staff never log in. It's built for a phone screen on a counter during service, not a desk.",
-              "El Portal de Cocina se abre desde un enlace con un token específico del restaurante — el personal de cocina nunca inicia sesión. Está pensado para un móvil en la barra durante el servicio, no para un escritorio."
+              "Kitchen Portal opens from a link with a restaurant-specific token — kitchen staff never log in. It's built for a phone or tablet on the counter during service, not a desk. It's part of your one Avanza setup, connected to everything else automatically.",
+              "El Portal de Cocina se abre desde un enlace con un token específico del restaurante — el personal de cocina nunca inicia sesión. Está pensado para un móvil o tablet en la barra durante el servicio, no para un escritorio. Forma parte de tu única configuración de Avanza, conectado con todo lo demás automáticamente."
             )}
           </Callout>
         )}

@@ -5,15 +5,14 @@ import LanguageSwitcher from "../components/LanguageSwitcher";
 import GlobalSearch from "../components/GlobalSearch";
 import watermarkStamp from "../assets/watermark-stamp.png";
 import watermarkTilePrint from "../assets/watermark-tile-print.png";
-import { osRestaurantNav, impulseNav, kitchenPortalNav, type NavItem } from "../lib/navConfig";
+import { osRestaurantNav, impulseNav, groupLabels, type NavItem } from "../lib/navConfig";
 
 type Props = {
   product: "os" | "impulse";
-  section?: "kitchen";
   children: React.ReactNode;
 };
 
-export default function DocsLayout({ product, section, children }: Props) {
+export default function DocsLayout({ product, children }: Props) {
   const { lang, t } = useLanguage();
   const navigate = useNavigate();
   const { slug } = useParams();
@@ -21,15 +20,10 @@ export default function DocsLayout({ product, section, children }: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [query, setQuery] = useState("");
 
-  const nav: NavItem[] = section === "kitchen" ? kitchenPortalNav : product === "os" ? osRestaurantNav : impulseNav;
-  const base =
-    section === "kitchen"
-      ? `/docs/${lang}/os/restaurant/kitchen-portal`
-      : product === "os"
-      ? `/docs/${lang}/os/restaurant`
-      : `/docs/${lang}/impulse`;
-  const productLabel = section === "kitchen" ? "Kitchen Portal" : product === "os" ? "Avanza OS" : "Avanza Impulse";
-  const accentClass = section === "kitchen" ? "border-green" : product === "os" ? "border-gold" : "border-blue";
+  const nav: NavItem[] = product === "os" ? osRestaurantNav : impulseNav;
+  const base = product === "os" ? `/docs/${lang}/os/restaurant` : `/docs/${lang}/impulse`;
+  const productLabel = product === "os" ? "Avanza OS" : "Avanza Impulse";
+  const accentClass = product === "os" ? "border-gold" : "border-blue";
 
   const filtered = query
     ? nav.filter((n) => (lang === "en" ? n.en : n.es).toLowerCase().includes(query.toLowerCase()))
@@ -37,19 +31,31 @@ export default function DocsLayout({ product, section, children }: Props) {
 
   const navList = (onNavigate?: () => void) => (
     <nav className="flex flex-col gap-0.5 px-2 pb-8">
-      {filtered.map((item) => {
+      {filtered.map((item, i) => {
         const active = slug === item.slug;
+        const prevGroup = i > 0 ? filtered[i - 1].group : undefined;
+        const showGroupHeader = item.group && item.group !== prevGroup && !collapsed && !query;
+        const groupLabel = item.group ? groupLabels[item.group]?.[lang === "en" ? "en" : "es"] ?? item.group : "";
         return (
-          <Link
-            key={item.slug}
-            to={`${base}/${item.slug}`}
-            onClick={onNavigate}
-            className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
-              active ? `bg-bg2 text-text border-l-2 ${accentClass}` : "text-text-muted hover:bg-bg2/60 hover:text-text"
-            } ${collapsed ? "text-center text-xs" : ""}`}
-          >
-            {collapsed ? (lang === "en" ? item.en : item.es).slice(0, 2) : lang === "en" ? item.en : item.es}
-          </Link>
+          <div key={item.slug}>
+            {showGroupHeader && (
+              <div className="mb-1 mt-4 flex items-center gap-2 px-3">
+                {item.kitchen && <span className="h-1.5 w-1.5 rounded-full bg-green" />}
+                <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-text-dim">
+                  {groupLabel}
+                </span>
+              </div>
+            )}
+            <Link
+              to={`${base}/${item.slug}`}
+              onClick={onNavigate}
+              className={`block rounded-md px-3 py-1.5 text-sm transition-colors ${
+                active ? `bg-bg2 text-text border-l-2 ${item.kitchen ? "border-green" : accentClass}` : "text-text-muted hover:bg-bg2/60 hover:text-text"
+              } ${item.group && !collapsed ? "pl-5" : ""} ${collapsed ? "text-center text-xs" : ""}`}
+            >
+              {collapsed ? (lang === "en" ? item.en : item.es).slice(0, 2) : lang === "en" ? item.en : item.es}
+            </Link>
+          </div>
         );
       })}
     </nav>
@@ -66,7 +72,7 @@ export default function DocsLayout({ product, section, children }: Props) {
           {!collapsed && (
             <button onClick={() => navigate("/?home=1")} className="flex items-center gap-2">
               <span className="font-display text-base font-semibold text-gold-up">Avanza</span>
-              <span className="text-xs font-medium text-text-muted">{section === "kitchen" ? "Kitchen" : productLabel === "Avanza OS" ? "OS" : "Impulse"}</span>
+              <span className="text-xs font-medium text-text-muted">{productLabel === "Avanza OS" ? "OS" : "Impulse"}</span>
             </button>
           )}
           <button
@@ -77,11 +83,6 @@ export default function DocsLayout({ product, section, children }: Props) {
             {collapsed ? "»" : "«"}
           </button>
         </div>
-        {section === "kitchen" && !collapsed && (
-          <div className="mx-4 mb-3 rounded-md border border-green/20 bg-green/5 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-wide text-green">
-            {t("No login required", "No requiere inicio de sesión")}
-          </div>
-        )}
 
         {!collapsed && (
           <div className="px-4 pb-3">
@@ -108,7 +109,7 @@ export default function DocsLayout({ product, section, children }: Props) {
             <div className="flex items-center justify-between px-4 py-5">
               <button onClick={() => navigate("/?home=1")} className="flex items-center gap-2">
                 <span className="font-display text-base font-semibold text-gold-up">Avanza</span>
-                <span className="text-xs font-medium text-text-muted">{section === "kitchen" ? "Kitchen" : productLabel === "Avanza OS" ? "OS" : "Impulse"}</span>
+                <span className="text-xs font-medium text-text-muted">{productLabel === "Avanza OS" ? "OS" : "Impulse"}</span>
               </button>
               <button
                 onClick={() => setMobileOpen(false)}
@@ -118,11 +119,6 @@ export default function DocsLayout({ product, section, children }: Props) {
                 ✕
               </button>
             </div>
-            {section === "kitchen" && (
-              <div className="mx-4 mb-3 rounded-md border border-green/20 bg-green/5 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-wide text-green">
-                {t("No login required", "No requiere inicio de sesión")}
-              </div>
-            )}
             <div className="px-4 pb-3">
               <input
                 value={query}
@@ -152,7 +148,7 @@ export default function DocsLayout({ product, section, children }: Props) {
           <div className="min-w-0 flex-1 truncate font-mono text-xs text-text-dim">
             <Link to="/?home=1" className="hover:text-text">Avanza</Link>
             {" / "}
-            <Link to={section === "kitchen" ? `${base}/kitchen-home` : product === "os" ? `/docs/${lang}/os` : `/docs/${lang}/impulse`} className="hover:text-text">
+            <Link to={product === "os" ? `/docs/${lang}/os` : `/docs/${lang}/impulse`} className="hover:text-text">
               {productLabel}
             </Link>
             {slug && (

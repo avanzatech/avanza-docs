@@ -1,12 +1,13 @@
-export type NavItem = { slug: string; en: string; es: string };
+export type NavItem = { slug: string; en: string; es: string; group?: string; kitchen?: boolean };
 
 // Mirrors the actual client-facing structure in App.jsx, not the original
 // planning spec — confirmed by reading the bottom-nav array, OverflowMenu,
 // and each tab's real sub-structure directly in the source.
 //
 // Real bottom nav (5 tabs): Sales, Avanza (chat), Documentos, Productos, Pedidos
-// Pedidos has two internal views: Pedidos / Proveedores (not separate nav items)
-// Kitchen Portal is a separate token-based mini-app (own nav below)
+// Kitchen Portal is part of the same restaurant experience — a grouped
+// sub-section within this one nav, not a separate mode (kitchen: true marks
+// pages that render the login-free portal styling and content).
 export const osRestaurantNav: NavItem[] = [
   { slug: "getting-started", en: "Getting Started", es: "Primeros Pasos" },
   { slug: "sales", en: "Sales", es: "Ventas" },
@@ -14,21 +15,25 @@ export const osRestaurantNav: NavItem[] = [
   { slug: "documentos", en: "Documents (Albaranes & Facturas)", es: "Documentos (Albaranes y Facturas)" },
   { slug: "productos", en: "Products", es: "Productos" },
   { slug: "pedidos", en: "Orders & Suppliers", es: "Pedidos y Proveedores" },
-  { slug: "kitchen-portal", en: "Kitchen Portal", es: "Portal de Cocina" },
-  { slug: "support", en: "Support", es: "Soporte" },
-  { slug: "release-notes", en: "Release Notes", es: "Notas de Versión" },
-  { slug: "faq", en: "FAQ", es: "Preguntas Frecuentes" },
+  { slug: "kitchen-home", en: "Overview", es: "Resumen", group: "Kitchen Portal", kitchen: true },
+  { slug: "kitchen-board", en: "Board", es: "Tablero", group: "Kitchen Portal", kitchen: true },
+  { slug: "kitchen-appcc", en: "APPCC", es: "APPCC", group: "Kitchen Portal", kitchen: true },
+  { slug: "kitchen-pedidos", en: "Orders", es: "Pedidos", group: "Kitchen Portal", kitchen: true },
+  { slug: "kitchen-notas", en: "Notes", es: "Notas", group: "Kitchen Portal", kitchen: true },
+  { slug: "support", en: "Support", es: "Soporte", group: "Help" },
+  { slug: "release-notes", en: "Release Notes", es: "Notas de Versión", group: "Help" },
+  { slug: "faq", en: "FAQ", es: "Preguntas Frecuentes", group: "Help" },
 ];
 
-// Kitchen Portal's own 5-tab structure — separate from the main nav above
-// since it's a distinct no-login mini-app with its own visual variant.
-export const kitchenPortalNav: NavItem[] = [
-  { slug: "kitchen-home", en: "Home", es: "Inicio" },
-  { slug: "kitchen-board", en: "Board", es: "Tablero" },
-  { slug: "kitchen-appcc", en: "APPCC", es: "APPCC" },
-  { slug: "kitchen-pedidos", en: "Orders", es: "Pedidos" },
-  { slug: "kitchen-notas", en: "Notes", es: "Notas" },
-];
+// Bilingual labels for the sidebar group headers.
+export const groupLabels: Record<string, { en: string; es: string }> = {
+  "Kitchen Portal": { en: "Kitchen Portal", es: "Portal de Cocina" },
+  Help: { en: "Help", es: "Ayuda" },
+};
+
+// Kept for any legacy references; the kitchen pages now live inside
+// osRestaurantNav as a grouped sub-section.
+export const kitchenPortalNav: NavItem[] = osRestaurantNav.filter((n) => n.kitchen);
 
 // Avanza Impulse nav is unchanged for now — no Impulse frontend source
 // exists yet to ground this against, unlike OS. Flagged as an open item.
