@@ -1,6 +1,12 @@
 import type { ReactNode } from "react";
 import { Callout, StepCard } from "../components/content/Blocks";
-import KitchenPortalDemo from "../components/demos/KitchenPortalDemo";
+import {
+  KitchenHomeDemo,
+  KitchenBoardDemo,
+  KitchenAppccDemo,
+  KitchenOrdersDemo,
+  KitchenNotesDemo,
+} from "../components/demos/KitchenTabDemos";
 
 type ArticleBody = { en: ReactNode; es: ReactNode };
 
@@ -12,7 +18,7 @@ export const kitchenArticles: Record<string, ArticleBody> = {
           Kitchen Portal's home screen shows exactly one thing that needs attention — not a dashboard full of
           numbers. It picks the single most urgent item and puts it front and center.
         </p>
-        <KitchenPortalDemo />
+        <KitchenHomeDemo />
         <Callout type="info" title="Priority order">
           It checks in this order: dishes completely out of stock first, then deliveries waiting for APPCC
           registration, then dishes running low, and only shows "all good" once none of those apply.
@@ -36,7 +42,7 @@ export const kitchenArticles: Record<string, ArticleBody> = {
           La pantalla de inicio del Portal de Cocina muestra exactamente una cosa que necesita atención — no un
           panel lleno de cifras. Elige el elemento más urgente y lo pone en primer plano.
         </p>
-        <KitchenPortalDemo />
+        <KitchenHomeDemo />
         <Callout type="info" title="Orden de prioridad">
           Comprueba en este orden: primero los platos completamente sin stock, después las entregas esperando
           registro APPCC, luego los platos con stock bajo, y solo muestra "todo en orden" cuando ninguno aplica.
@@ -64,6 +70,7 @@ export const kitchenArticles: Record<string, ArticleBody> = {
           The Board shows stock status for the dishes selected on Home — not every dish, only the ones chosen for
           tracking.
         </p>
+        <KitchenBoardDemo />
         <StepCard number={1} title="Add or remove dishes from tracking">
           The Board opens in editing mode the first time, or whenever nothing's selected yet. Choose only what's
           actually worth watching — a short list gets checked; a long one gets ignored.
@@ -84,6 +91,7 @@ export const kitchenArticles: Record<string, ArticleBody> = {
           El Tablero muestra el estado de stock de los platos seleccionados en Inicio — no todos los platos, solo
           los elegidos para seguimiento.
         </p>
+        <KitchenBoardDemo />
         <StepCard number={1} title="Añade o quita platos del seguimiento">
           El Tablero se abre en modo edición la primera vez, o siempre que no haya nada seleccionado. Elige solo lo
           que realmente merece la pena vigilar — una lista corta se revisa; una larga se ignora.
@@ -108,6 +116,7 @@ export const kitchenArticles: Record<string, ArticleBody> = {
           APPCC logs the food-safety checks required for every delivery — reception temperature, condition, and
           batch traceability for each item. This is compliance record-keeping, not optional.
         </p>
+        <KitchenAppccDemo />
         <StepCard number={1} title="Open the batch for the delivery you just received">
           Pending batches are what Home points you to when APPCC registration is needed.
         </StepCard>
@@ -132,6 +141,7 @@ export const kitchenArticles: Record<string, ArticleBody> = {
           recepción, estado y trazabilidad de lote de cada artículo. Es un registro de cumplimiento normativo, no
           opcional.
         </p>
+        <KitchenAppccDemo />
         <StepCard number={1} title="Abre el lote de la entrega que acabas de recibir">
           Los lotes pendientes son a lo que te dirige Inicio cuando hace falta registrar el APPCC.
         </StepCard>
@@ -160,7 +170,7 @@ export const kitchenArticles: Record<string, ArticleBody> = {
           contact details. They pick a supplier, build a list, and submit it — and it lands in your approval queue,
           not in the supplier's inbox. It's the kitchen's request slip, not a spending button.
         </p>
-        <KitchenPortalDemo />
+        <KitchenOrdersDemo />
         <StepCard number={1} title="Pick a supplier">
           Staff see the same suppliers you've set up — Peix Fresc del Port, Distribucions Costa, your produce
           supplier — each showing how orders reach them (WhatsApp, email, or both). No prices, no account numbers.
@@ -191,7 +201,7 @@ export const kitchenArticles: Record<string, ArticleBody> = {
           contacto de tus proveedores. Eligen un proveedor, arman una lista y la envían — y llega a tu cola de
           aprobación, no al buzón del proveedor. Es la nota de pedido de la cocina, no un botón de gasto.
         </p>
-        <KitchenPortalDemo />
+        <KitchenOrdersDemo />
         <StepCard number={1} title="Elige un proveedor">
           El equipo ve los mismos proveedores que has configurado — Peix Fresc del Port, Distribucions Costa, tu
           proveedor de verdura — cada uno mostrando cómo le llegan los pedidos (WhatsApp, email o ambos). Sin
@@ -227,16 +237,24 @@ export const kitchenArticles: Record<string, ArticleBody> = {
           photos, and an agenda calendar for what's coming up. It's where the things that used to live on sticky
           notes and in one person's head become something the whole team can see.
         </p>
-        <KitchenPortalDemo />
-        <StepCard number={1} title="The noticeboard — messages and photos">
-          Anyone can post a note, with or without a photo. A cook snaps the crate of bruised tomatoes that arrived
-          so the manager sees it before deciding whether to accept the delivery. A shift leaves a handover: "low on
-          clean aprons, laundry comes Thursday." Photos compress automatically, so it's fast even on kitchen wifi.
+        <KitchenNotesDemo />
+        <StepCard number={1} title="The noticeboard — a WhatsApp-style team chat">
+          It works like the group chat your team already knows: type a message, tap the camera to attach a photo,
+          send. A cook snaps the crate of bruised tomatoes that arrived so the manager sees it before deciding
+          whether to accept the delivery. A shift leaves a handover: "low on clean aprons, laundry comes Thursday."
+          Photos compress automatically, so it's fast even on kitchen wifi, and messages clear themselves after 30
+          days so the board stays current.
         </StepCard>
-        <StepCard number={2} title="The agenda — what's coming up">
-          The calendar holds events the whole team should know about: a large booking Friday, a deep-clean Monday,
-          a supplier visit, a staff birthday. Add a title, date, time, and type — it's visible to everyone who opens
-          the portal.
+        <StepCard number={2} title="The agenda — a shared calendar">
+          A month calendar the whole team can see: a large booking Friday, a deep-clean Monday, a supplier visit, a
+          staff birthday. Add a title, date, time, and a color-coded type (delivery, cleaning, health, staff) — it's
+          visible to everyone who opens the portal, with today and upcoming events surfaced first.
+        </StepCard>
+        <StepCard number={3} title="Connect your booking form — reservations land on the calendar">
+          This is the piece that makes the calendar run itself. Each restaurant has a private webhook URL; paste it
+          into your existing booking form (the one on your website or booking provider), and from then on every new
+          reservation drops onto the agenda automatically — table size, name, and time — with no one re-typing
+          anything. The kitchen sees the night's bookings the moment they're made.
         </StepCard>
         <Callout type="tip" title="Why this matters more than it looks">
           A restaurant runs on dozens of small pieces of knowledge that usually live in one person's memory. When
@@ -257,17 +275,25 @@ export const kitchenArticles: Record<string, ArticleBody> = {
           continuo para mensajes y fotos, y una agenda para lo que viene. Es donde las cosas que antes vivían en
           post-its y en la cabeza de una sola persona pasan a estar a la vista de todo el equipo.
         </p>
-        <KitchenPortalDemo />
-        <StepCard number={1} title="El tablón — mensajes y fotos">
-          Cualquiera puede publicar una nota, con o sin foto. Un cocinero fotografía la caja de tomates golpeados que
-          llegó para que el encargado lo vea antes de decidir si acepta la entrega. Un turno deja un relevo: "quedan
-          pocos delantales limpios, la lavandería viene el jueves". Las fotos se comprimen solas, así que es rápido
-          incluso con el wifi de la cocina.
+        <KitchenNotesDemo />
+        <StepCard number={1} title="El tablón — un chat de equipo estilo WhatsApp">
+          Funciona como el grupo de chat que tu equipo ya conoce: escribes un mensaje, tocas la cámara para adjuntar
+          una foto, envías. Un cocinero fotografía la caja de tomates golpeados que llegó para que el encargado lo
+          vea antes de decidir si acepta la entrega. Un turno deja un relevo: "quedan pocos delantales limpios, la
+          lavandería viene el jueves". Las fotos se comprimen solas, así que es rápido incluso con el wifi de la
+          cocina, y los mensajes se borran solos a los 30 días para que el tablón esté siempre al día.
         </StepCard>
-        <StepCard number={2} title="La agenda — lo que viene">
-          El calendario guarda eventos que todo el equipo debería saber: una reserva grande el viernes, una limpieza
-          a fondo el lunes, la visita de un proveedor, el cumpleaños de alguien. Añade título, fecha, hora y tipo —
-          queda visible para todos los que abran el portal.
+        <StepCard number={2} title="La agenda — un calendario compartido">
+          Un calendario mensual que todo el equipo ve: una reserva grande el viernes, una limpieza a fondo el lunes,
+          la visita de un proveedor, el cumpleaños de alguien. Añade título, fecha, hora y un tipo con color
+          (entrega, limpieza, sanidad, personal) — queda visible para todos los que abran el portal, con hoy y los
+          próximos eventos destacados primero.
+        </StepCard>
+        <StepCard number={3} title="Conecta tu formulario de reservas — las reservas llegan al calendario">
+          Esta es la pieza que hace que el calendario se llene solo. Cada restaurante tiene una URL de webhook
+          privada; la pegas en tu formulario de reservas existente (el de tu web o tu proveedor de reservas), y a
+          partir de ahí cada reserva nueva aparece en la agenda automáticamente — número de comensales, nombre y hora
+          — sin que nadie reescriba nada. La cocina ve las reservas de la noche en cuanto se hacen.
         </StepCard>
         <Callout type="tip" title="Por qué importa más de lo que parece">
           Un restaurante funciona con decenas de pequeños datos que normalmente viven en la memoria de una sola
