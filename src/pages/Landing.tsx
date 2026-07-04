@@ -63,7 +63,7 @@ export default function Landing() {
   return (
     <div className="relative flex min-h-screen flex-col overflow-hidden bg-bg">
       <LogoIntro onDone={() => setIntroDone(true)} />
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 z-0">
         {/* CSS fallback — visible immediately and stays visible if WebGL
             fails to initialize for any reason, so the background is never
             just flat black. The shader canvas paints over this once it's up. */}
