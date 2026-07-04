@@ -113,50 +113,60 @@ export const kitchenArticles: Record<string, ArticleBody> = {
     en: (
       <>
         <p>
-          APPCC logs the food-safety checks required for every delivery — reception temperature, condition, and
-          batch traceability for each item. This is compliance record-keeping, not optional.
+          APPCC is where you record food-safety traceability: for each product on an invoice, its lot number and
+          expiry date, plus the reception check for the whole delivery. This is the record that has to hold up if a
+          product is ever recalled — so it's built to be fast, not a paperwork chore.
         </p>
         <KitchenAppccDemo />
-        <StepCard number={1} title="Open the batch for the delivery you just received">
-          Pending batches are what Home points you to when APPCC registration is needed.
+        <StepCard number={1} title="Open the invoice that needs lots registered">
+          Registration is per invoice: any factura with items still missing a lot number shows up as pending, and
+          Home points you straight to it. Each line-item on that invoice gets its own lot number and expiry date.
         </StepCard>
-        <StepCard number={2} title="Scan instead of typing lot numbers">
-          Point the camera at the product's barcode — it reads the lot number and expiry date directly (GS1
-          format) instead of you copying digits by hand.
+        <StepCard number={2} title="Scan the barcode — it fills lot and expiry for you">
+          Point the camera at the product's barcode. Avanza reads the GS1 code and fills in both the lot number and
+          the expiry date automatically, so you're not squinting at tiny digits and typing them by hand. You can
+          still type them manually for anything that won't scan.
         </StepCard>
-        <StepCard number={3} title="Record temperature and condition">
-          Enter the reception temperature and mark whether the delivery's condition and appearance passed — these
-          are the two go/no-go checks required at reception.
+        <StepCard number={3} title="Confirm the reception check for the delivery">
+          Once per delivery, record the reception temperature and mark whether condition and appearance passed —
+          the two go/no-go checks. High-temperature deliveries get flagged (refrigerated goods should arrive at 7°C
+          or below).
         </StepCard>
         <Callout type="warning" title="Common mistake">
-          Skipping the scan and typing "NO_LOTE" out of habit. Only use that when a product genuinely has no lot
-          number on it — scanning correctly is what makes traceability actually work if there's ever a recall.
+          Marking "NO_LOTE" out of habit to move faster. Only use it when a product genuinely has no lot code on it
+          (loose salt, some produce). Scanning the real lot is what makes traceability actually work — "NO_LOTE"
+          everywhere means that if there's a recall, you can't prove what you served.
         </Callout>
       </>
     ),
     es: (
       <>
         <p>
-          APPCC registra los controles de seguridad alimentaria obligatorios en cada entrega — temperatura de
-          recepción, estado y trazabilidad de lote de cada artículo. Es un registro de cumplimiento normativo, no
-          opcional.
+          APPCC es donde registras la trazabilidad de seguridad alimentaria: por cada producto de una factura, su
+          número de lote y su fecha de caducidad, más el control de recepción de toda la entrega. Es el registro que
+          tiene que aguantar si alguna vez se retira un producto — por eso está pensado para ser rápido, no un
+          trámite.
         </p>
         <KitchenAppccDemo />
-        <StepCard number={1} title="Abre el lote de la entrega que acabas de recibir">
-          Los lotes pendientes son a lo que te dirige Inicio cuando hace falta registrar el APPCC.
+        <StepCard number={1} title="Abre la factura que necesita registrar lotes">
+          El registro es por factura: cualquier factura con artículos que aún no tienen número de lote aparece como
+          pendiente, e Inicio te lleva directo a ella. Cada línea de esa factura recibe su propio número de lote y
+          fecha de caducidad.
         </StepCard>
-        <StepCard number={2} title="Escanea en lugar de escribir los números de lote">
-          Apunta la cámara al código de barras del producto — lee el número de lote y la fecha de caducidad
-          directamente (formato GS1) en lugar de copiar los dígitos a mano.
+        <StepCard number={2} title="Escanea el código — rellena lote y caducidad por ti">
+          Apunta la cámara al código de barras del producto. Avanza lee el código GS1 y rellena automáticamente
+          tanto el número de lote como la caducidad, así no forzas la vista con dígitos diminutos ni los escribes a
+          mano. Siempre puedes introducirlos manualmente para lo que no escanee.
         </StepCard>
-        <StepCard number={3} title="Registra temperatura y estado">
-          Introduce la temperatura de recepción y marca si el estado y el aspecto de la entrega son correctos —
-          son los dos controles obligatorios en la recepción.
+        <StepCard number={3} title="Confirma el control de recepción de la entrega">
+          Una vez por entrega, registra la temperatura de recepción y marca si el estado y el aspecto son correctos
+          — los dos controles obligatorios. Las entregas con temperatura alta se señalan (los refrigerados deben
+          llegar a 7°C o menos).
         </StepCard>
         <Callout type="warning" title="Error común">
-          Saltarse el escaneo y escribir "NO_LOTE" por costumbre. Úsalo solo cuando un producto realmente no tenga
-          número de lote — escanear correctamente es lo que hace que la trazabilidad funcione de verdad si alguna
-          vez hay una retirada de producto.
+          Marcar "NO_LOTE" por costumbre para ir más rápido. Úsalo solo cuando un producto realmente no tenga código
+          de lote (sal a granel, algo de verdura). Escanear el lote real es lo que hace que la trazabilidad funcione
+          — "NO_LOTE" en todo significa que, si hay una retirada, no puedes demostrar qué serviste.
         </Callout>
       </>
     ),

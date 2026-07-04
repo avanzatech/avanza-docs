@@ -102,26 +102,58 @@ export function KitchenBoardDemo() {
   );
 }
 
-/* ── APPCC ── delivery reception logging ── */
+/* ── APPCC ── per-item lot & expiry entry on an invoice ── */
 export function KitchenAppccDemo() {
   const { t } = usePreferences();
+  const items = [
+    { n: "Merluza fresca", lot: "L-24073", exp: "2026-07-08", scanned: true },
+    { n: "Rape", lot: "L-24074", exp: "2026-07-09", scanned: true },
+    { n: "Sal marina", lot: "", exp: "", noLote: true },
+  ];
   return (
     <div className={shell} style={shellBg}>
       <div className="p-4">
-        <div className="mb-3 text-[13px] font-bold text-white">{t("Log a reception", "Registrar recepción")}</div>
-        <div className="rounded-2xl border border-gold/20 bg-gold/5 p-4">
-          <div className="mb-3 text-[12px] font-semibold text-gold">Peix Fresc del Port · 14:20</div>
-          <div className="mb-2 flex items-center gap-2 text-[13px] text-white/85">
-            <span className="text-green">📷</span> {t("Scan lot number (GS1)", "Escanear número de lote (GS1)")}
-          </div>
-          <div className="mb-2 flex items-center gap-3">
-            <span className="text-[12px] text-white/60">{t("Reception temp", "Temp. recepción")}</span>
-            <span className="rounded-lg bg-white/[0.06] px-2.5 py-1 text-[13px] font-bold text-white">3.5°C</span>
-          </div>
-          <div className="flex gap-2">
-            <span className="rounded-lg bg-green/20 px-3 py-1.5 text-[12px] font-semibold text-green">✓ {t("Condition OK", "Estado OK")}</span>
-            <span className="rounded-lg border border-white/15 px-3 py-1.5 text-[12px] text-white/60">{t("Appearance OK", "Aspecto OK")}</span>
-          </div>
+        <div className="mb-1 text-[13px] font-bold text-white">Peix Fresc del Port</div>
+        <div className="mb-3 text-[11px] text-white/45">{t("Factura · register lot & expiry per item", "Factura · registra lote y caducidad por artículo")}</div>
+
+        {/* reception header */}
+        <div className="mb-3 flex flex-wrap gap-2">
+          <span className="rounded-lg bg-white/[0.06] px-2.5 py-1 text-[11px] text-white/80">🌡 {t("Reception", "Recepción")} 3.5°C</span>
+          <span className="rounded-lg bg-green/20 px-2.5 py-1 text-[11px] font-semibold text-green">✓ {t("Condition OK", "Estado OK")}</span>
+          <span className="rounded-lg bg-green/20 px-2.5 py-1 text-[11px] font-semibold text-green">✓ {t("Appearance OK", "Aspecto OK")}</span>
+        </div>
+
+        {/* per-item lot/expiry rows */}
+        <div className="space-y-2">
+          {items.map((it) => (
+            <div key={it.n} className="rounded-xl border border-white/10 bg-white/[0.04] p-3">
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-[13px] font-semibold text-white">{it.n}</span>
+                {it.scanned ? (
+                  <span className="rounded-full bg-green/20 px-2 py-0.5 text-[10px] font-bold text-green">📷 {t("Scanned", "Escaneado")}</span>
+                ) : it.noLote ? (
+                  <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-white/50">NO_LOTE</span>
+                ) : null}
+              </div>
+              {it.noLote ? (
+                <div className="text-[11px] italic text-white/40">{t("No lot code on this product", "Sin código de lote en este producto")}</div>
+              ) : (
+                <div className="flex gap-2">
+                  <div className="flex-1 rounded-lg bg-black/30 px-2.5 py-1.5">
+                    <div className="text-[9px] text-white/40">{t("Lot no.", "Nº lote")}</div>
+                    <div className="font-mono text-[12px] text-white">{it.lot}</div>
+                  </div>
+                  <div className="flex-1 rounded-lg bg-black/30 px-2.5 py-1.5">
+                    <div className="text-[9px] text-white/40">{t("Expiry", "Caducidad")}</div>
+                    <div className="font-mono text-[12px] text-white">{it.exp}</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="mt-3 flex items-center justify-center gap-2 rounded-xl border border-dashed border-gold/30 py-2.5 text-[12px] font-semibold text-gold">
+          📷 {t("Scan barcode to auto-fill lot + expiry", "Escanea el código para rellenar lote + caducidad")}
         </div>
       </div>
       <TabChrome active="appcc" />

@@ -4,6 +4,7 @@ import ProductCardDemo from "../components/demos/ProductCardDemo";
 import DashboardDemo from "../components/demos/DashboardDemo";
 import PedidosDemo from "../components/demos/PedidosDemo";
 import DocumentosDemo from "../components/demos/DocumentosDemo";
+import ExportDemo from "../components/demos/ExportDemo";
 import AvanzaChatDemo from "../components/demos/AvanzaChatDemo";
 
 // Content is grounded in the live App.jsx implementation, verified against
@@ -524,11 +525,20 @@ export const osArticles: Record<string, ArticleBody> = {
           A number on the Documentos tab means something needs a decision — usually a new upload waiting to be
           matched to a supplier and order.
         </StepCard>
-        <StepCard number={2} title="Export when you need accounting data">
-          Three separate exports exist for three separate purposes: IVA export (accounting/tax), sales export, and
-          batch invoice review. Use the one that matches what you're actually trying to do — they're not
-          interchangeable.
+        <StepCard number={2} title="Export what you need — pick a date range, get the right sheet">
+          At the top of Documentos you set one date range (it defaults to the 1st of this month through today),
+          and that range feeds three separate Excel exports. They are not interchangeable — each answers a
+          different question:
         </StepCard>
+        <ExportDemo />
+        <Callout type="info" title="What's inside each export">
+          The <strong>IVA export</strong> is what your gestoría wants: every factura's supplier, taxable base, VAT
+          rate, VAT amount and total, ready to file. The <strong>Sales export</strong> is your POS takings over the
+          range. The <strong>Albaranes export</strong> is a line-by-line document audit — each item with its lot
+          number, expiry date, and a link back to the original scanned document, which is what makes traceability
+          hold up if there's ever a recall. All three come out as .xlsx, named with the date range so your folder
+          stays organized on its own.
+        </Callout>
         <Callout type="tip" title="Business value">
           Because every albarán is tied to a real delivery, your product and pricing history stays accurate without
           you manually logging anything — Avanza builds it from the documents you already have to handle anyway.
@@ -560,11 +570,20 @@ export const osArticles: Record<string, ArticleBody> = {
           Un número en la pestaña Documentos significa que algo necesita una decisión — normalmente una subida
           nueva esperando emparejarse con un proveedor y un pedido.
         </StepCard>
-        <StepCard number={2} title="Exporta cuando necesites datos contables">
-          Existen tres exportaciones separadas para tres propósitos distintos: exportación de IVA (contabilidad),
-          exportación de ventas y revisión de facturas por lotes. Usa la que corresponda a lo que realmente
-          necesitas — no son intercambiables.
+        <StepCard number={2} title="Exporta lo que necesites — elige un rango de fechas, obtén la hoja correcta">
+          Arriba en Documentos fijas un rango de fechas (por defecto del 1 de este mes hasta hoy), y ese rango
+          alimenta tres exportaciones de Excel distintas. No son intercambiables — cada una responde a una pregunta
+          diferente:
         </StepCard>
+        <ExportDemo />
+        <Callout type="info" title="Qué contiene cada exportación">
+          La <strong>exportación de IVA</strong> es lo que quiere tu gestoría: por cada factura, proveedor, base
+          imponible, tipo de IVA, cuota y total, lista para presentar. La <strong>exportación de ventas</strong> es
+          tu recaudación de TPV del periodo. La <strong>exportación de albaranes</strong> es una auditoría documento
+          a documento — cada artículo con su número de lote, caducidad y enlace al documento escaneado original, que
+          es lo que hace que la trazabilidad aguante si alguna vez hay una retirada. Las tres salen en .xlsx,
+          nombradas con el rango de fechas para que tu carpeta se ordene sola.
+        </Callout>
         <Callout type="tip" title="Valor de negocio">
           Como cada albarán está vinculado a una entrega real, tu historial de productos y precios se mantiene
           preciso sin que tengas que anotar nada manualmente — Avanza lo construye a partir de los documentos que
