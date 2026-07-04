@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { usePreferences } from "../lib/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import ProductCard from "../components/ProductCard";
+import ShaderCardBackground from "../components/ShaderCardBackground";
 import AmbientBackground from "../components/AmbientBackground";
 import osCardImg from "../assets/cards/avanza-os-card.webp";
 import impulseCardImg from "../assets/cards/avanza-impulse-card.webp";
@@ -91,22 +92,27 @@ export default function Landing() {
           <span className="text-text-muted">{t("do you need help with?", "necesitas ayuda?")}</span>
         </motion.h1>
 
-        <div className="mt-10 grid w-full max-w-3xl gap-5 [perspective:1200px] md:grid-cols-2">
-          {show &&
-            products.map((p, i) => (
-              <ProductCard
-                key={p.id}
-                eyebrowDot={p.dot}
-                glowColor={p.glow}
-                name={p.name}
-                subtitle={p.subtitle[lang]}
-                desc={p.desc[lang]}
-                cta={t("Open Documentation", "Abrir Documentación")}
-                onClick={() => go(p.id)}
-                delay={0.25 + i * 0.12}
-                image={p.image}
-              />
-            ))}
+        <div className="relative mt-10 w-full max-w-3xl">
+          <div className="absolute -inset-8 -z-10 overflow-hidden rounded-[32px] opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_100%)]">
+            <ShaderCardBackground />
+          </div>
+          <div className="grid w-full gap-5 [perspective:1200px] md:grid-cols-2">
+            {show &&
+              products.map((p, i) => (
+                <ProductCard
+                  key={p.id}
+                  eyebrowDot={p.dot}
+                  glowColor={p.glow}
+                  name={p.name}
+                  subtitle={p.subtitle[lang]}
+                  desc={p.desc[lang]}
+                  cta={t("Open Documentation", "Abrir Documentación")}
+                  onClick={() => go(p.id)}
+                  delay={0.25 + i * 0.12}
+                  image={p.image}
+                />
+              ))}
+          </div>
         </div>
       </main>
     </div>
