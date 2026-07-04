@@ -60,7 +60,7 @@ function BlueprintCard({
       onClick={onSelect}
       style={{ rotateX, rotateY, transformPerspective: 900 }}
       className={`group relative flex ${
-        featured ? "aspect-[21/9] min-h-[220px]" : "aspect-[4/3] min-h-[130px]"
+        featured ? "aspect-[16/9] min-h-[200px] sm:aspect-[21/9]" : "aspect-[4/3] min-h-[130px]"
       } flex-col justify-end overflow-hidden rounded-2xl border border-brd text-left transition-[border-color,box-shadow] duration-300 hover:border-white/10`}
     >
       <div
@@ -142,7 +142,7 @@ export default function BlueprintPicker() {
             <BlueprintCard b={blueprints[0]} lang={lang} t={t} onSelect={() => select(blueprints[0])} featured />
           </motion.div>
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {blueprints.slice(1).map((b, i) => (
               <motion.div
                 key={b.id}
