@@ -15,35 +15,68 @@ export const osArticles: Record<string, ArticleBody> = {
     en: (
       <>
         <p>
-          Sales is what opens first — it's your dashboard, not a separate screen. One number matters most:
-          yesterday's revenue, front and center, compared against the day before.
+          Sales is what opens first — it's your home base, not a separate report you go looking for. It answers the
+          question every owner asks before anything else in the morning: <em>how did we do?</em> The headline is
+          yesterday's revenue, front and center, measured against the day before so the number has context instead of
+          just sitting there.
         </p>
         <DashboardDemo />
+        <p>
+          Below the headline sit the numbers that turn "how did we do" into "how are we trending": this week against
+          last, this month against last, your average ticket, and your busiest days. Individually they're facts;
+          together they're the shape of your business — whether Tuesdays are worth staying open for, whether the new
+          menu lifted the average check, whether last month's growth was real or just one good weekend.
+        </p>
         <Callout type="info" title="Where the numbers come from">
-          Nothing here is manually entered. Revenue comes from your POS feed, costs come from processed invoices —
-          the margin bar is real accounting, not an estimate.
+          Nothing here is typed in by hand. Revenue flows from your POS; costs come from the invoices Avanza has
+          already processed. So the margin bar underneath isn't a guess or a target you set — it's real accounting,
+          reconciled from documents that actually arrived.
         </Callout>
-        <Callout type="tip" title="Business value">
-          Seeing margin — not just revenue — next to your sales number is what actually drives decisions. A busy
-          day with a thin margin tells a different story than the revenue number alone would.
+        <Callout type="tip" title="The number most owners miss">
+          Revenue tells you how busy you were. <strong>Margin</strong> tells you whether being busy paid. A €4,200
+          Saturday at Casa Mediterránea looks great — until the margin bar shows costs ate more of it than the
+          Saturday before, because the fish supplier's price crept up. That's the difference this screen exists to
+          make visible. Over weeks, it's the single clearest signal of which menu changes and supplier switches are
+          quietly working for you or against you.
+        </Callout>
+        <Callout type="note" title="What it is — and isn't">
+          Sales is a mirror, not a lever. It reflects what already happened from real POS and invoice data; it never
+          estimates or projects. If a day looks off, the answer is in a real event — a missed POS sync, an invoice
+          not yet processed — not a rounding choice the software made.
         </Callout>
       </>
     ),
     es: (
       <>
         <p>
-          Ventas es lo primero que se abre — es tu panel principal, no una pantalla aparte. Un número importa más
-          que ningún otro: la facturación de ayer, en primer plano, comparada con el día anterior.
+          Ventas es lo primero que se abre — es tu base, no un informe aparte que tienes que ir a buscar. Responde la
+          pregunta que todo dueño se hace antes que nada por la mañana: <em>¿cómo fue?</em> El titular es la
+          facturación de ayer, en primer plano, comparada con el día anterior para que el número tenga contexto en
+          vez de estar ahí suelto.
         </p>
         <DashboardDemo />
+        <p>
+          Debajo del titular están los números que convierten el "¿cómo fue?" en "¿cómo vamos?": esta semana contra
+          la anterior, este mes contra el anterior, tu ticket medio y tus días más fuertes. Por separado son datos;
+          juntos son la forma de tu negocio — si los martes vale la pena abrir, si la carta nueva subió el ticket
+          medio, si el crecimiento del mes pasado fue real o solo un buen finde.
+        </p>
         <Callout type="info" title="De dónde salen los números">
-          Nada aquí se introduce manualmente. La facturación viene de tu TPV, los costes vienen de las facturas
-          procesadas — la barra de margen es contabilidad real, no una estimación.
+          Nada aquí se introduce a mano. La facturación viene de tu TPV; los costes vienen de las facturas que Avanza
+          ya ha procesado. Así que la barra de margen de debajo no es una suposición ni un objetivo que fijas tú — es
+          contabilidad real, cuadrada desde documentos que de verdad llegaron.
         </Callout>
-        <Callout type="tip" title="Valor de negocio">
-          Ver el margen — no solo la facturación — junto a tu número de ventas es lo que realmente guía las
-          decisiones. Un día ajetreado con margen ajustado cuenta una historia distinta a la que cuenta solo la
-          cifra de ventas.
+        <Callout type="tip" title="El número que casi todos los dueños pasan por alto">
+          La facturación te dice cuánto trabajaste. El <strong>margen</strong> te dice si trabajar tanto valió la
+          pena. Un sábado de 4.200 € en Casa Mediterránea pinta genial — hasta que la barra de margen muestra que los
+          costes se comieron más que el sábado anterior, porque el proveedor de pescado subió el precio. Esa es la
+          diferencia que esta pantalla existe para hacer visible. Con las semanas, es la señal más clara de qué
+          cambios de carta y de proveedor están trabajando a tu favor o en tu contra.
+        </Callout>
+        <Callout type="note" title="Qué es — y qué no">
+          Ventas es un espejo, no una palanca. Refleja lo que ya pasó, con datos reales de TPV y facturas; nunca
+          estima ni proyecta. Si un día se ve raro, la respuesta está en un evento real — una sincronización de TPV
+          que falló, una factura sin procesar — no en un redondeo que hizo el software.
         </Callout>
       </>
     ),
@@ -225,6 +258,13 @@ export const osArticles: Record<string, ArticleBody> = {
           Assuming a draft was sent because it appeared. Drafts sit and wait for you — check the badge count on the
           Pedidos tab regularly, especially if you're not in the app every day.
         </Callout>
+        <Callout type="tip" title="Why it works this way">
+          Everywhere else, automation asks you to trust it blindly. Pedidos is built on the opposite idea: the
+          software does the tedious part — noticing you're low, drafting the order, pre-filling the supplier and
+          quantities — but the decision to spend money is always yours. Over time you'll trust the drafts more and
+          glance at them less, but the safety rail never goes away. That's what makes it safe to let it run: an
+          order can be wrong, but it can never surprise you.
+        </Callout>
         <p className="text-sm text-text-dim">
           Related: <em>Documentos</em> — every order eventually becomes an albarán when it's delivered.
         </p>
@@ -265,6 +305,13 @@ export const osArticles: Record<string, ArticleBody> = {
           Asumir que un borrador se envió solo porque apareció. Los borradores esperan tu acción — revisa el
           contador de la pestaña Pedidos con regularidad, sobre todo si no entras en la app cada día.
         </Callout>
+        <Callout type="tip" title="Por qué funciona así">
+          En todas partes, la automatización te pide confiar a ciegas. Pedidos se construye sobre la idea contraria:
+          el software hace lo tedioso — detectar que vas bajo, preparar el pedido, rellenar el proveedor y las
+          cantidades — pero la decisión de gastar dinero siempre es tuya. Con el tiempo confiarás más en los
+          borradores y los mirarás menos, pero la barrera de seguridad nunca desaparece. Eso es lo que hace que sea
+          seguro dejarlo funcionar: un pedido puede estar mal, pero nunca puede sorprenderte.
+        </Callout>
         <p className="text-sm text-text-dim">
           Relacionado: <em>Documentos</em> — cada pedido acaba convirtiéndose en un albarán al recibirse.
         </p>
@@ -276,12 +323,15 @@ export const osArticles: Record<string, ArticleBody> = {
     en: (
       <>
         <p>
-          Avanza is a conversation, not a form. Ask it questions the way you'd ask a manager — it has real context
-          on your sales, spend, and orders, and answers from that.
+          Avanza is a conversation, not a form. Ask it questions the way you'd ask a trusted manager who happens to
+          have every invoice, sale, and order memorized — because that's exactly the context it's answering from. No
+          menus to learn, no report to configure: you ask, it answers from your real numbers.
         </p>
         <Callout type="tip" title="Good places to start">
-          "How are sales going?", "How much have I spent?", "What should I reorder soon?" — these are the exact
-          suggested prompts shown when you open the tab, because they're the questions owners actually ask.
+          "How are sales going?", "How much have I spent this month?", "What should I reorder soon?" — these are the
+          exact suggested prompts shown when you open the tab, because they're the questions owners actually ask. But
+          the real power shows when you get specific: "Which supplier raised prices the most this quarter?" or "Was
+          last Friday busier than the Friday before?"
         </Callout>
         <StepCard number={1} title="Just type the question">
           No commands, no syntax — plain language, in Spanish or English.
@@ -294,6 +344,12 @@ export const osArticles: Record<string, ArticleBody> = {
           It's one continuous conversation, not a fresh session each time — earlier context in the thread carries
           forward.
         </StepCard>
+        <Callout type="info" title="Why it gets more valuable over time">
+          Every invoice you process, every order you approve, every day of sales adds to what Avanza can reason
+          about. Six months in, "why is my food cost higher than last spring?" isn't a vague question — it has a real
+          answer, drawn from your own history. The assistant is the front door to a growing memory of how your
+          restaurant actually runs.
+        </Callout>
         <Callout type="note" title="Common mistake">
           Treating it like a search bar for menu navigation ("where's the export button"). It's built for
           questions about your business, not app navigation — for that, the tabs at the bottom are faster.
@@ -303,12 +359,16 @@ export const osArticles: Record<string, ArticleBody> = {
     es: (
       <>
         <p>
-          Avanza es una conversación, no un formulario. Pregúntale como le preguntarías a un encargado — tiene
-          contexto real sobre tus ventas, gastos y pedidos, y responde a partir de eso.
+          Avanza es una conversación, no un formulario. Pregúntale como le preguntarías a un encargado de confianza
+          que se supiera de memoria cada factura, venta y pedido — porque ese es justo el contexto desde el que
+          responde. Sin menús que aprender, sin informes que configurar: preguntas y responde desde tus números
+          reales.
         </p>
         <Callout type="tip" title="Buenos puntos de partida">
-          "¿Cómo van las ventas?", "¿Cuánto he gastado?", "¿Qué pedir pronto?" — son exactamente las sugerencias
-          que aparecen al abrir la pestaña, porque son las preguntas que los dueños hacen de verdad.
+          "¿Cómo van las ventas?", "¿Cuánto he gastado este mes?", "¿Qué pedir pronto?" — son exactamente las
+          sugerencias que aparecen al abrir la pestaña, porque son las preguntas que los dueños hacen de verdad. Pero
+          la fuerza real aparece cuando concretas: "¿Qué proveedor subió más los precios este trimestre?" o "¿El
+          viernes pasado fue más fuerte que el anterior?"
         </Callout>
         <StepCard number={1} title="Simplemente escribe la pregunta">
           Sin comandos ni sintaxis especial — lenguaje normal, en español o inglés.
@@ -320,6 +380,12 @@ export const osArticles: Record<string, ArticleBody> = {
         <StepCard number={3} title="Continúa en el mismo hilo">
           Es una conversación continua, no una sesión nueva cada vez — el contexto anterior del hilo se mantiene.
         </StepCard>
+        <Callout type="info" title="Por qué vale más con el tiempo">
+          Cada factura que procesas, cada pedido que apruebas, cada día de ventas suma a lo que Avanza puede razonar.
+          A los seis meses, "¿por qué mi coste de comida es más alto que la primavera pasada?" no es una pregunta
+          vaga — tiene una respuesta real, sacada de tu propio historial. El asistente es la puerta de entrada a una
+          memoria creciente de cómo funciona de verdad tu restaurante.
+        </Callout>
         <Callout type="note" title="Error común">
           Tratarlo como un buscador para navegar por el menú ("dónde está el botón de exportar"). Está pensado
           para preguntas sobre tu negocio, no para navegar la app — para eso, las pestañas de abajo son más
@@ -358,8 +424,14 @@ export const osArticles: Record<string, ArticleBody> = {
           Expecting food items to show up here. If a product you're looking for isn't in this list, check Kitchen
           Portal's Board instead — food inventory lives there.
         </Callout>
+        <Callout type="tip" title="Set it once, stop thinking about it">
+          The real value isn't the count on screen today — it's what happens after you set thresholds on your
+          fast-movers. Tell Avanza "Estrella Damm never below three crates" once, and from then on the reorder drafts
+          itself the moment a slow week or a busy weekend pushes you there. Multiply that across every drink and the
+          payoff is a bar that quietly never runs dry mid-service, without you tracking any of it in your head.
+        </Callout>
         <p className="text-sm text-text-dim">
-          Related: <em>Pedidos</em> — thresholds set here are what triggers automatic drafts there.
+          Related: <em>Orders</em> — thresholds set here are what triggers automatic drafts there.
         </p>
       </>
     ),
@@ -392,6 +464,13 @@ export const osArticles: Record<string, ArticleBody> = {
         <Callout type="warning" title="Error común">
           Esperar encontrar productos de comida aquí. Si un producto que buscas no está en esta lista, revisa el
           Tablero del Portal de Cocina — el inventario de comida vive allí.
+        </Callout>
+        <Callout type="tip" title="Configúralo una vez, olvídate">
+          El valor real no es la cifra en pantalla de hoy — es lo que pasa después de fijar umbrales en tus productos
+          de mayor rotación. Dile a Avanza "Estrella Damm nunca por debajo de tres cajas" una vez, y a partir de ahí
+          el pedido se prepara solo en cuanto una semana floja o un finde fuerte te lleve al límite. Multiplícalo por
+          cada bebida y el resultado es una barra que, en silencio, nunca se queda sin nada a mitad de servicio, sin
+          que tengas que llevar la cuenta en la cabeza.
         </Callout>
         <p className="text-sm text-text-dim">
           Relacionado: <em>Pedidos</em> — los umbrales configurados aquí son lo que dispara los borradores
@@ -427,6 +506,12 @@ export const osArticles: Record<string, ArticleBody> = {
           Because every albarán is tied to a real delivery, your product and pricing history stays accurate without
           you manually logging anything — Avanza builds it from the documents you already have to handle anyway.
         </Callout>
+        <Callout type="info" title="The payoff comes at quarter-end">
+          Handle documents here as they arrive and your IVA return is already assembled when the gestoría asks —
+          no shoebox of crumpled tickets, no late night reconciling three months at once. Casa Mediterránea's owner
+          photographs each factura the day it lands; when the quarter closes, the export is one tap. That's the
+          quiet, compounding value: a few seconds per document now saves a lost evening later.
+        </Callout>
         <p className="text-sm text-text-dim">
           Related: <em>Orders</em> — an order becomes an albarán once it's delivered and uploaded.
         </p>
@@ -457,6 +542,13 @@ export const osArticles: Record<string, ArticleBody> = {
           Como cada albarán está vinculado a una entrega real, tu historial de productos y precios se mantiene
           preciso sin que tengas que anotar nada manualmente — Avanza lo construye a partir de los documentos que
           ya tienes que gestionar de todos modos.
+        </Callout>
+        <Callout type="info" title="La recompensa llega a fin de trimestre">
+          Gestiona los documentos aquí según llegan y tu declaración de IVA ya está montada cuando la gestoría te la
+          pide — sin caja de tickets arrugados, sin noches cuadrando tres meses de golpe. El dueño de Casa
+          Mediterránea fotografía cada factura el día que llega; cuando cierra el trimestre, la exportación es un
+          toque. Ese es el valor silencioso que se acumula: unos segundos por documento ahora te ahorran una tarde
+          perdida después.
         </Callout>
         <p className="text-sm text-text-dim">
           Relacionado: <em>Pedidos</em> — un pedido se convierte en albarán al entregarse y subirse.
