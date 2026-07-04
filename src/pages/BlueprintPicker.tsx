@@ -25,11 +25,13 @@ function BlueprintCard({
   lang,
   t,
   onSelect,
+  featured = false,
 }: {
   b: (typeof blueprints)[number];
   lang: "en" | "es";
   t: (en: string, es: string) => string;
   onSelect: () => void;
+  featured?: boolean;
 }) {
   const ref = useRef<HTMLButtonElement>(null);
   const mx = useMotionValue(0.5);
@@ -57,7 +59,9 @@ function BlueprintCard({
       onMouseLeave={onMouseLeave}
       onClick={onSelect}
       style={{ rotateX, rotateY, transformPerspective: 900 }}
-      className="group relative flex aspect-[4/3] min-h-[260px] flex-col justify-end overflow-hidden rounded-2xl border border-brd text-left transition-[border-color,box-shadow] duration-300 hover:border-white/10"
+      className={`group relative flex ${
+        featured ? "aspect-[21/9] min-h-[220px]" : "aspect-[4/3] min-h-[130px]"
+      } flex-col justify-end overflow-hidden rounded-2xl border border-brd text-left transition-[border-color,box-shadow] duration-300 hover:border-white/10`}
     >
       <div
         className="absolute inset-0 -z-20 bg-cover bg-center transition-transform duration-500 ease-out group-hover:scale-[1.05]"
@@ -78,10 +82,9 @@ function BlueprintCard({
         style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)" }}
       />
 
-      <div className="relative flex flex-col items-start gap-2 p-5">
-        <span className="text-2xl" style={{ filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.6))" }}>{b.icon}</span>
+      <div className={`relative flex flex-col items-start gap-2 ${featured ? "p-6" : "p-4"}`}>
         <span
-          className="text-[15px] font-semibold text-text"
+          className={`${featured ? "text-[19px]" : "text-[13px]"} font-semibold text-text`}
           style={{ textShadow: "0 2px 10px rgba(0,0,0,0.9)" }}
         >
           {lang === "en" ? b.en : b.es}
@@ -124,23 +127,33 @@ export default function BlueprintPicker() {
         <LanguageSwitcher />
       </header>
 
-      <main className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-6 pb-24 pt-12 text-center">
+      <main className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 pb-24 pt-12 text-center">
         <p className="mb-6 font-mono text-xs uppercase tracking-widest text-text-muted">{t("Avanza OS", "Avanza OS")}</p>
         <h1 className="max-w-xl font-display text-3xl font-semibold leading-tight text-text md:text-4xl">
           {t("Select your business blueprint", "Selecciona tu tipo de negocio")}
         </h1>
 
-        <div className="mt-12 grid w-full grid-cols-2 gap-5 [perspective:1000px] md:grid-cols-4">
-          {blueprints.map((b, i) => (
-            <motion.div
-              key={b.id}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <BlueprintCard b={b} lang={lang} t={t} onSelect={() => select(b)} />
-            </motion.div>
-          ))}
+        <div className="mt-12 flex w-full flex-col gap-4 [perspective:1000px]">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <BlueprintCard b={blueprints[0]} lang={lang} t={t} onSelect={() => select(blueprints[0])} featured />
+          </motion.div>
+
+          <div className="grid grid-cols-3 gap-4">
+            {blueprints.slice(1).map((b, i) => (
+              <motion.div
+                key={b.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.08 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <BlueprintCard b={b} lang={lang} t={t} onSelect={() => select(b)} />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </main>
 
