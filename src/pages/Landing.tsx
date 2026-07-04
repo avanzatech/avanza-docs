@@ -8,6 +8,7 @@ import AmbientBackground from "../components/AmbientBackground";
 import osCardImg from "../assets/cards/avanza-os-card.webp";
 import impulseCardImg from "../assets/cards/avanza-impulse-card.webp";
 import LogoIntro from "../components/LogoIntro";
+import ComingSoonOverlay from "../components/ComingSoonOverlay";
 
 const products = [
   {
@@ -33,6 +34,7 @@ const products = [
     dot: "bg-blue",
     glow: "rgba(91,141,239,0.16)",
     image: impulseCardImg,
+    locked: true,
   },
 ];
 
@@ -42,6 +44,7 @@ export default function Landing() {
   const [params] = useSearchParams();
   const forceHome = params.get("home") === "1";
   const [introDone, setIntroDone] = useState(false);
+  const [showComingSoon, setShowComingSoon] = useState(false);
 
   useEffect(() => {
     if (forceHome || !product) return;
@@ -53,6 +56,11 @@ export default function Landing() {
   }, [forceHome, product, blueprint, lang, navigate]);
 
   const go = (id: "os" | "impulse") => {
+    const p = products.find((x) => x.id === id);
+    if (p?.locked) {
+      setShowComingSoon(true);
+      return;
+    }
     setProduct(id);
     navigate(id === "os" ? `/docs/${lang}/os` : `/docs/${lang}/impulse/getting-started`);
   };
@@ -101,7 +109,7 @@ export default function Landing() {
                 name={p.name}
                 subtitle={p.subtitle[lang]}
                 desc={p.desc[lang]}
-                cta={t("Open Documentation", "Abrir Documentación")}
+                cta={p.locked ? t("Coming Soon", "Próximamente") : t("Open Documentation", "Abrir Documentación")}
                 onClick={() => go(p.id)}
                 delay={0.25 + i * 0.12}
                 image={p.image}
@@ -109,6 +117,8 @@ export default function Landing() {
             ))}
         </div>
       </main>
+
+      <ComingSoonOverlay open={showComingSoon} onClose={() => setShowComingSoon(false)} />
     </div>
   );
 }
