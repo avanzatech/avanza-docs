@@ -57,56 +57,89 @@ body {
 
 /* ---- Print / PDF export ---- */
 @media print {
-  /* Force backgrounds to render (Chromium/Safari honor this) */
   * {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    /* Release fixed heights and scroll containers so the full article flows
+       across pages instead of being clipped to the on-screen viewport. */
+    max-height: none !important;
+    overflow: visible !important;
   }
-  /* Clean paper: white page, dark text */
+
   html, body {
     background: #ffffff !important;
     color: #1a1a1a !important;
+    height: auto !important;
+    overflow: visible !important;
   }
-  /* Hide app chrome — sidebar, header, drawer, footer controls */
+
+  /* Hide app chrome */
   aside, header, .no-print {
     display: none !important;
   }
-  /* Article fills the page */
-  main {
-    max-width: 100% !important;
+
+  /* Neutralize every dark app container so no dark bands print on white paper */
+  .bg-bg, .bg-bg2, .bg-card, [class*="bg-bg"], [class*="bg-card"] {
+    background: #ffffff !important;
   }
-  main > div {
+
+  /* Layout wrappers: full width, no dark fill, no flex height constraints */
+  main, main > div, article {
     max-width: 100% !important;
+    width: 100% !important;
     padding: 0 !important;
+    background: transparent !important;
+    display: block !important;
   }
-  /* Swap the dark-bg screen watermark for the paper-tuned print watermark */
-  .doc-watermark-screen {
-    display: none !important;
+  .flex { display: block !important; }
+  .doc-stepcard { display: flex !important; }
+
+  /* Callouts / step cards: keep a light, printable accent instead of the dark
+     fill that was causing the black/white boundary bands. */
+  .doc-callout, .doc-stepcard {
+    background: #f7f6f2 !important;
+    border: 1px solid #e0ddd2 !important;
+    color: #1a1a1a !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
   }
+  .doc-callout *, .doc-stepcard * { color: #1a1a1a !important; }
+
+  /* All text dark on white */
+  h1, h2, h3, h4, p, li, span, div, strong, em {
+    color: #1a1a1a !important;
+  }
+  a { color: #1a1a1a !important; text-decoration: none !important; }
+
+  /* Watermark: use an absolute (not fixed) repeating tile so it prints on
+     EVERY page, and sits behind content. */
+  .doc-watermark-screen { display: none !important; }
   .doc-watermark-print {
     display: block !important;
-    position: fixed !important;
+    position: absolute !important;
     inset: 0 !important;
     z-index: 0 !important;
-    opacity: 0.07 !important;
+    opacity: 0.08 !important;
   }
-  a {
-    color: #1a1a1a !important;
-    text-decoration: none !important;
-  }
-  @page {
-    margin: 1.6cm;
-  }
+  article { position: relative !important; z-index: 1; }
+
+  /* Avoid awkward breaks */
+  h1, h2, h3 { page-break-after: avoid; }
+  img { page-break-inside: avoid; max-width: 100% !important; }
+
+  @page { margin: 1.6cm; }
 }
 
-/* Print watermark hidden on screen (screen watermark handles the display view) */
+/* Print watermark hidden on screen (screen watermark handles display) */
 @media screen {
   .doc-watermark-print { display: none; }
 }
 
-/* Prevent any wide child (demo strips, code, tables) from causing the whole
-   page to scroll sideways on mobile — contain overflow to the element itself */
-html, body {
-  overflow-x: hidden;
-  max-width: 100%;
+/* Prevent wide children from causing horizontal scroll on mobile — but NOT
+   in print (print overflow is handled above). */
+@media screen {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
 }

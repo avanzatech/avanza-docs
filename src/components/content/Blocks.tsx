@@ -11,7 +11,7 @@ const calloutStyles = {
 export function Callout({ type = "note", title, children }: { type?: keyof typeof calloutStyles; title?: string; children: ReactNode }) {
   const s = calloutStyles[type];
   return (
-    <div className={`my-4 rounded-lg border ${s.border} ${s.bg} px-4 py-3`}>
+    <div className={`doc-callout my-4 rounded-lg border ${s.border} ${s.bg} px-4 py-3`}>
       <div className="flex items-start gap-2">
         <span className="mt-0.5 text-sm">{s.icon}</span>
         <div className="min-w-0 flex-1">
@@ -25,7 +25,7 @@ export function Callout({ type = "note", title, children }: { type?: keyof typeo
 
 export function StepCard({ number, title, children }: { number: number; title: string; children: ReactNode }) {
   return (
-    <div className="my-4 flex gap-4 rounded-lg border border-brd bg-card px-4 py-4">
+    <div className="doc-stepcard my-4 flex gap-4 rounded-lg border border-brd bg-card px-4 py-4">
       <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold/15 font-mono text-xs font-medium text-gold-light">
         {number}
       </div>
