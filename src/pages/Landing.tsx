@@ -5,8 +5,8 @@ import { usePreferences } from "../lib/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import ProductCard from "../components/ProductCard";
 import ShaderCardBackground from "../components/ShaderCardBackground";
-import osCardImg from "../assets/cards/avanza-os-card.webp";
-import impulseCardImg from "../assets/cards/avanza-impulse-card.webp";
+import osCardImg from "../assets/cards/avanza-os-matte.webp";
+import impulseCardImg from "../assets/cards/avanza-impulse-matte.webp";
 import LogoIntro from "../components/LogoIntro";
 import ComingSoonOverlay from "../components/ComingSoonOverlay";
 
