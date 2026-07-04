@@ -177,7 +177,7 @@ export default function DocsLayout({ product, section, children }: Props) {
               backgroundImage: `url(${watermarkTile})`,
               backgroundRepeat: "repeat",
               backgroundSize: "300px auto",
-              opacity: 0.08,
+              opacity: 0.14,
             }}
           />
           <div

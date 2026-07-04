@@ -103,3 +103,10 @@ body {
 @media screen {
   .doc-watermark-print { display: none; }
 }
+
+/* Prevent any wide child (demo strips, code, tables) from causing the whole
+   page to scroll sideways on mobile — contain overflow to the element itself */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
